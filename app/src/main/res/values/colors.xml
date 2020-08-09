@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#67B1CC</color>
+    <color name="colorPrimaryDark">#08204A</color>
+    <color name="colorAccent">#394C6E </color>
+    <color name="black">#000000</color>
+<!--    <color name="white">#ffffff</color>-->
+    <color name="red">#ff0000</color>
+    <color name="ligt_grey">#c2c5cc</color>
+
+
+<!--    searchbar-->
+
+    <color name="searchBarIconColor">#67B1CC</color>
+    <color name="searchBarPrimaryColor">#08204A</color>
+    <color name="searchBarCursorColor">#67B1CC</color>
+    <color name="searchBarDividerColor">#67B1CC</color>
+
+
+<!--    searchbar text-->
+    <color name="searchBarTextColor">@color/colorPrimary</color>
+    <color name="searchBarHintColor">@color/colorPrimary</color>
+    <color name="searchBarPlaceholderColor">@color/colorPrimary</color>
+    <color name="searchBarTextHighlightColor">@color/colorPrimaryDark</color>
+
+
+<!--    catcho error report -->
+    <color name="catcho_primary">@color/colorPrimaryDark</color>
+    <color name="catcho_primary_dark">@color/colorPrimaryDark</color>
+    <color name="catcho_text_light">@color/colorPrimary</color>
+    <color name="catcho_accent">@color/colorAccent</color>
+    <color name="catcho_text">@color/colorPrimaryDark</color>
+
+
+<!--    sweet alert-->
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="button_text_color">@color/colorPrimaryDark</color>
+    <color name="error_stroke_color">@color/colorPrimaryDark</color>
+    <color name="float_transparent">#00000000</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="success_stroke_color">@color/colorPrimaryDark</color>
+    <color name="sweet_dialog_bg_color">#FFFF</color>
+    <color name="text_color">#575757</color>
+    <color name="trans_success_stroke_color">@color/colorPrimaryDark</color>
+    <color name="warning_stroke_color">@color/colorPrimaryDark</color>
+    <color name="confirm_button_color">@color/colorPrimary</color>
+</resources>

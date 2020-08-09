@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textStyle="bold"
+        android:padding="17sp"
+        />
+    <RadioGroup
+        android:id="@+id/payment_radiogrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="M-pesa"
+            android:textStyle="bold"
+            android:padding="17sp"
+            android:layout_margin="17dp"
+            android:id="@+id/radio_mpesa"
+            />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PayPal"
+            android:textStyle="bold"
+            android:padding="17sp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:id="@+id/radiopaypal"
+
+            />
+
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textStyle="bold"
+        android:padding="17sp"
+        android:layout_margin="17dp"
+        />
+</LinearLayout>

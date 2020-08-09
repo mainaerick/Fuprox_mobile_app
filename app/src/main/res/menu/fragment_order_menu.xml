@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:title="Search by"
+        android:enabled="false"
+
+        />
+    <item
+        android:id="@+id/order_delete_all"
+        android:title="Delete All"
+        android:visible="false"/>
+
+        <item
+            android:id="@+id/byco"
+            android:title="Company"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/bydate"
+            android:title="Date"
+            android:checked="true"
+            android:checkable="true"/>
+
+</menu>

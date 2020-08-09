@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "930368282343",
+    "firebase_url": "https://avid-elevator-256208.firebaseio.com",
+    "project_id": "avid-elevator-256208",
+    "storage_bucket": "avid-elevator-256208.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930368282343:android:77d8385b31255e10e10c42",
+        "android_client_info": {
+          "package_name": "com.example.currentplacedetailsonmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930368282343-936fbf3apbvpfhq88tu891t8885gsdud.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.currentplacedetailsonmap",
+            "certificate_hash": "28de8ac63a7e8c764854b38a25eb73f2a216a308"
+          }
+        },
+        {
+          "client_id": "930368282343-qdg9l1lm4hg1lbrlr43cvc7dv68p0qgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA96mDSM5oaN7AgIl53MN1OfY-wAjZi9C4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930368282343-qdg9l1lm4hg1lbrlr43cvc7dv68p0qgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

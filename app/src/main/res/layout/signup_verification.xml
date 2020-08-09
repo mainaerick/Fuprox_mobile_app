@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="39dp"
+    android:background="@color/colorPrimaryDark">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="332dp"
+                android:layout_height="235dp"
+                android:layout_above="@+id/layout_email"
+                android:layout_marginBottom="70dp"
+                android:src="@mipmap/ic_signup"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verify Email"
+                style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="13dp"
+                android:fontFamily="@font/lato"
+                />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_email"
+                android:background="@drawable/border"
+                android:layout_marginBottom="13dp"
+                android:padding="3dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="5dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/tvactivationemail"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/lato_bold"
+                    tools:targetApi="lollipop" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_code"
+                android:background="@drawable/border"
+                android:layout_marginBottom="13dp"
+                android:padding="3dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="5dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Code"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/tvactivation_code"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/lato_bold"
+                    tools:targetApi="lollipop" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:id="@+id/activate_acc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Verify"
+                    android:layout_below="@+id/layout_password"
+                    android:background="@drawable/border_primary"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_bold"
+                    android:layout_weight="1" />
+                <TextView
+                    style="@style/Widget.AppCompat.Button"
+                    android:gravity="center"
+                    android:id="@+id/create_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:padding="7dp"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/border"
+                    android:layout_marginLeft="13dp"
+                    android:fontFamily="@font/lato_bold"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/resetaccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Did Not Get Code? Click Here."
+                android:layout_gravity="start"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_marginTop="23dp"
+                android:padding="7dp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar_acc"
+        android:theme="@style/AppTheme.PopupOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_acc"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/app_name"
+            app:titleMarginStart="33dp"
+            app:titleTextColor="#fff"
+            app:subtitleTextColor="@color/colorAccent"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_centerInParent="true"
+            android:id="@+id/noaccount_image"
+
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/noaccount_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/noaccount_image"
+            android:visibility="invisible"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            />
+
+        <TextView
+            android:id="@+id/noaccountsubtitile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in/Create Account"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/noaccount_title"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN IN"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/noaccountsubtitile"
+            android:layout_marginTop="17dp"
+            android:padding="7dp"
+            android:id="@+id/account_sign_in"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffff"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE ACCOUNT"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/account_sign_in"
+            android:padding="7dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffff"
+            android:id="@+id/account_signup"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText,RtlHardcoded,ContentDescription">
+
+
+    <item
+        android:id="@+id/verify_payment"
+        android:title="Verify Payment"
+        />
+    <item
+        android:id="@+id/menu3"
+        android:title="Print Ticket" />
+    <item
+        android:id="@+id/menu1"
+        android:title="Get Directions" />
+    <item
+        android:id="@+id/remove_pending"
+        android:title="Delete"/>
+    <item
+        android:id="@+id/float_bubble"
+        android:title="Float Updates"/>
+</menu>

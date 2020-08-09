@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimaryDark"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/layout_i"
+        >
+
+        <ImageView
+            android:id="@+id/institution_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+            android:padding="13dp"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:layout_toRightOf="@+id/institution_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:visibility="gone"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:padding="13dp"
+            android:id="@+id/title_i"
+            android:textColor="#fff"
+
+            />
+
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            style="@style/MaterialSearchBarLight"
+            app:mt_speechMode="false"
+            app:mt_hint="Search bookings"
+            app:mt_placeholder="Search services"
+            app:mt_maxSuggestionsCount="5"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mt_roundedSearchBarEnabled="false"
+            android:layout_margin="23dp"
+            android:id="@+id/searchBar_institution"
+            android:layout_below="@+id/title_i"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Institutions"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_below="@+id/searchBar_institution"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:paddingTop="23dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:fontFamily="@font/lato"
+
+            />
+
+    </RelativeLayout>
+
+        <ListView
+            android:id="@+id/institution_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            tools:listitem="@layout/list_institution"
+            android:scrollbars="none"
+            android:layout_below="@+id/layout_i"
+            android:layout_marginBottom="90dp"
+            android:paddingTop="15dp"
+            android:paddingRight="47dp"
+            android:paddingLeft="47dp"
+            />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/service_listview"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:id="@+id/layout_error_disp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_conectionerror2"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connection Error!"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato"
+            android:textStyle="bold"
+            android:id="@+id/error_title"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Couldn't communicate with the server"
+            android:layout_gravity="center"
+            android:fontFamily="@font/lato_bold"
+            android:id="@+id/error_description"
+            android:textAlignment="center"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/colorAccent"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Retry"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingLeft="23dp"
+                android:paddingRight="23dp"
+                android:id="@+id/retry_btn"
+                />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

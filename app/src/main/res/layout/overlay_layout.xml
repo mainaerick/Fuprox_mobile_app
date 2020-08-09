@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+
+<com.andremion.counterfab.CounterFab
+    android:id="@+id/fabHead"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@mipmap/ic_signup"
+    app:fabSize="normal"
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/baubledetaillayout"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/fabHead"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/fabHead"
+                android:text="This is to show size of the line:\nloan services"
+                android:id="@+id/bubble_detail"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textAllCaps="true"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+
+
+                />
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="end"
+                android:background="@mipmap/ic_close"
+                android:id="@+id/close_fab"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvservicename"
+            android:layout_below="@+id/bubble_detail"
+            android:layout_marginTop="7dp"
+            android:text="Loans"
+            android:fontFamily="@font/lato_bold"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

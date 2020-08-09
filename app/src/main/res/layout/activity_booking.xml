@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.activity_booking"
+    android:orientation="vertical"
+    >
+
+<!--    <android.support.v7.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="96dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardCornerRadius="13dp"-->
+<!--        >-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/service_selected_textview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Loan Services"-->
+<!--            android:padding="13dp"-->
+<!--            android:background="#f0f0f0"-->
+<!--            />-->
+<!--    </android.support.v7.widget.CardView>-->
+
+<!--    <android.support.v7.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardCornerRadius="13dp"-->
+<!--        >-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/booking_date_activity"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Date"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:padding="13dp"-->
+<!--            android:elevation="0dp"-->
+<!--            android:background="#f0f0f0"-->
+<!--            />-->
+<!--    </android.support.v7.widget.CardView>-->
+
+<!--    <android.support.v7.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardCornerRadius="13dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:id="@+id/booking_time_activity"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:hint="Time"-->
+<!--            android:padding="13dp"-->
+<!--            android:background="#f0f0f0"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            />-->
+<!--    </android.support.v7.widget.CardView>-->
+
+
+
+
+
+
+
+<!--    &lt;!&ndash;        &ndash;&gt;-->
+<!--    &lt;!&ndash;    <EditText&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:id="@+id/booking_date"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginStart="24dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginTop="96dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginEnd="24dp"&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        android:hint="@string/prompt_email"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:inputType="textEmailAddress"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:selectAllOnFocus="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;    <EditText&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:id="@+id/password"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginStart="24dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginEnd="24dp"&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        android:hint="@string/prompt_password"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:imeActionLabel="@string/action_sign_in_short"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:imeOptions="actionDone"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:inputType="textPassword"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:selectAllOnFocus="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/booking_date" />&ndash;&gt;-->
+<!--    <android.support.v7.widget.CardView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardCornerRadius="13dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginStart="48dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="48dp"-->
+<!--        android:layout_marginBottom="64dp"-->
+<!--        >-->
+<!--        <Button-->
+
+<!--            android:elevation="0dp"-->
+<!--            android:id="@+id/booking_confirm_activity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#000"-->
+<!--            android:text="Confirm booking"-->
+<!--            app:layout_constraintVertical_bias="0.2"-->
+<!--            android:background="#ffff"-->
+<!--            />-->
+<!--    </android.support.v7.widget.CardView>-->
+
+
+
+</LinearLayout>

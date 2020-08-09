@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="23dp"
+    tools:ignore="HardcodedText,RtlHardcoded,ContentDescription">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="254"
+        android:id="@+id/countrycode"
+        style="@style/TextAppearance.AppCompat.Title" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="710 ### ###"
+        android:inputType="phone"
+        style="@style/TextAppearance.AppCompat.Title"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+
+            />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            />
+
+        <Button
+            android:id="@+id/btn_remove_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="remove"
+            android:visibility="gone"
+
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

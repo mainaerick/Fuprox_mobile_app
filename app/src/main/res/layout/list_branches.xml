@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText,RtlHardcoded,ContentDescription"
+    android:descendantFocusability="blocksDescendants">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/orders_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="3dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="afterDescendants"
+            android:orientation="vertical"
+            android:padding="9dp"
+            android:background="@color/colorPrimary">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="23dp">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:srcCompat="@mipmap/ic_business"
+                    android:id="@+id/branch_icon"
+                    android:background="@drawable/background_circle"
+                    android:padding="3dp"
+                    />
+                <TextView
+                    android:id="@+id/branch_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Branch name"
+                    android:layout_marginStart="1.5dp"
+                    android:layout_marginEnd="1.5dp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:fontFamily="@font/lato_bold"
+                    />
+
+                <com.like.LikeButton
+                    app:icon_type="heart"
+                    app:icon_size="17dp"
+                    android:id="@+id/favourite_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:like_drawable="@drawable/ic_favorite_black_24dp"
+                    app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"
+                    app:dots_primary_color="@color/colorAccent"
+                    app:dots_secondary_color="@color/colorPrimary"
+                    app:circle_end_color="@color/colorAccent" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/branch_dist"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:text="(12232km from your location)"
+                    android:fontFamily="@font/lato_bold"
+
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtbranchid"
+                android:visibility="gone"
+                />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
+
+<!--<CheckBox-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:button="@drawable/radiobutton_drawable"-->
+<!--android:id="@+id/favourite_btn"-->
+<!--android:layout_marginTop="13dp"-->
+<!--    />-->
+
+
+<!--<com.like.LikeButton-->
+<!--app:icon_type="heart"-->
+<!--app:icon_size="17dp"-->
+<!--android:id="@+id/star_button"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--app:like_drawable="@drawable/ic_favorite_black_24dp"-->
+<!--app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"-->
+<!--app:dots_primary_color="@color/colorAccent"-->
+<!--app:dots_secondary_color="@color/colorPrimary"-->
+<!--app:circle_end_color="@color/colorAccent"-->
+<!--    />-->

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
+    tools:ignore="HardcodedText,RtlHardcoded,ContentDescription"
+    >
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/orders_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="0dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="afterDescendants"
+            android:orientation="vertical"
+            android:padding="13dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvfav_id"
+                android:visibility="gone"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="23dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_business"/>
+                <TextView
+                    android:id="@+id/favbranch_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Branch name"
+                    android:layout_marginStart="1.5dp"
+                    android:layout_marginEnd="1.5dp"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:layout_weight="1"
+                    android:maxLines="2"
+                    android:fontFamily="@font/lato_bold"
+                    android:textAlignment="center"
+                    />
+
+                <com.like.LikeButton
+                app:icon_type="heart"
+                app:icon_size="17dp"
+                android:id="@+id/favourite_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:like_drawable="@drawable/ic_favorite_black_24dp"
+                app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"
+                app:dots_primary_color="@color/colorPrimaryDark"
+                app:dots_secondary_color="@color/colorPrimary"
+                app:circle_end_color="@color/colorAccent" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="13dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/branch_dist"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:text="(12232km from your location)"
+                    android:fontFamily="@font/lato_bold"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtbranchid"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
+
+
+<!--<CheckBox-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:button="@drawable/radiobutton_drawable"-->
+<!--android:id="@+id/favourite_btn"-->
+<!--android:layout_marginTop="13dp"-->
+<!--    />-->
+
+<!--<com.like.LikeButton-->
+<!--app:icon_type="heart"-->
+<!--app:icon_size="17dp"-->
+<!--android:id="@+id/star_button"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--app:like_drawable="@drawable/ic_favorite_black_24dp"-->
+<!--app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"-->
+<!--app:dots_primary_color="@color/colorPrimaryDark"-->
+<!--app:dots_secondary_color="@color/colorPrimary"-->
+<!--app:circle_end_color="@color/colorAccent"-->
+<!--    />-->
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:orientation="vertical"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:background="@color/colorPrimary">-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/layouttitle"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="1.5dp"-->
+<!--        android:layout_marginEnd="1.5dp"-->
+<!--        android:layout_marginBottom="39dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/favbranch_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Institution name"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="17sp" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_below="@+id/layouttitle">-->
+
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/branch_dist"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_gravity="center"-->
+<!--            />-->
+
+<!--        <com.like.LikeButton-->
+<!--            app:icon_type="heart"-->
+<!--            app:icon_size="17dp"-->
+<!--            android:id="@+id/star_button"-->
+<!--            app:liked="true"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:like_drawable="@drawable/ic_favorite_black_24dp"-->
+<!--            app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"-->
+<!--            app:dots_primary_color="@color/colorAccent"-->
+<!--            app:dots_secondary_color="@color/colorPrimary"-->
+<!--            app:circle_end_color="@color/colorAccent"-->
+
+<!--            />-->
+
+
+<!--    </LinearLayout>-->
+
+<!--</RelativeLayout>-->
