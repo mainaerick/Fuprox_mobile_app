@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Favourite"
                 android:visibility="visible"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                 android:padding="13dp"
                 android:textColor="@color/colorPrimary"
                 android:layout_centerInParent="true"

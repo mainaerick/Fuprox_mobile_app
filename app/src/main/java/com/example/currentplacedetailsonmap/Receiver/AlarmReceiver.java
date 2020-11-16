@@ -44,6 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Calendar calendar= Calendar.getInstance();
        notification.createNotificationChannel(context);
 
+
         SimpleDateFormat timeFormat=new SimpleDateFormat("HH:mm");
         SimpleDateFormat dayformat=new SimpleDateFormat("EEEE");
 
@@ -135,7 +136,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/book/get/user");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/book/get/user");
                 json.put("user_id", new Dbhelper(activity).get_user_id());
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -261,7 +262,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             InputStream is = null;
             String result = null;
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/ahead/of/you/id");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(context)+"/ahead/of/you/id");
                 json.put("booking_id", booking_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

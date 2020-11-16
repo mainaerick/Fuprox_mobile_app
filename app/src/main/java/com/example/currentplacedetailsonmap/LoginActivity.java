@@ -45,24 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            if (new Dbhelper(LoginActivity.this).check_user()==1){
-                finish();
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-            }
-            else {
-//                loadwithanimation("login");
-//                sign_in(LoginActivity.this);
-                if (retrive_pending_user().equals("")){
-                    loadFragment(new login(this));
-                }
-                else {
-                    loadFragment(new activate_acc(this));
-                }
 
-            }
-        }, 1000);
+        if (retrive_pending_user().equals("")){
+            loadFragment(new login(this));
+        }
+        else {
+            loadFragment(new activate_acc(this));
+        }
         Log.e(TAG, "onCreate: ", null);
     }
     public boolean loadFragment(Fragment fragment) {

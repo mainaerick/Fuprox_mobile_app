@@ -53,4 +53,7 @@
     <color name="trans_success_stroke_color">@color/colorPrimaryDark</color>
     <color name="warning_stroke_color">@color/colorPrimaryDark</color>
     <color name="confirm_button_color">@color/colorPrimary</color>
+
+
+    <attr name="sb_checked_color" format="reference|color"/>
 </resources>

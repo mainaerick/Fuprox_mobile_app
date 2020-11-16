@@ -109,7 +109,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
 //                editor.putString("company_name", txtcompanyname.getText().toString());
 //                editor.putString("branch_name",txtbranch.getText().toString());
 
-            HttpPost post = new HttpPost(new strings_().url()+"/verify/payment");
+            HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment");
             json.put("branch_id", Integer.parseInt(branch_id.trim()));
             json.put("start", start);
             json.put("service_name",service_name);
@@ -161,17 +161,17 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
                             msg="Payment Unsuccessful";
                         }
                     } catch (Throwable t) {
-                        Log.e("My App", "Could not parse malformed JSON: services offered \"" + result + "\""+t.getMessage());
+                        Log.e("My App", "Could not parse malformed JSON: verify payment \"" + result + "\""+t.getMessage());
                         errorms=t.toString();
                     }
                 } catch (Exception e) {
-                    Log.e("log_tag", "Error converting result " + e.toString());
+                    Log.e("log_tag", "Error converting result verify payment " + e.toString());
                     errorms=e.toString();
                 }
             }
         } catch(Exception e) {
             e.printStackTrace();
-            Log.d(TAG, "run: book connection error" );
+            Log.d(TAG, "run: book connection error verify payment" );
             errorms=e.toString();
         }
         return null;

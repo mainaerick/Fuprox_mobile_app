@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.model.strings_;
 
@@ -131,7 +130,7 @@ public class confirm_r_code extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/password/forgot/code");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/password/forgot/code");
                 json.put("code", security_code);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

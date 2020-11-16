@@ -1,15 +1,19 @@
 package com.example.currentplacedetailsonmap.model;
 
+import android.content.Context;
+
+import com.example.currentplacedetailsonmap.utils.Dbhelper;
+
 public class strings_ {
 
-    public String url(){
+    public String get_ipaddress(Context context){
 
         String url_str;
 
-
 //            url_str="https://api.fuprox.com";
 //            url_str="http://192.168.43.162:4000";
-        url_str="http://68.183.89.127:4000";
+//        url_str="http://159.65.144.235:4000";
+        url_str=new Dbhelper(context).get_ipaddress();
 
         return url_str;
     }

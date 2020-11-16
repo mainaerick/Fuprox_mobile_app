@@ -142,7 +142,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
                 String result = null;
 
                 try {
-                    HttpPost post = new HttpPost(new strings_().url()+"/book/get");
+                    HttpPost post = new HttpPost(new strings_().get_ipaddress(getActivity())+"/book/get");
                     json.put   ("booking_id", sid);
                     json.put   ("user_id", user_id);
                     StringEntity se = new StringEntity( json.toString());

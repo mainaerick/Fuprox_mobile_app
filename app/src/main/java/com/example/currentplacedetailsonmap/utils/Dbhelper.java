@@ -50,6 +50,7 @@ private static final int DB_VERSION = 1;
     private static final String SETTING_ID = "_id";
     private static final String SETTING_NOTIFICATIONDELAY = "notify_before";
     private static final String SETTING_NOTIFICATIONSTATE= "notify_state";
+    private static final String SETTING_IPADDRESS= "ip_address";
 
 
 
@@ -118,7 +119,8 @@ private static final int DB_VERSION = 1;
         String CREATE_TABLE_SETTINGS = "CREATE TABLE " + SETTING_TABLE + "("
                 + SETTING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + SETTING_NOTIFICATIONDELAY + " INTEGER,"
-                + SETTING_NOTIFICATIONSTATE + " TEXT"
+                + SETTING_NOTIFICATIONSTATE + " TEXT,"
+                + SETTING_IPADDRESS + " TEXT"
                 + ")";
 
 
@@ -216,7 +218,9 @@ private static final int DB_VERSION = 1;
 //        if (cursor.getCount()==0){
             contentValues.put(SETTING_NOTIFICATIONDELAY, 0);
             contentValues.put(SETTING_NOTIFICATIONSTATE, "1");
-            db.insert(SETTING_TABLE,null, contentValues);
+        contentValues.put(SETTING_IPADDRESS, "122");
+
+        db.insert(SETTING_TABLE,null, contentValues);
 //        }
 
         db.close();
@@ -250,6 +254,15 @@ private static final int DB_VERSION = 1;
         }
         return state;
     }
+    public String get_ipaddress(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+SETTING_TABLE,null);
+        String state=" ";
+        if (cursor.moveToFirst()){
+            state=cursor.getString(cursor.getColumnIndex(SETTING_IPADDRESS));
+        }
+        return state;
+    }
 
     public int getnotidelay(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -259,6 +272,14 @@ private static final int DB_VERSION = 1;
             delay=cursor.getInt(cursor.getColumnIndex(SETTING_NOTIFICATIONDELAY));
         }
         return delay;
+    }
+
+    public void set_ipaddress(String ipaddress){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SETTING_IPADDRESS, ipaddress);
+        db.update(SETTING_TABLE,contentValues, null,null);
+        db.close();
     }
 
     public void setnotistate(String state){

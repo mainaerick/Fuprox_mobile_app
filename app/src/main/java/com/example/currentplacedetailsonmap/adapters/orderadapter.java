@@ -353,7 +353,7 @@ public class orderadapter extends ArrayAdapter<booking_details> {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/branch/get/single");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(mActivity)+"/branch/get/single");
                 json.put("branch_id", branch_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

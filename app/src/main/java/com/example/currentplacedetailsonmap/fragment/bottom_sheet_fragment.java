@@ -589,7 +589,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                 InputStream is = null;
                 String result = null;
                 try {
-                    HttpPost post = new HttpPost(new strings_().url()+"/book/make");
+                    HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/book/make");
                     json.put("branch_id", branch_id);
                     json.put("start", start);
                     json.put("service_name",service_name);
@@ -796,7 +796,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/services/get/all");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/services/get/all");
                 json.put("branch_id", b_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -986,7 +986,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             InputStream is = null;
             String result = null;
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/ahead/of/you");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/ahead/of/you");
                 json.put("branch_id", id);
                 json.put("service_name",servicename);
                 StringEntity se = new StringEntity( json.toString());

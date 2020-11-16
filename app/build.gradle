@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -76,7 +77,10 @@ dependencies {
     }
 
 
-    implementation 'com.github.andremion:counterfab:1.0.1'
+    implementation 'com.github.andremion:counterfab:1.0.1' //widget to show line count progress
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'  //loading dots
+
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'  //switch
 //    implementation 'com.github.yesidlazaro:GmailBackground:1.2.0' //gmail
 
     //    implementation 'com.google.firebase:firebase-analytics:17.2.3'

@@ -71,6 +71,7 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
     LinearLayout error_linearlayout;
     ListView listView;
     String error_title="";
+    LinearLayout layout_loading;
 
 
     Activity activity;
@@ -91,6 +92,8 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View mainview=inflater.inflate(R.layout.layout_institution, container, false);
+
+        layout_loading = mainview.findViewById(R.id.layout_loading);
 
         if (institution_list.isEmpty()){
             new institution_get(mainview).execute();
@@ -267,11 +270,12 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
 
         @Override
         protected void onPreExecute() {
-            pDialog = new ProgressDialog(getContext());
-            pDialog.setMessage("Loading. Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
+            layout_loading.setVisibility(View.VISIBLE);
+//            pDialog = new ProgressDialog(getContext());
+//            pDialog.setMessage("Loading. Please wait...");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(false);
+//            pDialog.show();
         }
 
         @Override
@@ -287,7 +291,7 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/company/by/service");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/company/by/service");
                 json.put("service", service_id);
 
                 StringEntity se = new StringEntity( json.toString());
@@ -385,7 +389,8 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            pDialog.dismiss();
+//            pDialog.dismiss();
+            layout_loading.setVisibility(View.GONE);
             setupAdapter(view);
 
             if (error_title.isEmpty()){
@@ -434,152 +439,152 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
         list_status_nolist=true;
     }
 
-
-    private static void sendJson_getbranch_details(final String searchtext) {
-        final Thread t = new Thread() {
-
-            public void run() {
-                Looper.prepare(); //For Preparing Message Pool for the child Thread
-                HttpClient client = new DefaultHttpClient();
-                HttpConnectionParams.setConnectionTimeout(client.getParams(), 100000); //Timeout Limit
-                HttpResponse response;
-                JSONObject json = new JSONObject();
-                StringBuilder sb;
-                InputStream is = null;
-                String result = null;
-
-                try {
-                    HttpPost post = new HttpPost(new strings_().url()+"/app/search/");
-                    json.put("term", " ");
-                    StringEntity se = new StringEntity( json.toString());
-                    se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    post.setEntity(se);
-                    response = client.execute(post);
-                    HttpEntity entity = response.getEntity();
-                    is = entity.getContent();
-
-
-
-                    /*Checking response */
-                    if(response!=null){
-//                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-
-//                        decode response to string
-
-                        try {
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                                    is, "iso-8859-1"), 8);
-                            sb = new StringBuilder();
-                            sb.append(reader.readLine()).append("\n");
-                            String line = "0";
-
-                            while ((line = reader.readLine()) != null) {
-                                sb.append(line).append("\n");
-                            }
-
-                            is.close();
-                            result = sb.toString();
-
-
-//                            CONVERT THE RESPONSE RESULT TO JSON FROM STRRING
-
-                            JSONObject obj = null;
-                            JSONArray jsonarray;
-                            try {
-//                                obj= new JSONObject(result);
-                                jsonarray=new JSONArray(result);
-//                                if (!post_params.isEmpty()){
-//                                    for (int j=0;j<post_params.size();j++){
-//                                        ArrayList<suggestion_details> arr = new ArrayList<>();
-//                                        arr.add(post_params.get(j));
-//                                        post_params.removeAll(arr);
+//
+//    private static void sendJson_getbranch_details(final String searchtext) {
+//        final Thread t = new Thread() {
+//
+//            public void run() {
+//                Looper.prepare(); //For Preparing Message Pool for the child Thread
+//                HttpClient client = new DefaultHttpClient();
+//                HttpConnectionParams.setConnectionTimeout(client.getParams(), 100000); //Timeout Limit
+//                HttpResponse response;
+//                JSONObject json = new JSONObject();
+//                StringBuilder sb;
+//                InputStream is = null;
+//                String result = null;
+//
+//                try {
+//                    HttpPost post = new HttpPost(new strings_().get_ipaddress()+"/app/search/");
+//                    json.put("term", " ");
+//                    StringEntity se = new StringEntity( json.toString());
+//                    se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+//                    post.setEntity(se);
+//                    response = client.execute(post);
+//                    HttpEntity entity = response.getEntity();
+//                    is = entity.getContent();
+//
+//
+//
+//                    /*Checking response */
+//                    if(response!=null){
+////                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+//
+////                        decode response to string
+//
+//                        try {
+//                            BufferedReader reader = new BufferedReader(new InputStreamReader(
+//                                    is, "iso-8859-1"), 8);
+//                            sb = new StringBuilder();
+//                            sb.append(reader.readLine()).append("\n");
+//                            String line = "0";
+//
+//                            while ((line = reader.readLine()) != null) {
+//                                sb.append(line).append("\n");
+//                            }
+//
+//                            is.close();
+//                            result = sb.toString();
+//
+//
+////                            CONVERT THE RESPONSE RESULT TO JSON FROM STRRING
+//
+//                            JSONObject obj = null;
+//                            JSONArray jsonarray;
+//                            try {
+////                                obj= new JSONObject(result);
+//                                jsonarray=new JSONArray(result);
+////                                if (!post_params.isEmpty()){
+////                                    for (int j=0;j<post_params.size();j++){
+////                                        ArrayList<suggestion_details> arr = new ArrayList<>();
+////                                        arr.add(post_params.get(j));
+////                                        post_params.removeAll(arr);
+////                                    }
+////                                }
+//                                if (jsonarray.length()>4){
+//                                    for (int j=0;j<4;j++){
+//                                        obj=new JSONObject(jsonarray.getString(j));
+////
+//                                        String company=obj.getString("company");
+//                                        String branch_name=obj.getString("name");
+//                                        suggestion_details suggestion_details=new suggestion_details();
+//                                        suggestion_details.setTitle(branch_name);
+//                                        suggestion_details.setLatitude(obj.getString("longitude"));
+//                                        suggestion_details.setLongitude(obj.getString("latitude"));
+//                                        suggestion_details.setOpens(obj.getString("opens"));
+//                                        suggestion_details.setCloses(obj.getString("closes"));
+//                                        suggestion_details.setId(obj.getString("id"));
+//                                        suggestion_details.setCompany(company);
+////                                    post_params.add(company+ " " +branch_name);
+//                                        post_params.add(suggestion_details);
 //                                    }
 //                                }
-                                if (jsonarray.length()>4){
-                                    for (int j=0;j<4;j++){
-                                        obj=new JSONObject(jsonarray.getString(j));
 //
-                                        String company=obj.getString("company");
-                                        String branch_name=obj.getString("name");
-                                        suggestion_details suggestion_details=new suggestion_details();
-                                        suggestion_details.setTitle(branch_name);
-                                        suggestion_details.setLatitude(obj.getString("longitude"));
-                                        suggestion_details.setLongitude(obj.getString("latitude"));
-                                        suggestion_details.setOpens(obj.getString("opens"));
-                                        suggestion_details.setCloses(obj.getString("closes"));
-                                        suggestion_details.setId(obj.getString("id"));
-                                        suggestion_details.setCompany(company);
-//                                    post_params.add(company+ " " +branch_name);
-                                        post_params.add(suggestion_details);
-                                    }
-                                }
-
-                                else{
-                                    for (int i=0;i<jsonarray.length();i++){
-                                        obj=new JSONObject(jsonarray.getString(i));
+//                                else{
+//                                    for (int i=0;i<jsonarray.length();i++){
+//                                        obj=new JSONObject(jsonarray.getString(i));
+////
+//                                        String company=obj.getString("company");
+//                                        String branch_name=obj.getString("name");
+//                                        suggestion_details suggestion_details=new suggestion_details();
+//                                        suggestion_details.setTitle(branch_name);
+//                                        suggestion_details.setLatitude(obj.getString("longitude"));
+//                                        suggestion_details.setLongitude(obj.getString("latitude"));
+//                                        suggestion_details.setOpens(obj.getString("opens"));
+//                                        suggestion_details.setCloses(obj.getString("closes"));
+//                                        suggestion_details.setId(obj.getString("id"));
+//                                        suggestion_details.setCompany(company);
+////                                    post_params.add(company+ " " +branch_name);
+//                                        post_params.add(suggestion_details);
+//                                        Log.d(TAG, "run: search results "+ obj.getString("company")+" "+obj.getString("name"));
 //
-                                        String company=obj.getString("company");
-                                        String branch_name=obj.getString("name");
-                                        suggestion_details suggestion_details=new suggestion_details();
-                                        suggestion_details.setTitle(branch_name);
-                                        suggestion_details.setLatitude(obj.getString("longitude"));
-                                        suggestion_details.setLongitude(obj.getString("latitude"));
-                                        suggestion_details.setOpens(obj.getString("opens"));
-                                        suggestion_details.setCloses(obj.getString("closes"));
-                                        suggestion_details.setId(obj.getString("id"));
-                                        suggestion_details.setCompany(company);
-//                                    post_params.add(company+ " " +branch_name);
-                                        post_params.add(suggestion_details);
-                                        Log.d(TAG, "run: search results "+ obj.getString("company")+" "+obj.getString("name"));
-
-                                    }
-                                }
-
-
-
-                                Log.d(TAG, "run: search odj "+result);
-
-
-
-
-
-
-
-//                                PUT DATA TO THE LOCAL DATABASE
-
-
-
-
-                            } catch (Throwable t) {
-                                Log.d(TAG, "run: search result error "+ searchtext);
-
-                                Log.e("My App", "search result error  " +t.getMessage());
-
-//                                Log.e("My App", "Could not parse malformed JSON: \"" + json + "\""+t.getMessage());
-                            }
-
-
-//                            Log.d(TAG, "run: string" + result);
-
-                        } catch (Exception e) {
-                            Log.e("log_tag", "Error converting result " + e.toString());
-                        }
-
-
-                    }
-
-                } catch(Exception e) {
-                    e.printStackTrace();
-
-                    //                    createDialog("Error", "Cannot Estabilish Connection");
-                }
-
-                Looper.loop(); //Loop in the message queue
-            }
-        };
-
-        t.start();
-    }
+//                                    }
+//                                }
+//
+//
+//
+//                                Log.d(TAG, "run: search odj "+result);
+//
+//
+//
+//
+//
+//
+//
+////                                PUT DATA TO THE LOCAL DATABASE
+//
+//
+//
+//
+//                            } catch (Throwable t) {
+//                                Log.d(TAG, "run: search result error "+ searchtext);
+//
+//                                Log.e("My App", "search result error  " +t.getMessage());
+//
+////                                Log.e("My App", "Could not parse malformed JSON: \"" + json + "\""+t.getMessage());
+//                            }
+//
+//
+////                            Log.d(TAG, "run: string" + result);
+//
+//                        } catch (Exception e) {
+//                            Log.e("log_tag", "Error converting result " + e.toString());
+//                        }
+//
+//
+//                    }
+//
+//                } catch(Exception e) {
+//                    e.printStackTrace();
+//
+//                    //                    createDialog("Error", "Cannot Estabilish Connection");
+//                }
+//
+//                Looper.loop(); //Loop in the message queue
+//            }
+//        };
+//
+//        t.start();
+//    }
 
     private boolean loadFragment(Fragment fragment) {
         //switching fragment

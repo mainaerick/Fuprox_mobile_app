@@ -54,7 +54,6 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-
         ImageView backbtn=findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +113,8 @@ public class HelpActivity extends AppCompatActivity {
         View view;
         String error_title="";
         String error="";
+
+
         @Override
         protected void onPreExecute() {
             pDialog = new ProgressDialog(HelpActivity.this);
@@ -133,7 +134,8 @@ public class HelpActivity extends AppCompatActivity {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url() + "/help/feed");
+                HttpPost httpPost = new HttpPost(new strings_().get_ipaddress(HelpActivity.this) + "/help/feed");
+                HttpPost post = httpPost;
 //                json.put("branch", "");
 
                 StringEntity se = new StringEntity(json.toString());
@@ -254,12 +256,12 @@ public class HelpActivity extends AppCompatActivity {
 //        ArrayList<branches_details> servicelist = new ArrayList<>();
         error_linearlayout.setVisibility(View.VISIBLE);
         expandableListView.setVisibility(View.GONE);
-        TextView error_title=view.findViewById(R.id.error_title);
-        TextView error_desc=view.findViewById(R.id.error_description);
+        TextView error_title=findViewById(R.id.error_title);
+        TextView error_desc=findViewById(R.id.error_description);
         error_title.setText(error);
         error_desc.setText(error_description);
 
-        Button error_retry=view.findViewById(R.id.retry_btn);
+        Button error_retry=findViewById(R.id.retry_btn);
 
         error_retry.setOnClickListener(new View.OnClickListener() {
             @Override

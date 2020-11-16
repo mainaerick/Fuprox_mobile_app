@@ -3,8 +3,11 @@ package com.example.currentplacedetailsonmap.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,21 +18,26 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.currentplacedetailsonmap.BuildConfig;
 import com.example.currentplacedetailsonmap.HelpActivity;
 import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.activities.Settings_activity;
 import com.example.currentplacedetailsonmap.model.alertdialoghelper;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.suke.widget.SwitchButton;
 
 @SuppressWarnings("ALL")
 @SuppressLint("ValidFragment")
 public class account_fragment extends Fragment {
     static ProgressDialog pDialog;
     Activity activity;
-    TextView txtaddnumber,acc_phone,textViewsettings;
+    TextView txtaddnumber,acc_phone,textViewsettings,textViewshare,textViewrate;
     ImageView notification_button;
+    public BottomNavigationView navView;
+
     public account_fragment(Activity _activity){
         activity=_activity;
     }
@@ -41,6 +49,7 @@ public class account_fragment extends Fragment {
         View view;
 
 
+
         if (new Dbhelper(getContext()).check_user()==1){
             view=inflater.inflate(R.layout.account, container, false);
             final TextView txtname=view.findViewById(R.id.acc_name),txtemail=view.findViewById(R.id.acc_email),
@@ -48,6 +57,43 @@ public class account_fragment extends Fragment {
             txtlogout=view.findViewById(R.id.logout),tv_help=view.findViewById(R.id.help);
             textViewsettings=view.findViewById(R.id.acsettings);
             notification_button=view.findViewById(R.id.notificationbutton);
+            textViewrate = view.findViewById(R.id.rate);
+            textViewshare = view.findViewById(R.id.share);
+            ImageView backbtn = view.findViewById(R.id.backbtn);
+            
+            backbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navView= activity.findViewById(R.id.nav_view);
+                    navView.setSelectedItemId(R.id.navigation_queue);
+                }
+            });
+            textViewshare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "NoQueue application");
+                        String shareMessage= "\nLet me recommend you this application\n\n";
+                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                        startActivity(Intent.createChooser(shareIntent, "choose one"));
+                    } catch(Exception e) {
+                        //e.toString();
+                    }
+
+                }
+            });
+
+
+
+            textViewrate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rateApp();
+                }
+            });
 
             tv_help.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,14 +131,53 @@ public class account_fragment extends Fragment {
                 }
             });
 
-            if (new Dbhelper(activity).getnotistate().equals("1")){
-                notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_active_black_24dp));
 
+
+            com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
+                    view.findViewById(R.id.switch_button);
+
+            switchButton.toggle();     //switch state
+            switchButton.toggle(false);//switch without animation
+            switchButton.setShadowEffect(true);//disable shadow effect
+            switchButton.setEnabled(true);//disable button
+            switchButton.setEnableEffect(false);//disable the switch animation
+
+            if (new Dbhelper(activity).getnotistate().equals("1")){
+//                notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_active_black_24dp));
+                switchButton.setChecked(true);
+                switchButton.isChecked();
             }
             else {
-                notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_off_black_24dp));
-
+//                notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_off_black_24dp));
+                switchButton.setChecked(false);
             }
+            switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                    if (isChecked){
+                        new Dbhelper(activity).setnotistate("1");
+                        notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_active_black_24dp));
+                        Snackbar snackbar = Snackbar.make(view, "Notification Enabled!", Snackbar.LENGTH_LONG);
+//                        snackbar.setAnchorView(mActivity.findViewById(R.id.nav_view));
+                        View snackBarView = snackbar.getView();
+                        snackBarView.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+                        snackbar.setTextColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+                        snackbar.show();
+                    }
+                    else {
+                        new Dbhelper(activity).setnotistate("0");
+                        notification_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_notifications_off_black_24dp));
+
+                        Snackbar snackbar = Snackbar.make(view, "Notification Disabled!", Snackbar.LENGTH_LONG);
+//                        snackbar.setAnchorView(mActivity.findViewById(R.id.nav_view));
+                        View snackBarView = snackbar.getView();
+                        snackBarView.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+                        snackbar.setTextColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+                        snackbar.show();
+                    }
+                }
+            });
 
                 notification_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -269,5 +354,34 @@ public class account_fragment extends Fragment {
         }
     }
 
+    public void rateApp()
+    {
+        try
+        {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
 
+    private Intent rateIntentForUrl(String url)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, activity.getPackageName())));
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+        }
+        else
+        {
+            //noinspection deprecation
+            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+        }
+        intent.addFlags(flags);
+        return intent;
+    }
 }

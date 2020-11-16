@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.model.strings_;
 
@@ -156,7 +155,7 @@ public class change_password extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/password/forgot/change");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/password/forgot/change");
                 json.put("code", security_code);
                 json.put("email", email);
                 json.put("password", password);

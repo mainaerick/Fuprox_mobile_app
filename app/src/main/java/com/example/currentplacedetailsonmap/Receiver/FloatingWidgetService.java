@@ -2,7 +2,6 @@ package com.example.currentplacedetailsonmap.Receiver;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.andremion.counterfab.CounterFab;
 import com.example.currentplacedetailsonmap.MainActivity;
@@ -49,7 +47,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.example.currentplacedetailsonmap.Receiver.AlarmReceiver.TAG;
-import static com.example.currentplacedetailsonmap.model.notification.notify_;
 
 /**
  * Created by anupamchugh on 01/08/17.
@@ -288,7 +285,7 @@ public class FloatingWidgetService extends Service {
             InputStream is = null;
             String result = null;
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/ahead/of/you/id");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(FloatingWidgetService.this)+"/ahead/of/you/id");
                 json.put("booking_id", booking_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

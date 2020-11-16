@@ -649,7 +649,7 @@ public class queue extends Fragment implements OnMapReadyCallback {
             pDialog.setCancelable(false);
             pDialog.show();
 
-            Log.d(TAG, "onPreExecute: "+new strings_().url()+"/branch/get");
+            Log.d(TAG, "onPreExecute: "+new strings_().get_ipaddress(getContext())+"/branch/get");
             // Prompt the user for permission.
             getLocationPermission();
 
@@ -683,7 +683,7 @@ public class queue extends Fragment implements OnMapReadyCallback {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
-            JSONObject json = jParser.makeHttpRequest(new strings_().url()+"/branch/get", "GET", params);
+            JSONObject json = jParser.makeHttpRequest(new strings_().get_ipaddress(getContext())+"/branch/get", "GET", params);
             JSONObject resultObject;
             JSONArray jsonArray = null;
 

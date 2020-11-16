@@ -20,9 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.R;
-import com.example.currentplacedetailsonmap.fragment.ordersfragment;
 import com.example.currentplacedetailsonmap.model.strings_;
 
 import org.apache.http.HttpEntity;
@@ -168,7 +166,7 @@ public class signup extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/user/signup");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/user/signup");
                 json.put("email", email);
                 json.put("password",password);
                 StringEntity se = new StringEntity( json.toString());

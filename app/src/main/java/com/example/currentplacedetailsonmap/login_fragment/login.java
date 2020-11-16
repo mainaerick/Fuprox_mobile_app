@@ -13,9 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.MainActivity;
 import com.example.currentplacedetailsonmap.R;
-import com.example.currentplacedetailsonmap.adapters.favourite_adapter;
-import com.example.currentplacedetailsonmap.fragment.Favourite_fragment;
 import com.example.currentplacedetailsonmap.model.strings_;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 
@@ -190,7 +186,7 @@ public class login extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/user/login");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/user/login");
                 json.put("email", email);
                 json.put("password",password);
                 StringEntity se = new StringEntity( json.toString());

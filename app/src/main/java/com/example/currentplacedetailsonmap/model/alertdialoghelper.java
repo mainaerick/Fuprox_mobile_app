@@ -543,7 +543,7 @@ public class alertdialoghelper {
                 pDialog.show();
 
                 try {
-                    HttpPost post = new HttpPost(new strings_().url()+"/user/login");
+                    HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/user/login");
                     json.put("email", email);
                     json.put("password",password);
                     StringEntity se = new StringEntity( json.toString());
@@ -681,7 +681,7 @@ public class alertdialoghelper {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/services/get/all");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(context)+"/services/get/all");
                 json.put("branch_id", b_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

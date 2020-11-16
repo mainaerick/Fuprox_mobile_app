@@ -24,6 +24,7 @@
             android:orientation="horizontal"
             android:padding="9dp"
             android:background="@color/colorPrimary">
+
             <ImageView
                 android:id="@+id/service_image"
                 android:layout_width="48dp"
@@ -34,8 +35,7 @@
                 android:gravity="center"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:textAllCaps="true"
-                android:padding="3dp"
-                />
+                android:padding="3dp" />
             <TextView
                 android:id="@+id/institution_title"
                 android:layout_width="wrap_content"

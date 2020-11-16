@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/user/signup");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/user/signup");
                 json.put("email", email);
                 json.put("password",password);
                 StringEntity se = new StringEntity( json.toString());

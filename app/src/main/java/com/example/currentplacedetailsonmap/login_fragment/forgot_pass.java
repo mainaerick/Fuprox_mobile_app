@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.currentplacedetailsonmap.LoginActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.model.strings_;
 
@@ -155,7 +154,7 @@ public class forgot_pass extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/password/forgot/email");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/password/forgot/email");
                 json.put("email", email);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

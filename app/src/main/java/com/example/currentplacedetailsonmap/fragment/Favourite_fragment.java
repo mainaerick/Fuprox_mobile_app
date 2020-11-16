@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import com.example.currentplacedetailsonmap.adapters.favourite_adapter;
 import com.example.currentplacedetailsonmap.model.strings_;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -39,12 +41,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class Favourite_fragment extends Fragment {
     Activity activity;
     ProgressDialog pDialog;
+    public BottomNavigationView navView;
 
     public Favourite_fragment(Activity _activity){
         activity=_activity;
@@ -65,6 +67,17 @@ public class Favourite_fragment extends Fragment {
             ListView listView=view.findViewById(R.id.listview_fav);
             favourite_adapter favourite_adapter = new favourite_adapter(getActivity(),listView,R.layout.list_favourite,new Dbhelper(getActivity()).get_fav());
             listView.setAdapter(favourite_adapter);
+
+
+            ImageView backbtn = view.findViewById(R.id.backbtn);
+
+            backbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navView= activity.findViewById(R.id.nav_view);
+                    navView.setSelectedItemId(R.id.navigation_queue);
+                }
+            });
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -122,7 +135,7 @@ public class Favourite_fragment extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/branch/get/single");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/branch/get/single");
                 json.put("branch_id", branch_id);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -242,7 +255,7 @@ public class Favourite_fragment extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/company/by/id");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/company/by/id");
                 json.put("id", company_id);
 
                 StringEntity se = new StringEntity( json.toString());

@@ -29,13 +29,13 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.example.currentplacedetailsonmap.MainActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.adapters.orderadapter;
 import com.example.currentplacedetailsonmap.model.JSONParser;
 import com.example.currentplacedetailsonmap.model.strings_;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import org.apache.http.HttpEntity;
@@ -56,7 +56,6 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -76,6 +75,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
     MaterialSearchBar searchBar;
     String filter="";
     String booking_id="";
+    public BottomNavigationView navView;
 
     public ordersfragment(){
 
@@ -107,12 +107,20 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
             ImageView imageView=view.findViewById(R.id.noorders);
             Button restoreprevious=view.findViewById(R.id.getprevious_bookings);
 
+            ImageView backbtn = view.findViewById(R.id.backbtn);
+
+            backbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navView= activity.findViewById(R.id.nav_view);
+                    navView.setSelectedItemId(R.id.navigation_queue);
+                }
+            });
+
             restoreprevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new get_all_bookings(getActivity()).execute();
-
-
                 }
             });
 
@@ -440,7 +448,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/book/get/user");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/book/get/user");
                 json.put("user_id", new Dbhelper(activity).get_user_id());
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -586,7 +594,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
                 String result = null;
 
                 try {
-                    HttpPost post = new HttpPost(new strings_().url()+"/branch/get/single");
+                    HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/branch/get/single");
                     json.put("branch_id", branch_id);
                     StringEntity se = new StringEntity( json.toString());
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -701,7 +709,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/company/by/id");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/company/by/id");
                 json.put("id", company_id);
 
                 StringEntity se = new StringEntity( json.toString());

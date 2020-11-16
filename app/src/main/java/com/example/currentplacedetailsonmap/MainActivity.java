@@ -35,7 +35,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.currentplacedetailsonmap.Receiver.FloatingWidgetService;
 import com.example.currentplacedetailsonmap.adapters.suggestion_adapter;
 import com.example.currentplacedetailsonmap.fragment.Favourite_fragment;
 import com.example.currentplacedetailsonmap.fragment.Services_fragment;
@@ -50,6 +49,11 @@ import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
 import com.example.currentplacedetailsonmap.utils.suggestion_details;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import net.alhazmy13.catcho.library.Catcho;
@@ -176,16 +180,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Catcho.Builder(this)
                 .recipients("erickmaina29@students.ku.ac.ke")
                 .build();
-        askForSystemOverlayPermission();
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class));
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class).putExtra("activity_background", true));
 //        finish();
         setContentView(R.layout.activity_main);
         notification.createNotificationChannel(this);
 
-        if (new Dbhelper(this).getsettings()==0) {
-            new Dbhelper(this).first_settings();
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if (new Dbhelper(MainActivity.this).check_user()==1){
+                askForSystemOverlayPermission();
+                setupadapter();
+            }
+            else {
+//                loadwithanimation("login");
+//                sign_in(LoginActivity.this);
+                finish();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            }
+        },1000);
+
+    }
+
+    private void setupadapter(){
         setalarm(this);
         navView= findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -298,6 +315,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 })
         );
     }
+
+    private void get_ipaddress() {
+        // Read from the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("ip_");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+//                User user = dataSnapshot.getValue(User.class);
+                Log.d(TAG, "Value is: " + value);
+                if (new Dbhelper(MainActivity.this).get_ipaddress().equals("122")||
+                        !new Dbhelper(MainActivity.this).get_ipaddress().equals(value)||
+                        new Dbhelper(MainActivity.this).get_ipaddress()!=null){
+                    new Dbhelper(MainActivity.this).set_ipaddress(value);
+                }
+                Toast.makeText(MainActivity.this, ""+value, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+    }
+
     @Override
     public void onSearchStateChanged(boolean enabled) {
         if(post_params.isEmpty()){
@@ -409,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/app/search");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(MainActivity.this)+"/app/search");
                 json.put("term", searchtext);
                 StringEntity se = new StringEntity( json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -572,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().url()+"/company/by/id");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(MainActivity.this)+"/company/by/id");
                 json.put("id", company_id);
 
                 StringEntity se = new StringEntity( json.toString());
