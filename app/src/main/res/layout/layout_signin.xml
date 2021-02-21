@@ -99,17 +99,18 @@
                 android:layout_marginTop="23dp"
 
                 >
+
                 <TextView
-                    style="@style/Widget.AppCompat.Button"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:id="@+id/confirm_signin"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="SIGN IN"
-                    android:padding="7dp"
+                    android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:fontFamily="@font/lato_bold"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:text="LOGIN"
 
                     />
                 <TextView

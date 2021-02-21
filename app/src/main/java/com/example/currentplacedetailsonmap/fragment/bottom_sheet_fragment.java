@@ -18,11 +18,13 @@ import androidx.annotation.Nullable;
 
 import com.example.currentplacedetailsonmap.Receiver.PM_verify_service;
 import com.example.currentplacedetailsonmap.model.strings_;
+import com.example.currentplacedetailsonmap.utils.verifypayment_pending;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.util.Log;
@@ -45,6 +47,7 @@ import com.example.currentplacedetailsonmap.model.alertdialoghelper;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
 import com.example.currentplacedetailsonmap.utils.services_offered_details;
+import com.google.gson.JsonObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -73,6 +76,7 @@ import java.util.TimeZone;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.content.Context.MODE_PRIVATE;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 @SuppressWarnings("ALL")
@@ -679,7 +683,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (error.equals(" ")){
-                    refreshnavview();
+//                    refreshnavview();
                     SharedPreferences prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
                     if (prefs.getAll().size()!=0){
                         new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE)
@@ -711,9 +715,27 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.SUCCESS_TYPE);
                         sweetAlertDialog
                                 .setTitleText("Verification Successful")
-                                .setContentText("Proceeding to payment...")
+                                .setContentText("Booking a ticket for you, wait for notification")
+                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismissWithAnimation();
+                                        refreshnavview();
+                                    }
+                                })
                                 .show();
-                        sweetAlertDialog.findViewById(R.id.confirm_button).setVisibility(View.GONE);
+                        sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.catcho_primary_dark));
+
+                        sweetAlertDialog.getButton(R.id.confirm_button).setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+//                        final Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                sweetAlertDialog.dismissWithAnimation();
+//                                refreshnavview();
+//
+//                            }
+//                        }, 5000);
 
                         SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
                         editor.putString("start", String.valueOf(booking_milis));
@@ -727,6 +749,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         editor.putString("branch_name",txtbranch.getText().toString());
                         editor.apply();
                         activity.startService(new Intent(activity, PM_verify_service.class));
+                        dismiss();
                     }
                 }
                 else{
@@ -755,7 +778,8 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
     public void refreshnavview(){
 
         BottomNavigationView navView=activity.findViewById(R.id.nav_view);
-        navView.getOrCreateBadge(R.id.navigation_order).setNumber(new Dbhelper(getContext()).getactivebookings());
+        navView.setSelectedItemId(R.id.navigation_queue);
+//        navView.getOrCreateBadge(R.id.navigation_order).setNumber(new Dbhelper(getContext()).getactivebookings());
 
     }
 
@@ -963,6 +987,8 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
         String content,branchname,servicename,booking_id;
         String msg="";
         String error_serv=" ";
+        ArrayList<String> tellers = new ArrayList<>();
+
         public Checkinfront(int id, String servicename){
             this.context=context;
             this.id=id;
@@ -1017,8 +1043,13 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         try {
                             obj= new JSONObject(result);
                             infront=obj.getInt("infront");
-                            Log.d(TAG, "doInBackground: infront="+infront+"branc_id="+id+" servicenam="+servicename);
-
+                            JSONArray teller = obj.getJSONArray("tellers");
+                            JSONObject tellersobj= null;
+                            for (int i=0;i<teller.length();i++){
+                                tellersobj = teller.getJSONObject(i);
+                                tellers.add(tellersobj.getString("number"));
+                            }
+                            Log.d(TAG, "doInBackground: infront="+infront+"branc_id="+id+" object="+tellers.get(0));
                         } catch (Throwable t) {
                             Log.e("My App", "Could not parse malformed JSON: services offered \"" + result + "\""+t.getMessage());
                             error_serv="There was a problem communicating with the servers. \n\n Try again later.";
@@ -1042,19 +1073,23 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             super.onPostExecute(s);
 
             if (error_serv.equals(" ")){
+                StringBuilder strlellerlist = new StringBuilder();
+
+                for (int i=0; i<tellers.size(); i++){
+                    strlellerlist.append(": "+tellers.get(i));
+                }
                 Log.d(TAG, "onPostExecute: check infront"+infront);
                 if (infront==0){
-                    tvnumberpeople.setText(servicename+" queue is empty");
+                    tvnumberpeople.setText(servicename+" queue is empty\n\n Teller No" + strlellerlist.toString());
                 }
                 else{
-                    tvnumberpeople.setText(servicename+" queue has "+infront+ " people");
+                    tvnumberpeople.setText(servicename+" queue has "+infront+ " people\n\n Teller No" + strlellerlist);
                 }
 
             }
             else {
                 Log.d(TAG, "onPostExecute: check infront"+error_serv);
                 tvnumberpeople.setText(error_serv);
-
             }
             Log.d(TAG, "onPostExecute: "+error_serv);
         }

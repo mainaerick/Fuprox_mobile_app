@@ -43,11 +43,13 @@ public class HelpActivity extends AppCompatActivity {
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
-    HashMap<String, List<String>> expandableListDetail=new HashMap<>();
+    HashMap<String, String> expandableListDetail=new HashMap<>();
     LinearLayout error_linearlayout;
     ProgressDialog pDialog;
-    HashMap<String, List<String>> ExpandableListDataPump=new HashMap<>() ;
+    HashMap<String, String> ExpandableListDataPump=new HashMap<>() ;
     List<String> answer = new ArrayList<String>();
+    List<String> question = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,22 @@ public class HelpActivity extends AppCompatActivity {
 
             }
         });
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                TextView textView=view.findViewById(R.id.question_answer);
+                if (textView.getVisibility()==View.VISIBLE){
+                    textView.setVisibility(View.GONE);
 
+                }
+                else {
+                    textView.setVisibility(View.VISIBLE);
+                    textView.setText(answer.get(i));
+
+                }
+                return false;
+            }
+        });
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -170,18 +187,16 @@ public class HelpActivity extends AppCompatActivity {
 //                            obj= new JSONObject(result);
 
                             jsonarray = new JSONArray(result);
-
-
                             String name = null;
                             int i = 0;
                             while (i < jsonarray.length()) {
-
-
                                 service_details service_details = new service_details();
                                 obj = new JSONObject(jsonarray.getString(i));
-
                                 answer.add(obj.getString("solution"));
-                                ExpandableListDataPump.put(obj.getString("title"),answer);
+                                question.add(obj.getString("title"));
+
+                                if (!ExpandableListDataPump.containsKey(obj.getString("title")))
+                                    ExpandableListDataPump.put(obj.getString("title"),obj.getString("solution"));
 
                                 i++;
                             }

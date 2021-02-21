@@ -377,7 +377,7 @@ public class Branches_fragment extends Fragment implements MaterialSearchBar.OnS
                                 i++;
                             }
                             if (branches_list.size()==0){
-                                error_title="No institutions";
+                                error_title="No Branches";
                                 error="No Branches added yet!";
                             }
 ////
@@ -459,6 +459,7 @@ public class Branches_fragment extends Fragment implements MaterialSearchBar.OnS
             @Override
             public void onClick(View v) {
                 error_title = "";
+                error_linearlayout.setVisibility(View.INVISIBLE);
 
                 new branch_get(view).execute();
             }

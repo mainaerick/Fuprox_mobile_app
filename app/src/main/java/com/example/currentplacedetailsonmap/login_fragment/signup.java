@@ -250,6 +250,7 @@ public class signup extends Fragment {
                 Toast.makeText(activity, "Activation Code Sent To Email!", Toast.LENGTH_LONG).show();
                 SharedPreferences.Editor editor = activity.getSharedPreferences("pending_signup", MODE_PRIVATE).edit();
                 editor.putString("email", email);
+                editor.putString("password", password);
                 editor.apply();
                 rloadfragment(new activate_acc(activity));
             }

@@ -3,6 +3,7 @@ package com.example.currentplacedetailsonmap.Receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -31,6 +32,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.currentplacedetailsonmap.model.notification.notify_;
 
 
@@ -70,6 +72,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Calendar bookingcalendar=Calendar.getInstance();
                 bookingcalendar.setTimeInMillis(book_tstamp);
 
+                Log.d(TAG, "get_booking_notify: status"+ status+ "bookings count"+ cursor.getCount() );
                 if (status.equals("1")){
                     if (new Dbhelper(context).getnotistate().equals("1")){ //notify if notifications is enabled
                         String servicename,branch_id,branchname,booking_id;
@@ -180,20 +183,20 @@ public class AlarmReceiver extends BroadcastReceiver {
                             for(int i=0; i < jsonarray.length(); i++) {
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
                                 String booking_id = jsonobject.getString("id");
-                                boolean serviced=jsonobject.getBoolean("serviced");
+                                boolean serviced = jsonobject.getBoolean("serviced");
                                 String activeornot;
 //                              Log.d(TAG, "run: view all bokings id="+booking_id+ "  branch_id="+branch_id);
-                                if (serviced){
-                                    activeornot="1";
+                                if (serviced) {
+                                    activeornot = "0";
+                                } else {
+                                    activeornot = "1";
                                 }
-                                else {
-                                    activeornot="0";
-                                }
-                                new Dbhelper(activity).updateorder(booking_id,activeornot);
+                                Log.d(TAG, "doInBackground: activeornot "+activeornot);
+                                new Dbhelper(activity).updateorder(booking_id, activeornot);
 //                                sendJson_getbranch_details(branch_id,activity,timestamp,booking_id,service_name);                   //insert to db,
 //
                             }
-//                            result_ok="bookings";
+                            Log.d(TAG, "doInBackground: jsonarray lenght"+jsonarray.length()+" bookings from server "+ obj);
 
 
 
@@ -314,25 +317,71 @@ public class AlarmReceiver extends BroadcastReceiver {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            SharedPreferences sharedPreferences
+                    = context.getSharedPreferences("checkinfront",
+                    MODE_PRIVATE);
+
+            SharedPreferences.Editor myEdit
+                    = sharedPreferences.edit();
+            myEdit.putInt(
+                    "infront",
+                    infront);
+            myEdit.commit();
+            Log.d(TAG, "onPostExecute: stored infront value-> "+sharedPreferences.getInt("infront", 19));
+            Log.d(TAG, "onPostExecute: server infront value-> "+infront);
+
             if (error_serv.equals(" ")){
-                if (infront==20){
+                if (infront==20 && sharedPreferences.getInt("infront", 19)!=20){
+                    myEdit.clear().commit();
                     notify_(context,booking_id,id,content,"20 People in front of you",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
-                else if (infront==15){
+                else if (infront==15 && sharedPreferences.getInt("infront", 15)!=15){
+                    myEdit.clear().commit();
                     notify_(context,booking_id,id,content,"15 People in front of you",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
-                else if (infront==10){
+                else if (infront==10 && sharedPreferences.getInt("infront", 10)!=10){
+                    myEdit.clear().commit();
                     notify_(context,booking_id,id,content,"10 People in front of you",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
-                else if (infront >= 5 && infront != 1){
+                else if (infront <= 5 && infront != 1  && sharedPreferences.getInt("infront", 5)!=infront){
+                    myEdit.clear().commit();
+
                     notify_(context,booking_id,id,content,"less than 5 People in front of you",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
-                else if (infront==1){
+                else if (infront==1 && sharedPreferences.getInt("infront", 10)!=1){
+                    myEdit.clear().commit();
+
                     notify_(context,booking_id,id,content,"You are next to be served",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
-                else if (infront==0){
+                else if (infront==0  && sharedPreferences.getInt("infront", 0)!=0){
+                    myEdit.clear().commit();
+
                     new Dbhelper(context).updateorder(String.valueOf(booking_id),"0");
                     notify_(context,booking_id,id,content,"You are currently being served",branchname,servicename);
+                    myEdit.putInt(
+                            "infront",
+                            infront);
+                    myEdit.commit();
                 }
             }
             else {

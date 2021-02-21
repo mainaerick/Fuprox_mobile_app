@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.currentplacedetailsonmap.MainActivity;
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.Receiver.FloatingWidgetService;
 import com.example.currentplacedetailsonmap.Receiver.PM_verify_service;
 import com.example.currentplacedetailsonmap.model.notification;
 import com.example.currentplacedetailsonmap.model.strings_;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -85,6 +87,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
             pDialog.setCancelable(true);
             pDialog.show();
         }
+
     }
 
     @Override
@@ -117,6 +120,15 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
             json.put("is_instant",isinstant);
             json.put("phonenumber",phonenumber);
             json.put("token",token);
+            int amount=5;
+            if (isinstant.length()>=1){
+                amount = 10;
+            }
+            else {
+                amount = 5;
+            }
+            Log.d(TAG, "doInBackground: "+amount);
+            json.put("amount", amount);
 //            json.put("token", "11068980e1f1e544cfef");// remove after tested successfully
 
             StringEntity se = new StringEntity( json.toString());
@@ -144,6 +156,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
                     JSONObject obj = null;
                     try {
                         obj= new JSONObject(result);
+                        Log.d(TAG, "doInBackground: "+obj);
 //                            JSONObject new_obj = obj.getJSONObject("msg");
                         if (obj.length()>2){
                             msg="Payment Successful";
@@ -201,7 +214,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
                 }
                 else {
                     notification.createNotificationChannel(activity);
-                    notification.notify_payment_status(activity,1221,"Payment Failed","Due to Connection,Open app to retry","");
+                    notification.notify_payment_status(activity,1221,"Payment Failed ","Due to Connection,Open app to retry","");
                     insert_in_db(company_name,branch_name,token+"_"+phonenumber,branch_id,service_name,isinstant);
                 }
             }
@@ -212,6 +225,24 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
                 notification.createNotificationChannel(activity);
                 notification.notify_payment_status(activity,1221,"Payment Successful","You have Successfully booked for a queue in "+branch_name,booking_id);
                 Toast.makeText(activity, "Booking made Successfully", Toast.LENGTH_SHORT).show();
+
+                if (!action.equals("new")){
+//                    BottomNavigationView navView;
+//                    navView= new MainActivity().findViewById(R.id.nav_view);
+//                    navView.setSelectedItemId(R.id.navigation_order);
+                }
+                else {
+                    clear_prefs(prefs);
+
+                    Intent intent1 = new Intent(activity, MainActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("book_id", booking_id);
+                    bundle.putString("verify","verify");
+                    intent1.putExtras(bundle);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(intent1);
+                }
             }
             else {  //  payment was unsuccessful
                 if (!action.equals("new")){
@@ -221,6 +252,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
                             .setContentText("click to exit")
                             .show();
                     sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
+
                 }
                 else {
                     notification.createNotificationChannel(activity);

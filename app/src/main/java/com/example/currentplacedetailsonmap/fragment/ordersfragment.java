@@ -35,6 +35,7 @@ import com.example.currentplacedetailsonmap.model.JSONParser;
 import com.example.currentplacedetailsonmap.model.strings_;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
@@ -75,7 +76,9 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
     MaterialSearchBar searchBar;
     String filter="";
     String booking_id="";
+    SpinKitView spinKitView;
     public BottomNavigationView navView;
+    Button restoreprevious;
 
     public ordersfragment(){
 
@@ -105,8 +108,8 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
 
             ImageView refreshimg=view.findViewById(R.id.refresh_bookings);
             ImageView imageView=view.findViewById(R.id.noorders);
-            Button restoreprevious=view.findViewById(R.id.getprevious_bookings);
-
+            restoreprevious=view.findViewById(R.id.getprevious_bookings);
+            spinKitView = view.findViewById(R.id.spin_kit);
             ImageView backbtn = view.findViewById(R.id.backbtn);
 
             backbtn.setOnClickListener(new View.OnClickListener() {
@@ -422,19 +425,20 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(getContext());
-            pDialog.setMessage("Getting your previous bookings please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-
-                }
-            });
-            pDialog.show();
-
-
+            restoreprevious.setClickable(false);
+            restoreprevious.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//            pDialog = new ProgressDialog(getContext());
+//            pDialog.setMessage("Getting your previous bookings please wait...");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(false);
+//            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                @Override
+//                public void onCancel(DialogInterface dialog) {
+//
+//                }
+//            });
+//            pDialog.show();
+            spinKitView.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -499,10 +503,10 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
                                 String ticket_id=jsonobject.getString("ticket");
                                 boolean serviced=jsonobject.getBoolean("serviced");
                                 if (serviced){
-                                    bookingDetails.setServiced("1");
+                                    bookingDetails.setServiced("0");
                                 }
                                 else {
-                                    bookingDetails.setServiced("0");
+                                    bookingDetails.setServiced("1");
 
                                 }
 //                                    Log.d(TAG, "run: view all bokings id="+booking_id+ "  branch_id="+branch_id);
@@ -556,7 +560,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            pDialog.dismiss();
+//            pDialog.dismiss();
 
             if (booking_id.length()>0){
                 fragment_oder_more_details fragmentOderMoreDetails=new fragment_oder_more_details(booking_id,new Dbhelper(activity).get_user_id());
@@ -786,16 +790,28 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (_error.equals(" ")){
 
+            if (_error.equals(" ")){
+//                pDialog.dismiss();
+//                spinKitView.setVisibility(View.GONE);
                 Log.d(TAG, "onPostExecute: counting "+count);
                 new Dbhelper(activity).insert_booking(bookingDetails);
                 if(count==0){
+//                    pDialog.dismiss();
+                    spinKitView.setVisibility(View.GONE);
 //                    new MainActivity().loadFragment(new ordersfragment("",activity));
-                    rloadfragment();
+//                    rloadfragment();
+                    BottomNavigationView navView;
+                    navView= activity.findViewById(R.id.nav_view);
+                    navView.setSelectedItemId(R.id.navigation_order);
+
                 }
             }
-//            pDialog.dismiss();
+            else {
+                spinKitView.setVisibility(View.GONE);
+                restoreprevious.setClickable(true);
+                restoreprevious.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
 
         }
     }

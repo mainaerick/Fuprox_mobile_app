@@ -21,9 +21,9 @@
             android:layout_weight="1"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/tv_answer"
+            android:visibility="gone"
             android:fontFamily="@font/lato_bold"
             style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            android:text="asasasasas"
             />
     </LinearLayout>
 </LinearLayout>

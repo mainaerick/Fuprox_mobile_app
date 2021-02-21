@@ -188,16 +188,15 @@
                             />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="254"
                             android:id="@+id/countrycode"
                             style="@style/TextAppearance.AppCompat.Title"
-                            android:textColor="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/lato_bold"
                             android:gravity="bottom"
                             android:paddingBottom="11dp"
-                            android:fontFamily="@font/lato_bold"
-                            />
+                            android:text="254"
+                            android:textColor="@color/colorPrimary" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -209,7 +208,7 @@
                                 android:id="@+id/edittextnumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="7** *** ***"
+                                android:hint="Please enter your number here"
                                 android:backgroundTint="@color/colorAccent"
                                 android:textColor="@color/colorPrimary"
                                 style="@style/TextAppearance.AppCompat.Title"

@@ -60,12 +60,13 @@ public class PM_verify_service extends Service {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+//                Toast.makeText(PM_verify_service.this, ""+isinstant, Toast.LENGTH_SHORT).show();
                 new verifypayment_pending(PM_verify_service.this,phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
 //                new verifypayment_pending().execute();
                 Log.d(TAG, "run: paymeent verification process started ");
-//                Toast.makeText(PM_verify_service.this, "Service started by user.", Toast.LENGTH_LONG).show();
+//                Toast.makeText(PM_verify_service.this, "Service started by user."+service_name, Toast.LENGTH_LONG).show();
             }
-        }, 15000);
+        }, 50000);
         return START_STICKY;
     }
     @Override

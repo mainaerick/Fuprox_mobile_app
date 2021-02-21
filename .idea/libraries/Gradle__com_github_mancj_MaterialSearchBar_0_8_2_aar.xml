@@ -1,11 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.mancj:MaterialSearchBar:0.8.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ba81e7e41d2960354b83129238474f24/jetified-MaterialSearchBar-0.8.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ba81e7e41d2960354b83129238474f24/jetified-MaterialSearchBar-0.8.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/586d2698c60ea50761a59c181d42ac76/jetified-MaterialSearchBar-0.8.2/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/586d2698c60ea50761a59c181d42ac76/jetified-MaterialSearchBar-0.8.2/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/586d2698c60ea50761a59c181d42ac76/jetified-MaterialSearchBar-0.8.2/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f238245f3117479fa2f95a9d7e7e810b/jetified-MaterialSearchBar-0.8.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f238245f3117479fa2f95a9d7e7e810b/jetified-MaterialSearchBar-0.8.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f238245f3117479fa2f95a9d7e7e810b/jetified-MaterialSearchBar-0.8.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/75ff12cbb7ce9e3c80cc3610d08824a3/jetified-MaterialSearchBar-0.8.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/75ff12cbb7ce9e3c80cc3610d08824a3/jetified-MaterialSearchBar-0.8.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/75ff12cbb7ce9e3c80cc3610d08824a3/jetified-MaterialSearchBar-0.8.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.mancj/MaterialSearchBar/0.8.2/ba4e281f8d218cec3bee155975e12ba554e75abf/MaterialSearchBar-0.8.2-javadoc.jar!/" />

@@ -1,17 +1,18 @@
 <component name="libraryTable">
   <library name="Gradle: net.alhazmy13.catcho:library:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/812bcf327b9c49b5fb8823e7521d6bcc/jetified-library-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/812bcf327b9c49b5fb8823e7521d6bcc/jetified-library-1.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/812bcf327b9c49b5fb8823e7521d6bcc/jetified-library-1.1.0/jars/libs/mail.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/812bcf327b9c49b5fb8823e7521d6bcc/jetified-library-1.1.0/jars/libs/additionnal.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/812bcf327b9c49b5fb8823e7521d6bcc/jetified-library-1.1.0/jars/libs/activation.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/jars/libs/additionnal.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/jars/libs/mail.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/jars/libs/activation.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4478c5f82bd8addfb29f05e6acc9b2d/jetified-library-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/jars/libs/activation.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/jars/libs/additionnal.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6901f805151e7338c15f39db258b0a91/jetified-library-1.1.0/jars/libs/mail.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/jars/libs/activation.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/jars/libs/additionnal.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/jars/libs/mail.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4f36a1f6d928a76ecb90b00e2f84c547/jetified-library-1.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.alhazmy13.catcho/library/1.1.0/571aa935c594470f02980c0bf3e706bf7dea2704/library-1.1.0-javadoc.jar!/" />

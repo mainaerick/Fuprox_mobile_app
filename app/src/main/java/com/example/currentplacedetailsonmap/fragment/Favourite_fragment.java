@@ -57,9 +57,17 @@ public class Favourite_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view;
-
+        ImageView backbtn;
         if (new Dbhelper(getActivity()).get_fav().isEmpty()){
             view=inflater.inflate(R.layout.layout_favourite_empty, container, false);
+            backbtn = view.findViewById(R.id.backbtn);
+            backbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navView= activity.findViewById(R.id.nav_view);
+                    navView.setSelectedItemId(R.id.navigation_queue);
+                }
+            });
         }
         else {
             view=inflater.inflate(R.layout.favourite_layout, container, false);
@@ -69,7 +77,7 @@ public class Favourite_fragment extends Fragment {
             listView.setAdapter(favourite_adapter);
 
 
-            ImageView backbtn = view.findViewById(R.id.backbtn);
+            backbtn = view.findViewById(R.id.backbtn);
 
             backbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,9 +104,6 @@ public class Favourite_fragment extends Fragment {
 
         return view;
     }
-
-
-
 
     private class branch_get extends AsyncTask<String, String, String> {
 

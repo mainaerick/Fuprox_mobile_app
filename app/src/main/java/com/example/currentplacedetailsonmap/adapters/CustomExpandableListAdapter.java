@@ -18,12 +18,12 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private HashMap<String, String> expandableListDetail;
     private int lastPosition = -1;
 
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
-                                       HashMap<String, List<String>> expandableListDetail) {
+                                       HashMap<String, String> expandableListDetail) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
@@ -32,7 +32,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
         return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .get(expandedListPosition);
+                ;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
+
         final String expandedListText = (String) getChild(listPosition, expandedListPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
@@ -51,17 +52,25 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView expandedListTextView = (TextView) convertView
                 .findViewById(R.id.tv_answer);
-        expandedListTextView.setText(expandedListText);
-        Animation animation = AnimationUtils.loadAnimation(context, (expandedListPosition > lastPosition) ? R.anim.up_from_bottom : R.anim.up_from_bottom);
-        convertView.startAnimation(animation);
-        lastPosition = expandedListPosition;
+//        if (isLastChild){
+
+//            expandedListTextView.setText(expandedListText);
+
+//        }
+//        else {
+//            expandedListTextView.setVisibility(View.GONE);
+//        }
+
+//        Animation animation = AnimationUtils.loadAnimation(context, (expandedListPosition > lastPosition) ? R.anim.up_from_bottom : R.anim.up_from_bottom);
+//        convertView.startAnimation(animation);
+//        lastPosition = expandedListPosition;
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .size();
+        return this.expandableListDetail.size();
+
     }
 
     @Override

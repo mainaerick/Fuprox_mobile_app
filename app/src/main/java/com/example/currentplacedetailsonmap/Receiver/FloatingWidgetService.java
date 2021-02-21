@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class FloatingWidgetService extends Service {
     private View mOverlayView;
     int mWidth;
     CounterFab counterFab;
+    ImageView close_back;
     TextView details,servicename,closefab;
     boolean activity_background;
     LinearLayout baubledetaillayout;
@@ -121,6 +123,7 @@ public class FloatingWidgetService extends Service {
             servicename =mOverlayView.findViewById(R.id.tvservicename);
             closefab = mOverlayView.findViewById(R.id.close_fab);
             baubledetaillayout = mOverlayView.findViewById(R.id.baubledetaillayout);
+
             closefab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

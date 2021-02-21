@@ -68,7 +68,6 @@ public class login extends Fragment {
         context=getActivity();
         view=inflater.inflate(R.layout.layout_signin, container, false);
 
-
         view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.right_to_left));
         sign_in(view);
         return view;
@@ -86,6 +85,7 @@ public class login extends Fragment {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText text_email =view.findViewById(R.id.signin_email);
         editTextHashs.put(R.string.email, text_email);
+        text_email.setText(retrive_pending_user());
         final EditText text_password = view.findViewById(R.id.signin_password);
         editTextHashs.put(R.string.password, text_password);
 

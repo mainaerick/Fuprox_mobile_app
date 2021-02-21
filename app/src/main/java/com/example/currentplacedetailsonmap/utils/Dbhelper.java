@@ -308,7 +308,7 @@ private static final int DB_VERSION = 1;
     public int getactivebookings(){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+booking_table+" where "+booking_active+"='0'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+booking_table+" where "+booking_active+"='1'",null);
         return cursor.getCount();
     }
     public void insert_booking(booking_details booking_details){
@@ -390,6 +390,7 @@ private static final int DB_VERSION = 1;
             booking_details.setBooking_id(cursor.getString(cursor.getColumnIndex(db_booking_id)));
             booking_details.setBranch_id(cursor.getString(cursor.getColumnIndex(db_branch_id)));
             booking_details.setServiced(cursor.getString(cursor.getColumnIndex(booking_active)));
+            booking_details.setService_name(cursor.getString(cursor.getColumnIndex(db_service_name)));
 
 
             booking_list.add(booking_details);

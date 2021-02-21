@@ -200,7 +200,6 @@ public class confirm_r_code extends Fragment {
             pDialog.dismiss();
             if (status.equals("true")){
                 rloadfragment(new change_password(activity,email,security_code));
-
             }
             else{
                 SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.WARNING_TYPE);
@@ -218,6 +217,11 @@ public class confirm_r_code extends Fragment {
             }
         }
     }
+
+
+
+
+
 
 
 }

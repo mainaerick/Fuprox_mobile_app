@@ -108,10 +108,16 @@ public class institution_adapater extends ArrayAdapter<institution_details> {
         pDialog = new ProgressDialog(getContext());
 
 
-        String initials = "";
-        for (String s : s_title.split(" ")) {
-            initials+=s.charAt(0);
-        }
+//        String initials = "";
+//        for (String s : s_title.split(" ")) {
+//            initials+=s.charAt(0);
+//        }
+//        if (initials.length()>2){
+//            holder.txt_serviceimage.setText(initials.substring(0,2));
+//        }
+//        else {
+//            holder.txt_serviceimage.setText(initials);
+//        }
 
 //        new load_icon(icon_url,holder).execute();
 

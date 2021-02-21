@@ -424,6 +424,8 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
             @Override
             public void onClick(View v) {
                 error_title = "";
+                error_linearlayout.setVisibility(View.INVISIBLE);
+
                 new institution_get(view).execute();
             }
         });

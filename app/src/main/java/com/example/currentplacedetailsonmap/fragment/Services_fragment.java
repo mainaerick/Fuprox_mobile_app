@@ -317,6 +317,7 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
         error_retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                error_linearlayout.setVisibility(View.INVISIBLE);
                 new services_get(view).execute();
             }
         });

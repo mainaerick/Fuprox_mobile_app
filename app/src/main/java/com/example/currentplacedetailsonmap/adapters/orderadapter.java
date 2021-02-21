@@ -2,7 +2,9 @@ package com.example.currentplacedetailsonmap.adapters;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -29,14 +31,18 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.currentplacedetailsonmap.R;
 import com.example.currentplacedetailsonmap.Receiver.FloatingWidgetService;
+import com.example.currentplacedetailsonmap.Receiver.PM_verify_service;
 import com.example.currentplacedetailsonmap.fragment.fragment_oder_more_details;
+import com.example.currentplacedetailsonmap.model.notification;
 import com.example.currentplacedetailsonmap.model.strings_;
 import com.example.currentplacedetailsonmap.utils.Dbhelper;
 import com.example.currentplacedetailsonmap.utils.booking_details;
 import com.example.currentplacedetailsonmap.utils.verifypayment_pending;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import org.apache.http.HttpEntity;
@@ -59,6 +65,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static android.content.Context.MODE_PRIVATE;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class orderadapter extends ArrayAdapter<booking_details> {
@@ -96,13 +107,13 @@ public class orderadapter extends ArrayAdapter<booking_details> {
         final String name = Objects.requireNonNull(getItem(position)).getCo_name();
         final String branch_name_obj = Objects.requireNonNull(getItem(position)).getB_name();
         final String time_obj = Objects.requireNonNull(getItem(position)).getTime();
-        final String id = String.valueOf(Objects.requireNonNull(getItem(position)).getBooking_id());
-        String branch_id = String.valueOf(Objects.requireNonNull(getItem(position)).getBranch_id());
-        String service_name=String.valueOf(Objects.requireNonNull(getItem(position)).getService_name());
-        String serviced=String.valueOf(Objects.requireNonNull(getItem(position)).getServiced());
+        final String id = Objects.requireNonNull(getItem(position)).getBooking_id();
+        String branch_id = Objects.requireNonNull(getItem(position)).getBranch_id();
+        String service_name= Objects.requireNonNull(getItem(position)).getService_name();
+        String serviced= Objects.requireNonNull(getItem(position)).getServiced();
         final String _id = String.valueOf(Objects.requireNonNull(getItem(position)).getId());
 
-
+//        Toast.makeText(mActivity, ""+service_name, Toast.LENGTH_SHORT).show();
         com.example.currentplacedetailsonmap.utils.booking_details booking_details = new booking_details(name, branch_name_obj, time_obj, id, branch_id, service_name, serviced);
 
 
@@ -168,11 +179,11 @@ public class orderadapter extends ArrayAdapter<booking_details> {
         holder.title.setText(book_info_coname);
         holder.txtvbranch.setText(book_info_branch);
 
-        if (serviced.equals("0")){//not serviced
+        if (serviced.equals("1")){//not serviced
             holder.tvstatus.setText("Active");
 
         }
-        else if (serviced.equals("1")){//serviced
+        else if (serviced.equals("0")){//serviced
             holder.tvstatus.setText("Not Active");
         }
         else {
@@ -222,8 +233,10 @@ public class orderadapter extends ArrayAdapter<booking_details> {
                                 String phone_number = id.substring(id.indexOf("_")+1);
                                 String token = id.substring(0,id.indexOf("_"));
                                 Log.d(TAG, "onMenuItemClick: "+"phone--"+phone_number+"  booking_id--"+id);
-                                new verifypayment_pending(mActivity,phone_number,branch_id,book_info_time,service_name,new Dbhelper(mActivity).get_user_id(),
+                                new verifypayment_pending_(mActivity,phone_number,branch_id,book_info_time,service_name,new Dbhelper(mActivity).get_user_id(),
                                         serviced,book_info_coname,book_info_branch,token,"update").execute();
+                                Log.d(TAG, "onMenuItemClick: "+phone_number+" , "+branch_id+" , "+book_info_time+" , "+service_name+" , "+new Dbhelper(mActivity).get_user_id()
+                                        +" , "+ serviced+" , "+book_info_coname+" , "+book_info_branch+" , "+token);
                                 return true;
                             case R.id.menu1:    // get Direction
 
@@ -439,7 +452,233 @@ public class orderadapter extends ArrayAdapter<booking_details> {
 
 
 
+    public class verifypayment_pending_ extends AsyncTask<String, String, String> {
+        String msg="null";
+        Context activity;
+        SharedPreferences prefs;
+        String phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,action,booking_id;
+        ProgressDialog pDialog;
+        String errorms="";
 
+        public verifypayment_pending_(Context activity, String phonenumber,
+                                     String branch_id, String start,
+                                     String service_name, String user_id,
+                                     String isinstant, String company_name,
+                                     String branch_name, String token,String action){
+            this.activity=activity;
+            this.phonenumber = phonenumber;
+            this.branch_id = branch_id;
+            this.start = start;
+            this.service_name = service_name;
+            this.user_id = user_id;
+            this.isinstant = isinstant;
+            this.company_name = company_name;
+            this.branch_name = branch_name;
+            this.action = action;
+            this.token = token;
+//        prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
+//        phonenumber = prefs.getString("phonenumber", "No token defined");
+//        branch_id = prefs.getString("branch_id", "branch_id undefined");
+//        start = prefs.getString("start", "start undefined");
+//        service_name = prefs.getString("service_name", "sername undefined");
+//        user_id = prefs.getString("user_id", "user_id undefined");
+//        isinstant = prefs.getString("is_instant", "is_instant undefined");
+//        company_name = prefs.getString("company_name", "company undefined");
+//        branch_name = prefs.getString("branch_name", "branch undefined");
+////        token = prefs.getString("token", "token undefined");
+//        token = "11068980e1f1e544cfef";
+
+//            b8741c719336de7e16d5
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (!action.equals("new")){
+                pDialog = new ProgressDialog(activity);
+                pDialog.setMessage("Verifying payment...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(true);
+                pDialog.show();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpClient client = new DefaultHttpClient();
+            HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
+            HttpResponse response;
+            JSONObject json = new JSONObject();
+            StringBuilder sb;
+            InputStream is = null;
+            String result = null;
+
+            try {
+//                SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
+//                editor.putString("start", String.valueOf(booking_milis));
+//                editor.putString("user_id", new Dbhelper(activity).get_user_id());
+//                editor.putString("branch_id", b_id);
+//                editor.putString("service_name", service_name);
+//                editor.putString("is_instant", isinstant);
+//                editor.putString("phonenumber", phonenumber);
+//                editor.putString("token", obj.getString("token"));
+//                editor.putString("company_name", txtcompanyname.getText().toString());
+//                editor.putString("branch_name",txtbranch.getText().toString());
+
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment");
+                json.put("branch_id", Integer.parseInt(branch_id.trim()));
+                json.put("start", start);
+                json.put("service_name",service_name);
+                json.put("user_id",Integer.parseInt(user_id.trim()));
+                json.put("is_instant",isinstant);
+                json.put("phonenumber",phonenumber);
+                json.put("token",token);
+                int amount=5;
+                if (isinstant.equals("1")){
+                    amount = 10;
+                }
+                else {
+                    amount = 5;
+                }
+                Log.d(TAG, "doInBackground: "+amount);
+                json.put("amount", amount);
+//            json.put("token", "11068980e1f1e544cfef");// remove after tested successfully
+
+                StringEntity se = new StringEntity( json.toString());
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                post.setEntity(se);
+                response = client.execute(post);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+
+                /*Checking response */
+                if(response!=null){
+                    try {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                                is, StandardCharsets.ISO_8859_1), 8);
+                        sb = new StringBuilder();
+                        sb.append(reader.readLine()).append("\n");
+                        String line = "0";
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line).append("\n");
+                        }
+                        is.close();
+                        result = sb.toString();
+
+//                  CONVERT THE RESPONSE RESOULT TO JSON FROM STRRING
+                        JSONObject obj = null;
+                        try {
+                            obj= new JSONObject(result);
+                            Log.d(TAG, "doInBackground: "+obj);
+//                            JSONObject new_obj = obj.getJSONObject("msg");
+                            if (obj.length()>2){
+                                msg="Payment Successful";
+                                String booking_id=obj.getString("id");
+                                this.booking_id=booking_id;
+                                new Dbhelper(activity).update_pending_order(token+"_"+phonenumber,booking_id);
+
+                            }
+                            else {
+                                msg="Payment Unsuccessful";
+                            }
+                        } catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: verify payment \"" + result + "\""+t.getMessage());
+                            errorms=t.toString();
+                        }
+                    } catch (Exception e) {
+                        Log.e("log_tag", "Error converting result verify payment " + e.toString());
+                        errorms=e.toString();
+                    }
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "run: book connection error verify payment" );
+                errorms=e.toString();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e(TAG, "doInBackground: "+token);
+            if (!action.equals("new")){
+                pDialog.dismiss();
+            }
+            prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
+            if (msg.equals("null")){
+                if (prefs.getAll().size()==0 && action.equals("new")){ //   shared preferences are empty but service was called
+                    notification.createNotificationChannel(activity);
+                    notification.notify_payment_status(activity,1221,"Payment Unsuccessful","Transaction could not complete","");
+                }
+                else { //   failed to connection problems
+
+                        SweetAlertDialog sweetAlertDialog= new SweetAlertDialog(activity,SweetAlertDialog.ERROR_TYPE);
+                        sweetAlertDialog
+                                .setTitleText("Cannot establish connection")
+                                .setContentText("click to exit")
+//                            .setContentText(errorms)
+                                .show();
+                        sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
+                }
+            }
+            else {  //  backend was hit
+                if (msg.equals("Payment Successful")){  //  and payment was successful
+                    create_bubble(booking_id);
+                    notification.createNotificationChannel(activity);
+                    notification.notify_payment_status(activity,1221,"Payment Successful","You have Successfully booked for a queue in "+branch_name,booking_id);
+                    Toast.makeText(activity, "Booking made Successfully", Toast.LENGTH_SHORT).show();
+
+                }
+                else {  //  payment was unsuccessful
+
+                        SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.ERROR_TYPE);
+                        sweetAlertDialog
+                                .setTitleText("Payment verification failed")
+                                .setContentText("click to exit")
+                                .show();
+                        sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
+
+                }
+            }
+            clear_prefs(prefs);
+            activity.stopService(new Intent(activity, PM_verify_service.class));
+
+            Log.d(TAG, "onPostExecute:  token= "+token);
+            BottomNavigationView navView;
+            navView= mActivity.findViewById(R.id.nav_view);
+            navView.setSelectedItemId(R.id.navigation_order);
+
+        }
+
+        private void create_bubble(String booking_id){
+            Intent intent1 = new Intent(activity, FloatingWidgetService.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("activity_background", true);
+            bundle.putString("booking_id",booking_id);
+            intent1.putExtras(bundle);
+            activity.startService(intent1);
+        }
+
+        private void clear_prefs(SharedPreferences prefs){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+        }
+        private void insert_in_db(String company_name,String branch_name,String booking_id, String branch_id,String service_name,String serviced){
+            //bookingid=token+number serviced=instant_is
+            booking_details bookingDetails=new booking_details();
+            Calendar book_milis=Calendar.getInstance();
+            long booking_milis=book_milis.getTimeInMillis();
+            bookingDetails.setCo_name(company_name);
+            bookingDetails.setB_name(branch_name);
+            bookingDetails.setTime(String.valueOf(booking_milis));
+            bookingDetails.setBooking_id(booking_id);
+            bookingDetails.setBranch_id(branch_id);
+            bookingDetails.setService_name(service_name);
+            bookingDetails.setServiced(serviced);
+            new Dbhelper(activity).insert_booking(bookingDetails);
+        }
+    }
 
 
 
