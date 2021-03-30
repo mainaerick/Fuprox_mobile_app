@@ -10,10 +10,11 @@
     app:layout_constraintCircleRadius="@dimen/corner_radius_rounded"
     >
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:id="@+id/progress_circular"
         android:layout_gravity="end"
+        android:visibility="gone"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -29,13 +30,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="16dp"
+
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="347dp"
-            android:layout_marginTop="23dp"
             android:orientation="vertical">
 
 
@@ -46,23 +46,222 @@
                 android:layout_marginBottom="19dp"
 
                 >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_bottom"
+                    android:layout_marginBottom="27dp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/branchname"
+                        android:visibility="gone"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="23dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="16dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ticket number"
+                                android:fontFamily="@font/lato"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorAccent"
+                                android:layout_marginBottom="13dp"
+                                android:textSize="17dp"
+
+                                android:id="@+id/ticket_numberlabl" />
+                            <TextView
+                                android:id="@+id/ticket_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bold"
+                                android:textSize="27sp"
+                                android:textAllCaps="true"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorPrimary"
+                                android:layout_marginBottom="19dp"
+                                android:layout_below="@+id/ticket_numberlabl"
+                                />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Verification Number:"
+                                android:textColor="@color/colorAccent"
+                                android:fontFamily="@font/lato"
+                                android:textSize="17dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="13dp"
+                                android:id="@+id/labelvnumber"
+                                />
+
+                            <TextView
+                                android:id="@+id/ticket_verification"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/lato_bold"
+                                android:textColor="@color/colorPrimary"
+                                android:textAllCaps="true"
+                                android:textSize="27sp"
+                                android:layout_below="@+id/labelvnumber"
+                                />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/layout_served"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/queuedone"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23sp"
+                        android:text="tICKET SERVED"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="23dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:background="@drawable/border_primary"
+                        android:layout_marginBottom="19dp"
+
+                        />
+                </LinearLayout>
+
                 <TextView
+                    android:id="@+id/queuesize_error"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ticket number"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_marginRight="9dp"
-                    android:textColor="@color/colorPrimary"
+                    android:text="An Error Occured while getting queue details"
+                    android:textColor="@color/design_default_color_error"
+                    android:drawableTop="@drawable/ic_baseline_error_outline_24"
+                    android:textSize="23sp"
                     />
-                <TextView
-                    android:id="@+id/ticket_number"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Headline4"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginBottom="19dp"
-                    />
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/ticket_active"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hi,\nThank you for waiting"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lato"
+                        android:textSize="23dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="19dp"
+                        />
+
+
+                    <TextView
+                        android:layout_marginTop="23dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Here is your position in the queue"
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/queuesize"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="38sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="23dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:background="@drawable/border_primary"
+                        android:layout_marginBottom="19dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tellerslabel"
+                        android:layout_marginTop="23dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teller number/name offering ____ service"
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textColor="@color/colorAccent"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="13dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvtellers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="19dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We'll text you when your\nticket is almost ready."
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -82,6 +281,7 @@
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_marginRight="9dp"
                     android:textColor="@color/colorPrimary"
+                    android:visibility="gone"
                     />
 
                 <TextView
@@ -90,6 +290,7 @@
                     style="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/ligt_grey"
                     android:id="@+id/ticket_status"
+                    android:visibility="gone"
                     />
 
             </LinearLayout>
@@ -109,7 +310,7 @@
                     android:text="Service:"
                     android:layout_marginRight="9dp"
                     android:textColor="@color/colorPrimary"
-
+                    android:visibility="gone"
                     style="@style/TextAppearance.AppCompat.Title"
                     />
 
@@ -119,10 +320,20 @@
                     android:textColor="@color/ligt_grey"
                     android:id="@+id/ticket_service_name"
                     style="@style/TextAppearance.AppCompat.Title"
+                    android:visibility="gone"
 
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="19dp"
 
+                >
+
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"

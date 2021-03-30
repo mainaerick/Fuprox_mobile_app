@@ -59,9 +59,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimary"
                             android:text="Kenyatta University Branch"
-                            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-                            android:textStyle="bold"
                             android:fontFamily="@font/lato_bold"
+                            android:textSize="17sp"
                             />
                         <TextView
                             android:visibility="invisible"
@@ -72,19 +71,19 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
+                            android:layout_height="0dp"
                             android:layout_marginTop="12dp"
+                            android:visibility="visible"
                             android:layout_marginBottom="12dp"
                             android:background="#5d5d5d" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Now Open \n\nCloses 4PM"
+                            android:text="Open 05:00-18:00"
                             android:id="@+id/open_close_status"
                             android:textColor="@color/colorPrimary"
-                            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/lato_bold"
+                            android:fontFamily="@font/lato"
+                            android:textSize="15sp"
                             />
 
                     </LinearLayout>
@@ -97,6 +96,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp"
                         android:background="#5d5d5d" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -126,7 +126,22 @@
                             >
                         </Spinner>
                     </LinearLayout>
-
+                    <ProgressBar
+                        android:id="@+id/queuesizeprogress"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/queuesize_error"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="An Error Occured while getting queue details"
+                        android:textColor="@color/design_default_color_error"
+                        android:drawableLeft="@drawable/ic_baseline_error_outline_24"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,31 +150,86 @@
                         android:visibility="gone"
                         android:textStyle="bold"
                         android:textColor="#ffa500" />
-                    <TextView
-                        android:id="@+id/tvnumberofpeople"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="#ffa500"
-                        android:layout_marginTop="7dp"
-                        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-                        android:fontFamily="@font/lato_bold"
-                        />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="#5d5d5d" />
-
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="13dp"
+                        >
+                        <RelativeLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tvnumberofpeople"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimary"
+                                android:layout_marginTop="7dp"
+                                android:text="______"
+                                android:textSize="19sp"
+                                android:padding="3dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/lato_bold"
+                                android:layout_marginBottom="13dp"
+                                android:layout_below="@+id/lablequeuesize"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ahead of you\n"
+                                android:fontFamily="@font/lato_bold"
+                                android:textColor="@color/colorAccent"
+                                android:id="@+id/lablequeuesize"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tvtellernumbers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimary"
+                                android:layout_marginTop="7dp"
+                                android:text="______"
+                                android:textSize="19sp"
+                                android:padding="3dp"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/lato_bold"
+                                android:layout_marginBottom="13dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_below="@+id/availabletellers"/>
+                            <TextView
+                                android:id="@+id/availabletellers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Teller number/name offering the service"
+                                android:layout_alignParentEnd="true"
+                                android:textAlignment="viewEnd"
+                                android:fontFamily="@font/lato_bold"
+                                android:textColor="@color/colorAccent"
+                                />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="7dp"
+                        android:background="#5d5d5d" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
                         >
 
                         <TextView
@@ -201,79 +271,71 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorPrimary"
+                            android:textColorHint="@color/colorAccent"
                             >
-
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edittextnumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="Please enter your number here"
-                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter phone number"
+                                android:backgroundTint="@color/colorPrimary"
                                 android:textColor="@color/colorPrimary"
                                 style="@style/TextAppearance.AppCompat.Title"
                                 tools:targetApi="lollipop"
                                 android:fontFamily="@font/lato_bold"
+                                android:textColorHint="@color/colorAccent"
                                 android:inputType="phone" />
 
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
                         android:textStyle="bold"
                         android:text="@string/booking_info"
-                        style="@style/TextAppearance.Compat.Notification.Info"
                         android:id="@+id/bookwarning"
-                        android:layout_marginBottom="23dp"
+                        android:layout_marginTop="23dp"
+                        android:textAllCaps="true"
                         android:fontFamily="@font/lato_bold"
                         />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/ic_help_outline_black_24dp"
-                        android:layout_gravity="end"
-                        android:padding="7dp"
-                        />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
-
-                        <Button
+                        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                             android:id="@+id/book_click"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:text="Normal"
-                            style="@style/Widget.AppCompat.ActionButton"
                             android:textAllCaps="true"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimaryDark"
-                            android:background="@color/colorPrimary"
+                            android:background="@drawable/button_book"
                             android:layout_marginRight="5dp"
                             android:fontFamily="@font/lato_bold"
-                            />
-                        <Button
+                            app:spinning_bar_width="4dp"
+                            app:spinning_bar_color="@color/colorAccent"
+                            app:spinning_bar_padding="6dp"/>
+                        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                             android:id="@+id/instantbook"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:text="Instant booking"
-                            style="@style/Widget.AppCompat.ActionButton"
                             android:textAllCaps="true"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimaryDark"
-                            android:background="@color/colorPrimary"
-                            android:fontFamily="@font/lato_bold" />
-
-
+                            android:background="@drawable/button_book"
+                            android:fontFamily="@font/lato_bold"
+                            app:spinning_bar_width="4dp"
+                            app:spinning_bar_color="@color/colorAccent"
+                            app:spinning_bar_padding="6dp"
+                            />
                     </LinearLayout>
 
 
@@ -293,6 +355,15 @@
                 android:visibility="visible"
                 android:layout_marginTop="10dp"
                 >
+                <TextView
+                    android:id="@+id/error_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    android:textColor="@color/red_btn_bg_color"
+                    android:visibility="visible"
+                    android:textStyle="bold"
+                    />
 
                 <RelativeLayout
                     android:visibility="gone"
@@ -368,15 +439,7 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/error_display"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=" "
-                    android:textColor="@color/red_btn_bg_color"
-                    android:visibility="visible"
-                    android:textStyle="bold"
-                    />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -450,6 +513,22 @@
 
 
 </LinearLayout>
+
+<!--<Button-->
+<!--android:id="@+id/book_click"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="16dp"-->
+<!--android:layout_marginBottom="16dp"-->
+<!--android:text="Normal"-->
+<!--android:textAllCaps="true"-->
+<!--android:textStyle="bold"-->
+<!--android:textColor="@color/colorPrimaryDark"-->
+<!--android:background="@color/colorPrimary"-->
+<!--android:layout_marginRight="5dp"-->
+<!--android:fontFamily="@font/lato_bold"-->
+<!--    />-->
+
 
 <!--<RelativeLayout-->
 <!--android:layout_width="match_parent"-->

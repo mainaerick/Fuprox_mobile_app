@@ -25,17 +25,28 @@
             android:padding="9dp"
             android:background="@color/colorPrimary">
 
-            <ImageView
-                android:id="@+id/service_image"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/background_circle"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorPrimary"
-                android:gravity="center"
-                style="@style/TextAppearance.AppCompat.Title"
-                android:textAllCaps="true"
-                android:padding="3dp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/imageprogress"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    />
+                <ImageView
+                    android:id="@+id/service_image"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/background_circle"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginLeft="12dp"
+                    android:padding="3dp" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/institution_title"
                 android:layout_width="wrap_content"

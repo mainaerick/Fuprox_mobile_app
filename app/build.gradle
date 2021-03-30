@@ -5,11 +5,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion '29.0.2'
     defaultConfig {
-        applicationId "com.example.currentplacedetailsonmap"
+        applicationId "com.fuprox.noqueue"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
         vectorDrawables.useSupportLibrary = true
@@ -80,7 +80,15 @@ dependencies {
     implementation 'com.github.andremion:counterfab:1.0.1' //widget to show line count progress
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'  //loading dots
 
-    compile 'com.github.zcweng:switch-button:0.0.3@aar'  //switch
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'  //switch
+
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0' // sockets
+
+    implementation 'br.com.simplepass:loading-button-android:2.2.0' //animated button
+
+//    implementation ('io.socket:socket.io-client:2.0.0') {
+//        exclude group: 'org.json', module: 'json'
+//    }
 //    implementation 'com.github.yesidlazaro:GmailBackground:1.2.0' //gmail
 
     //    implementation 'com.google.firebase:firebase-analytics:17.2.3'

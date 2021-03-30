@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.currentplacedetailsonmap">
+    package="com.fuprox.noqueue">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW " />
 
     <application
+        android:name=".model.SocketInstance"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,7 +30,7 @@
             android:required="false" />
 
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name="com.fuprox.noqueue.activities.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +38,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".activities.Settings_activity" />
-        <activity android:name=".activities.Direction_activity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.fuprox.noqueue.HelpActivity" />
+        <activity android:name="com.fuprox.noqueue.activities.Settings_activity" />
+        <activity android:name="com.fuprox.noqueue.activities.Direction_activity" />
+        <activity android:name="com.fuprox.noqueue.SignupActivity" />
+        <activity android:name="com.fuprox.noqueue.LoginActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <action android:name="android.intent.action.VIEW" />-->
@@ -49,11 +50,11 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
-        <activity android:name=".activities.activity_booking" />
-        <activity android:name=".activities.activity_order_details" />
-        <activity android:name=".activities.Main2Activity" />
+        <activity android:name="com.fuprox.noqueue.activities.activity_booking" />
+        <activity android:name="com.fuprox.noqueue.activities.activity_order_details" />
+        <activity android:name="com.fuprox.noqueue.activities.Main2Activity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.fuprox.noqueue.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustNothing" />
 
@@ -72,7 +73,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".activities.MapsActivityCurrentPlace"
+            android:name="com.fuprox.noqueue.activities.MapsActivityCurrentPlace"
             android:label="@string/title_activity_maps">
 
             <!-- <intent-filter> -->
@@ -83,33 +84,33 @@
             <!-- </intent-filter> -->
         </activity>
 
-        <receiver android:name=".Receiver.AlarmReceiver" />
+        <receiver android:name="com.fuprox.noqueue.Receiver.AlarmReceiver" />
         <receiver
-            android:name=".Receiver.BootReceiver"
+            android:name="com.fuprox.noqueue.Receiver.BootReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".Receiver.TimechangedReceiver"
+            android:name="com.fuprox.noqueue.Receiver.TimechangedReceiver"
             android:exported="false">
             <intent-filter android:priority="2">
                 <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".Receiver.TimeZoneChangeReceiver"
+            android:name="com.fuprox.noqueue.Receiver.TimeZoneChangeReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver.verify_receiver" />
+        <receiver android:name="com.fuprox.noqueue.Receiver.verify_receiver" />
 
-        <service android:name=".Receiver.PM_verify_service" />
+        <service android:name="com.fuprox.noqueue.Receiver.PM_verify_service" />
         <service
-            android:name=".Receiver.FloatingWidgetService"
+            android:name="com.fuprox.noqueue.Receiver.FloatingWidgetService"
             android:enabled="true"
             android:exported="false" />
     </application>

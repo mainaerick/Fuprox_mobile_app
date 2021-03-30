@@ -37,7 +37,7 @@
     <string name="api_key">AIzaSyA96mDSM5oaN7AgIl53MN1OfY-wAjZi9C4</string>
     <string name="normal_amount">$3</string>
     <string name="instant_amount">$5</string>
-    <string name="booking_info">for Normal booking ksh5, for instant booking ksh10</string>
+    <string name="booking_info">Normal booking ksh5, Instant booking ksh10</string>
 
 
     <string-array name="CountryCodes">

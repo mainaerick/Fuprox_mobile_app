@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:930368282343:android:77d8385b31255e10e10c42",
         "android_client_info": {
-          "package_name": "com.example.currentplacedetailsonmap"
+          "package_name": "com.fuprox.noqueue"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "930368282343-936fbf3apbvpfhq88tu891t8885gsdud.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.currentplacedetailsonmap",
+            "package_name": "com.fuprox.noqueue",
             "certificate_hash": "28de8ac63a7e8c764854b38a25eb73f2a216a308"
           }
         },
