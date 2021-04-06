@@ -43,7 +43,7 @@ public class PM_verify_service extends Service {
 //                Toast.makeText(PM_verify_service.this, ""+isinstant, Toast.LENGTH_SHORT).show();
                 new verifypayment_pending(PM_verify_service.this,phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
 //                new verifypayment_pending().execute();
-                Log.d(TAG, "run: paymeent verification process started ");
+                Log.e(TAG, "run: paymeent verification process started "+token);
 //                Toast.makeText(PM_verify_service.this, "Service started by user."+service_name, Toast.LENGTH_LONG).show();
 //            }
 //        }, 30000);
@@ -190,7 +190,7 @@ public class PM_verify_service extends Service {
     private void clear_prefs(SharedPreferences prefs){
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
-        editor.apply();
+        editor.commit();
     }
     private void insert_in_db(String company_name,String branch_name,String booking_id, String branch_id,String service_name,String serviced){
         booking_details bookingDetails=new booking_details();

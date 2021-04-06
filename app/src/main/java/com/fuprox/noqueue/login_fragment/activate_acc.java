@@ -492,9 +492,8 @@ public class activate_acc extends Fragment {
             String result = null;
 
             try {
-                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext()) + "/user/dev/reset");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext()) + "/resend/code");
                 json.put("email", email);
-
                 StringEntity se = new StringEntity(json.toString());
                 se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                 post.setEntity(se);
@@ -530,6 +529,7 @@ public class activate_acc extends Fragment {
 
                             if (obj.length() > 2) {
                                 status = "true";
+                                message = "Code reset Successful. Check email.";
                             }
 
                         } catch (Throwable t) {
@@ -537,7 +537,7 @@ public class activate_acc extends Fragment {
                             Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"" + t.getMessage());
 
                         }
-                        Log.d(TAG, "run: string " + result);
+                        Log.e(TAG, "run: string " + result);
 
                     } catch (Exception e) {
 //                            Toast.makeText(activity, "No users created yet", Toast.LENGTH_SHORT).show();
@@ -559,7 +559,7 @@ public class activate_acc extends Fragment {
             super.onPostExecute(s);
             pDialog.dismiss();
             if (status.equals("true")) {
-                rloadfragment(new signup(activity));
+                rloadfragment(new activate_acc(activity));
             } else {
                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE);
                 sweetAlertDialog
@@ -595,7 +595,7 @@ public class activate_acc extends Fragment {
     private void clear_sharedpref(){
         SharedPreferences.Editor editor = activity.getSharedPreferences("pending_signup", MODE_PRIVATE).edit();
         editor.clear();
-        editor.apply();
+        editor.commit();
     }
 
 

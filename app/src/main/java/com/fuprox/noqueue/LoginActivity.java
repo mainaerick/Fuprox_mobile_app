@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.fuprox.noqueue.login_fragment.activate_acc;
 import com.fuprox.noqueue.login_fragment.login;
 import com.fuprox.noqueue.model.SocketInstance;
-import com.github.nkzawa.socketio.client.Socket;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Stack;
@@ -35,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         return email;
     }
-    Socket mSocket;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

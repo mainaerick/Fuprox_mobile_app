@@ -65,7 +65,8 @@ private static final int DB_VERSION = 1;
             db_booking_id="booking_id",
             db_branch_id="branch_id",
             db_service_name="service_name",
-            booking_active="booking_status";
+            booking_active="booking_status",
+            booking_q_no = "booking_q_no";
 
 //    favourites details
     public String fav_id="_id",
@@ -113,7 +114,8 @@ private static final int DB_VERSION = 1;
                 + db_booking_id + " TEXT,"
                 + db_branch_id + " TEXT,"
                 + db_service_name + " TEXT,"
-                + booking_active + " TEXT"
+                + booking_active + " TEXT,"
+                + booking_q_no + " INTEGER"
                 + ")";
 
         String CREATE_TABLE_SETTINGS = "CREATE TABLE " + SETTING_TABLE + "("
@@ -307,7 +309,6 @@ private static final int DB_VERSION = 1;
     }
     public int getactivebookings(){
         SQLiteDatabase db = this.getWritableDatabase();
-
         Cursor cursor = db.rawQuery("SELECT * FROM "+booking_table+" where "+booking_active+"='1'",null);
         return cursor.getCount();
     }
@@ -321,6 +322,7 @@ private static final int DB_VERSION = 1;
         contentValues.put(db_branch_id,booking_details.getBranch_id());
         contentValues.put(db_service_name,booking_details.getService_name());
         contentValues.put(booking_active,booking_details.getServiced());
+        contentValues.put(booking_q_no,21);
         db.insert(booking_table,null, contentValues);
 //        set an alarm
 //        new SimpleAlarmManager(activity)
@@ -329,6 +331,26 @@ private static final int DB_VERSION = 1;
 //                .start();
         db.close();
     }
+    public void updat_q_no(String id, int count){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(booking_q_no, count);
+        db.update(booking_table,contentValues, db_booking_id+"="+id,null);
+        db.close();
+    }
+    public int get_q_no(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+booking_table +" where "+db_booking_id+" = "+id,null);
+        int q_no = 0;
+        if (cursor.getCount()!=0){
+            if (cursor.moveToFirst()){
+                q_no=cursor.getInt(cursor.getColumnIndex(booking_q_no));
+            }
+        }
+        Log.d(TAG, "get_favid: "+q_no);
+        return q_no;
+    }
+
     public void updateorder(String booking_id,String status){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

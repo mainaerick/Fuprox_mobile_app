@@ -486,7 +486,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
             progressBar.setVisibility(View.GONE);
             if (error_serv.equals(" ")){
                 StringBuilder strlellerlist = new StringBuilder();
-                Log.e(TAG, "onPostExecute: rteller number" + tellers.get(0) );
+//                Log.e(TAG, "onPostExecute: rteller number" + tellers.get(0) );
                 if (tellers.size()==1){
                     strlellerlist.append(tellers.get(0)+"");
                 }

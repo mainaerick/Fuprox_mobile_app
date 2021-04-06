@@ -28,8 +28,6 @@ import com.fuprox.noqueue.model.JSONParser;
 import com.fuprox.noqueue.model.SocketInstance;
 import com.fuprox.noqueue.model.strings_;
 import com.fuprox.noqueue.utils.Dbhelper;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -63,7 +61,7 @@ public class login extends Fragment {
     Activity activity;
     ProgressDialog pDialog;
 
-    Socket mSocket;
+//    Socket mSocket;
     Context context;
     String[] dictionary={"name"};
     JSONObject jsonObject;
@@ -89,41 +87,41 @@ public class login extends Fragment {
         view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.right_to_left));
         sign_in(view);
 
-        SocketInstance instance = (SocketInstance)getActivity().getApplication();
-        mSocket = instance.getSocketInstance();
-        mSocket.connect();
-        listener();
+//        SocketInstance instance = (SocketInstance)getActivity().getApplication();
+//        mSocket = instance.getSocketInstance();
+//        mSocket.connect();
+//        listener();
 //        attemptSend();
 
-        if (mSocket.connected()){
-            Toast.makeText(activity, "Socket Connected!!",Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "onCreateView: ,Socket connected" );
-        }
+//        if (mSocket.connected()){
+//            Toast.makeText(activity, "Socket Connected!!",Toast.LENGTH_SHORT).show();
+//            Log.e(TAG, "onCreateView: ,Socket connected" );
+//        }
         return view;
     }
-    private void attemptSend() {
-        String booking_id = "2";
-        mSocket.emit("ahead_of_me_id" ,jsonObject.toString());
-
-    }
-
-    private void listener(){
-        mSocket.on("ahead_of_me_id_res_data", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                JSONObject data = null;
-                try {
-                    String username;
-                    data = new JSONObject((String) args[0]);
-//                    username = data.getString("name");
-
-                    Log.d(TAG, "listener: "+data.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    private void attemptSend() {
+//        String booking_id = "2";
+//        mSocket.emit("ahead_of_me_id" ,jsonObject.toString());
+//
+//    }
+//
+//    private void listener(){
+//        mSocket.on("ahead_of_me_id_res_data", new Emitter.Listener() {
+//            @Override
+//            public void call(Object... args) {
+//                JSONObject data = null;
+//                try {
+//                    String username;
+//                    data = new JSONObject((String) args[0]);
+////                    username = data.getString("name");
+//
+//                    Log.d(TAG, "listener: "+data.toString());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
     private void rloadfragment(Fragment fragment){
         FragmentManager fm = ((FragmentActivity) context)
                 .getSupportFragmentManager();
@@ -368,7 +366,7 @@ public class login extends Fragment {
     private void clear_sharedpref(){
         SharedPreferences.Editor editor = activity.getSharedPreferences("pending_signup", MODE_PRIVATE).edit();
         editor.clear();
-        editor.apply();
+        editor.commit();
     }
 
     @Override

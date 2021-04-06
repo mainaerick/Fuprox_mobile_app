@@ -112,8 +112,18 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
 //                editor.putString("token", obj.getString("token"));
 //                editor.putString("company_name", txtcompanyname.getText().toString());
 //                editor.putString("branch_name",txtbranch.getText().toString());
+            HttpPost post;
+            if (token.equals("null")){
+                post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment/number");
+                Log.e(TAG, "Verify_payment by number: ");
 
-            HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment");
+            }
+            else {
+
+                post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment");
+                Log.e(TAG, "Verify_payment by token: ");
+
+            }
             json.put("branch_id", Integer.parseInt(branch_id.trim()));
             json.put("start", start);
             json.put("service_name",service_name);
@@ -278,7 +288,7 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
     private void clear_prefs(SharedPreferences prefs){
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
-        editor.apply();
+        editor.commit();
     }
     private void insert_in_db(String company_name,String branch_name,String booking_id, String branch_id,String service_name,String serviced){
         //bookingid=token+number serviced=instant_is
@@ -294,4 +304,6 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
         bookingDetails.setServiced(serviced);
         new Dbhelper(activity).insert_booking(bookingDetails);
     }
+
+
 }

@@ -270,7 +270,7 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
 
         @Override
         protected void onPreExecute() {
-            layout_loading.setVisibility(View.VISIBLE);
+//            layout_loading.setVisibility(View.VISIBLE);
 //            pDialog = new ProgressDialog(getContext());
 //            pDialog.setMessage("Loading. Please wait...");
 //            pDialog.setIndeterminate(false);

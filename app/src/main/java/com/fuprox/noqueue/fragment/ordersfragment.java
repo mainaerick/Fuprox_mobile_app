@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -26,6 +27,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuprox.noqueue.R;
@@ -34,6 +37,7 @@ import com.fuprox.noqueue.model.JSONParser;
 import com.fuprox.noqueue.model.strings_;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.fuprox.noqueue.utils.booking_details;
+import com.fuprox.noqueue.utils.verifypayment_pending;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
@@ -59,7 +63,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 
 @SuppressLint("ValidFragment")
@@ -78,6 +85,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
     SpinKitView spinKitView;
     public BottomNavigationView navView;
     Button restoreprevious;
+    RelativeLayout pending_layout;
 
     public ordersfragment(){
 
@@ -154,7 +162,9 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         }
 
 
+        pending_layout = view.findViewById(R.id.layout_pending);
 
+        pending_transaction(view);
         view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right));
 
         return view;
@@ -815,7 +825,88 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         }
     }
 
+    SharedPreferences prefs;
+    String phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token;
+    TextView tvtrans_details;
+    public void pending_transaction(View view){
+        tvtrans_details = view.findViewById(R.id.tvtransaction_status);
+        prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
+        if (prefs.getAll().size()>0){
+//            phonenumber = prefs.getString("phonenumber", "No token defined");
+//            branch_id = prefs.getString("branch_id", "branch_id undefined");
+//            start = prefs.getString("start", "start undefined");
+//            service_name = prefs.getString("service_name", "sername undefined");
+//            user_id = prefs.getString("user_id", "user_id undefined");
+//            isinstant = prefs.getString("is_instant", "is_instant undefined");
+//            company_name = prefs.getString("company_name", "company undefined");
+//            branch_name = prefs.getString("branch_name", "branch undefined");
+//            token = prefs.getString("token", "token undefined");
 
+            tvtrans_details.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE);
+
+                    sweetAlertDialog
+                            .setTitleText("Incomplete Transaction.")
+                            .setContentText("Verify transaction if PAID or Cancel to book again")
+                            .setCancelButton("Cancel Transaction", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                    dismiss();
+                                    if (prefs.getAll().size()==0){
+//                                        Snackbar.make(getView(),"Sorry no transaction is available!",Snackbar.LENGTH_SHORT).show();
+                                        new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE)
+                                                .setTitleText("Sorry no transaction available!")
+                                                .setContentText("click to exit")
+                                                .show();
+                                        pending_transaction(view);
+                                    }
+                                    else {
+                                        SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
+                                        editor.clear();
+                                        editor.commit();
+                                        sweetAlertDialog.dismiss();
+                                        pending_transaction(view);
+                                        Toast.makeText(getContext(), "Transaction Cancelled", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setConfirmButton("Verify Transaction", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
+                                    String phonenumber = prefs.getString("phonenumber", "No token defined");
+                                    String branch_id = prefs.getString("branch_id", "branch_id undefined");
+                                    String start = prefs.getString("start", "start undefined");
+                                    String service_name = prefs.getString("service_name", "sername undefined");
+                                    String user_id = prefs.getString("user_id", "user_id undefined");
+                                    String isinstant = prefs.getString("is_instant", "is_instant undefined");
+                                    String company_name = prefs.getString("company_name", "company undefined");
+                                    String branch_name = prefs.getString("branch_name", "branch undefined");
+                                    String token = prefs.getString("token", "token undefined");
+                                    new verifypayment_pending(getContext(),phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
+                                    pending_transaction(view);
+
+                                    sweetAlertDialog.dismiss();
+
+                                }
+                            })
+                            .show();
+                    sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
+
+                }
+            });
+            pending_layout.setVisibility(View.VISIBLE);
+
+
+        }
+        else {
+            pending_layout.setVisibility(View.GONE);
+
+        }
+
+    }
 
 
 }

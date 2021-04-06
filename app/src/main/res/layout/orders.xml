@@ -57,21 +57,22 @@
             android:src="@drawable/ic_menu_black_24dp"
             android:layout_marginEnd="13dp"
             android:visibility="gone"
-
-
             android:contentDescription="TODO" />
 
     </RelativeLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="10dp"
+        android:orientation="vertical"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/laysearchbar"
-            android:layout_marginBottom="?attr/actionBarSize"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -91,24 +92,69 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:mt_roundedSearchBarEnabled="false"
-                    android:id="@+id/bookingsearchBar" />
+                    android:id="@+id/bookingsearchBar"
+
+                    />
 
             </LinearLayout>
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="afterDescendants"
+                android:orientation="vertical"
+                android:padding="13dp"
+                android:id="@+id/layout_pending"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_error_outline_24"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/imts"
+                    />
+                <TextView
+                    android:id="@+id/labelts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imts"
+                    android:textSize="17dp"
+                    android:text="Ongoing tansaction...\nTaking too long?"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/lato_bold"
+                    tools:ignore="ContentDescription"
+                    />
+                <TextView
+                    android:id="@+id/tvtransaction_status"
+                    android:background="@drawable/border"
+                    android:padding="13dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imts"
+                    android:textSize="17dp"
+                    android:text="Review"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/lato_bold"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
         </LinearLayout>
         <ListView
-            android:layout_marginTop="?attr/actionBarSize"
             android:id="@+id/homeworklist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:listSelector="@android:color/transparent"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/laysearchbar"
             tools:listitem="@layout/listorders" />
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab"-->
@@ -118,3 +164,72 @@
         <!--android:layout_margin="@dimen/fab_margin"-->
         <!--android:src="@drawable/baseline_add_white_24" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+<!--<RelativeLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:descendantFocusability="afterDescendants"-->
+<!--android:orientation="vertical"-->
+<!--android:padding="13dp"-->
+<!--android:id="@+id/layout_pending"-->
+<!--android:layout_marginTop="10dp"-->
+<!--android:background="@color/colorPrimary">-->
+
+<!--<ImageView-->
+<!--    android:id="@+id/noteimg"-->
+<!--    android:layout_width="32dp"-->
+<!--    android:layout_height="32dp"-->
+<!--    android:layout_below="@+id/popupbtn"-->
+<!--    android:layout_alignParentEnd="true"-->
+<!--    android:layout_alignParentTop="true"-->
+<!--    app:srcCompat="@drawable/ic_baseline_error_outline_24"-->
+<!--    tools:ignore="ContentDescription" />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/titlenote"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginBottom="3dp"-->
+<!--    android:text="OnGoing Transaction"-->
+<!--    android:layout_marginStart="1.5dp"-->
+<!--    android:layout_marginEnd="1.5dp"-->
+<!--    android:textAllCaps="true"-->
+<!--    android:textColor="@android:color/black"-->
+<!--    android:textSize="24sp"-->
+<!--    android:fontFamily="@font/lato_bold"-->
+<!--    />-->
+<!--<TextView-->
+<!--    android:id="@+id/tvtransaction_detail"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_below="@+id/titlenote"-->
+<!--    android:layout_marginBottom="3dp"-->
+<!--    android:text="Order Details"-->
+<!--    android:maxLines="2"-->
+<!--    android:fontFamily="@font/lato_bold"-->
+<!--    />-->
+<!--<Button-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Verify"-->
+<!--    android:textSize="13dp"-->
+<!--    android:id="@+id/trasaction_verify"-->
+<!--    android:layout_below="@+id/tvtransaction_detail"-->
+<!--    android:layout_alignParentEnd="true"-->
+<!--    android:layout_alignParentRight="true"-->
+<!--    android:fontFamily="@font/lato_bold"-->
+<!--    android:layout_marginTop="13dp"-->
+<!--    android:background="@drawable/border_primary"-->
+<!--    />-->
+<!--<Button-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Cancel"-->
+<!--    android:layout_toLeftOf="@+id/trasaction_verify"-->
+<!--    android:id="@+id/transaction_cancel"-->
+<!--    android:layout_below="@+id/tvtransaction_detail"-->
+<!--    android:fontFamily="@font/lato_bold"-->
+<!--    android:layout_margin="13dp"-->
+<!--    android:background="@drawable/border_primary"-->
+<!--    />-->
+<!--</RelativeLayout>-->

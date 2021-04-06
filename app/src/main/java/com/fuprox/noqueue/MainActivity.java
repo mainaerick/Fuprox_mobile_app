@@ -88,10 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("StaticFieldLeak")
 
 
-
     private static MaterialSearchBar searchBar;
     public  static String TAG="";
-
     List<suggestion_details> clonepost_params = new ArrayList<>();
     suggestion_adapter suggestion_adapter;
     public boolean permision_granted = false;
@@ -176,11 +174,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-
         super.onCreate(savedInstanceState);
         Catcho.Builder(this)
-                .recipients("erickmaina29@students.ku.ac.ke")
+                .recipients("niteric@gmail.com")
                 .build();
+
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class));
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class).putExtra("activity_background", true));
 //        finish();
@@ -191,7 +189,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        SharedPreferences.Editor myEdit
 //                = sharedPreferences.edit();
 //        myEdit.clear();
-//        myEdit.apply();
+//        myEdit.commit();
+
         notification.createNotificationChannel(this);
 
         Handler handler = new Handler();
@@ -244,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchBar.setPlaceHolder("Search a place to book");
 //        searchBar.inflateMenu(R.menu.main_menu);
         searchBar.setOnSearchActionListener(this);
-
         Log.d("LOG_TAG", getClass().getSimpleName() + ": text " + searchBar.getText());
         searchBar.setCardViewElevation(10);
 //        sendJson_getbranch_details(" ");
@@ -926,7 +924,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .commit();
+                    .commitAllowingStateLoss();
             return true;
         }
         return false;

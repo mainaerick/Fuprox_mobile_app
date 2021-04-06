@@ -128,7 +128,6 @@ public class confirm_r_code extends Fragment {
             StringBuilder sb;
             InputStream is = null;
             String result = null;
-
             try {
                 HttpPost post = new HttpPost(new strings_().get_ipaddress(getContext())+"/password/forgot/code");
                 json.put("code", security_code);

@@ -54,7 +54,6 @@ public class signup extends Fragment {
         activity=_activity;
     }
 
-
     Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -251,7 +250,7 @@ public class signup extends Fragment {
                 SharedPreferences.Editor editor = activity.getSharedPreferences("pending_signup", MODE_PRIVATE).edit();
                 editor.putString("email", email);
                 editor.putString("password", password);
-                editor.apply();
+                editor.commit();
                 rloadfragment(new activate_acc(activity));
             }
 

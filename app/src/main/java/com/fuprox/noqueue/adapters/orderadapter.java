@@ -522,7 +522,7 @@ public class orderadapter extends ArrayAdapter<booking_details> {
 //                editor.putString("company_name", txtcompanyname.getText().toString());
 //                editor.putString("branch_name",txtbranch.getText().toString());
 
-                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment");
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(activity)+"/verify/payment/number");
                 json.put("branch_id", Integer.parseInt(branch_id.trim()));
                 json.put("start", start);
                 json.put("service_name",service_name);
@@ -589,7 +589,7 @@ public class orderadapter extends ArrayAdapter<booking_details> {
                 }
             } catch(Exception e) {
                 e.printStackTrace();
-                Log.d(TAG, "run: book connection error verify payment" );
+                Log.e(TAG, "run: book connection error verify payment" );
                 errorms=e.toString();
             }
             return null;
@@ -660,7 +660,7 @@ public class orderadapter extends ArrayAdapter<booking_details> {
         private void clear_prefs(SharedPreferences prefs){
             SharedPreferences.Editor editor = prefs.edit();
             editor.clear();
-            editor.apply();
+            editor.commit();
         }
         private void insert_in_db(String company_name,String branch_name,String booking_id, String branch_id,String service_name,String serviced){
             //bookingid=token+number serviced=instant_is

@@ -479,7 +479,7 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
-                    .commit();
+                    .commitAllowingStateLoss();
             return true;
         }
         return false;

@@ -53,7 +53,7 @@ public class SimpleAlarmManager {
             Set<String> set = new HashSet<>();
             set.add(Integer.toString(id));
             editor.putStringSet("ids", set);
-            editor.apply();
+            editor.commit();
         }
         JSONObject jsonObject = new JSONObject();
         try {
@@ -62,7 +62,7 @@ public class SimpleAlarmManager {
             jsonObject.put("hourOfDay", this.hourOfDay);
             jsonObject.put("minuteOfDay", this.minuteOfDay);
             jsonObject.put("secondOfDay", this.secondOfDay);
-            editor.putString("idExtra" + id, jsonObject.toString()).apply();
+            editor.putString("idExtra" + id, jsonObject.toString()).commit();
         } catch (JSONException e) {
         }
 

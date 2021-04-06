@@ -253,7 +253,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="We'll text you when your\nticket is almost ready."
+                        android:text="We'll notify you when your\nticket is almost ready."
                         android:fontFamily="@font/lato"
                         android:textSize="17dp"
                         android:textAlignment="center"

@@ -26,13 +26,13 @@ import com.fuprox.noqueue.model.SocketInstance;
 import com.fuprox.noqueue.model.notification;
 import com.fuprox.noqueue.model.strings_;
 import com.fuprox.noqueue.utils.verifypayment_pending;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.util.Log;
@@ -74,6 +74,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,11 +88,12 @@ import java.util.TimeZone;
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import br.com.simplepass.loadingbutton.customViews.OnAnimationEndListener;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 import static android.content.Context.MODE_PRIVATE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
-
-
 @SuppressWarnings("ALL")
 @SuppressLint("ValidFragment")
 public class bottom_sheet_fragment extends BottomSheetDialogFragment {
@@ -111,12 +114,10 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
     CircularProgressButton nomalbook,instantbook;
 //    Button instantbook;
     ProgressBar progressBar;
-
             CheckBox chkinstantservice;
     String isinstant;
 
     String notopenmsg="";
-
     ArrayList<services_offered_details> servicesOfferedDetailsArrayList;
     ArrayList<String> list_sername;
 
@@ -175,6 +176,12 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             super.setupDialog(dialog, style);
             final View contentView = View.inflate(getContext(), R.layout.layout_bottom_sheet, null);
             dialog.setContentView(contentView);
+
+//            socket_init("token","phonenumber","branch_id","service_name");
+
+//            IO.Options options = IO.Options.builder()
+//                    .setForceNew(true)
+//                    .build();
 
 
             nomalbook=contentView.findViewById(R.id.book_click);
@@ -254,8 +261,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     if (ismedical.equals("1")){
                         instantbook.setVisibility(View.GONE);
                     }
-
-
                     if(new Dbhelper(getContext()).check_user()!=0){
                         String bt = "";
                         if (ismedical.equals("1")){
@@ -268,20 +273,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         }
 
                         bookclicked(contentView,nomalbook,bt);
-
-//                        if (invisi.equals("invisible")){
-//                            ln.setVisibility(View.VISIBLE);
-//                            warntv.setVisibility(View.VISIBLE);
-//                            invisi="visible";
-//                            button.setText("Booking");
-////                        startActivity(new Intent(getContext(),activity_booking.class));
-//                        }
-//                        else {
-////                        ln.setVisibility(View.INVISIBLE);
-////                        warntv.setVisibility(View.INVISIBLE);
-////                        invisi="invisible";
-////                        button.setText("Book Spot In Queue");
-//                        }
                     }
                     else {
                         warntv.setVisibility(View.VISIBLE);
@@ -337,7 +328,8 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                 public void onClick(View v) {
 //                    nomalbook.setVisibility(View.GONE);
                     if(new Dbhelper(getContext()).check_user()!=0){
-                        isinstant="l";
+                        isinstant="t";
+
                         bookclicked(contentView,instantbook,"instant");
                     }
                     else {
@@ -544,7 +536,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                                 else {
                                     SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
                                     editor.clear();
-                                    editor.apply();
+                                    editor.commit();
                                     sweetAlertDialog.dismiss();
                                     Toast.makeText(getContext(), "Transaction Cancelled", Toast.LENGTH_SHORT).show();
                                 }
@@ -625,6 +617,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         if (verifynumber()){
                             String completenumber=showcontrycode.getText().toString()
                                     +editnumber.getText().toString();
+
                             new make_booking(getActivity(),b_id,booking_time_format.format(booking_milis),new Dbhelper(getContext()).get_user_id(),spinner_text,completenumber).execute();
 //                        new make_booking(getActivity(),b_id,booking_time_format.format(booking_milis),new Dbhelper(getContext()).get_user_id(),spinner_text,"254740212762").execute();
                         }
@@ -687,8 +680,15 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
 //                pDialog.setCancelable(false);
 //                pDialog.show();
 
-                nomalbook.startAnimation();
-                instantbook.startAnimation();
+                if (isinstant.equals("")){
+                    nomalbook.startAnimation();
+                    instantbook.setClickable(false);
+
+                }
+                else{
+                    instantbook.startAnimation();
+                    nomalbook.setClickable(false);
+                }
                 error_disp.setText("");
             }
             @SuppressLint("WrongThread")
@@ -707,7 +707,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     json.put("start", start);
                     json.put("service_name",service_name);
                     json.put("user_id",user_id);
-                    json.put("is_instant",isinstant);
+                    json.put("is_instant","");
                     json.put("phonenumber",phonenumber);
                     StringEntity se = new StringEntity( json.toString());
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -741,7 +741,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                                 obj= new JSONObject(result);
 //                              jsonarray = new JSONArray(result);
 
-                                token = obj.getString("token");
+                                token = "null";
 //                                InputStream in = response.getEntity().getContent(); //Get the data in the entity
 //                                bookingDetails.setCo_name(txtcompanyname.getText().toString());
 //                                bookingDetails.setB_name(txtbranch.getText().toString());
@@ -783,7 +783,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     e.printStackTrace();
                     Log.d(TAG, "run: book connection error" );
                     error="Couldn't book \n\n There was a problem communicating with the servers. \n\n Try again later.";
-                    pDialog.dismiss();
+//                    pDialog.dismiss();
                 }
                 return null;
             }
@@ -812,7 +812,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                                     else {
                                         SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
                                         editor.clear();
-                                        editor.apply();
+                                        editor.commit();
                                         sweetAlertDialog.dismiss();
                                         Toast.makeText(getContext(), "Transaction Cancelled", Toast.LENGTH_SHORT).show();
 
@@ -841,30 +841,32 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
 
                     }
                     else{
-
-                        SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.SUCCESS_TYPE);
-                        sweetAlertDialog
-                                .setTitleText("Verification Successful")
-                                .setContentText("Booking a ticket for you, wait for notification")
-                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        sweetAlertDialog.dismissWithAnimation();
-                                        refreshnavview();
-                                    }
-                                })
-
-                                .show();
-                        sweetAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialogInterface) {
-                                        refreshnavview();
-                                        dismiss();
-                                    }
-                                });
-                        sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.catcho_primary_dark));
-
-                        sweetAlertDialog.getButton(R.id.confirm_button).setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+                        Toast.makeText(activity, "Proceeding to Payment...", Toast.LENGTH_SHORT).show();
+                        socket_init(token,phonenumber,branch_id,service_name);
+                        dismiss();
+//                        SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.SUCCESS_TYPE);
+//                        sweetAlertDialog
+//                                .setTitleText("Verification Successful")
+//                                .setContentText("Booking a ticket for you, wait for notification")
+//                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+//                                    @Override
+//                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                        sweetAlertDialog.dismissWithAnimation();
+//                                        refreshnavview();
+//                                    }
+//                                })
+//
+//                                .show();
+//                        sweetAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//                                    @Override
+//                                    public void onDismiss(DialogInterface dialogInterface) {
+//                                        refreshnavview();
+//                                        dismiss();
+//                                    }
+//                                });
+//                        sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.catcho_primary_dark));
+//
+//                        sweetAlertDialog.getButton(R.id.confirm_button).setTextColor(activity.getResources().getColor(R.color.colorPrimary));
 //                        final Handler handler = new Handler();
 //                        handler.postDelayed(new Runnable() {
 //                            @Override
@@ -885,8 +887,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                         editor.putString("token", token);
                         editor.putString("company_name", txtcompanyname.getText().toString());
                         editor.putString("branch_name",txtbranch.getText().toString());
-                        editor.apply();
-                        socket_init(token,phonenumber,branch_id,service_name);
+                        editor.commit();
 //                        insert_in_db(txtcompanyname.getText().toString(),txtbranch.getText().toString(),token+"_"+phonenumber,branch_id,service_name,isinstant);
 
 //                        activity.start+-Service(new Intent(activity, PM_verify_service.class));
@@ -896,7 +897,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                 else{
                     SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
                     editor.clear();
-                    editor.apply();
+                    editor.commit();
 
                     SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.WARNING_TYPE);
                     sweetAlertDialog
@@ -912,49 +913,144 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
                 }
 //                nomalbook.doneLoadingAnimation(activity.getResources().getColor(R.color.colorPrimary),drawableToBitmap(activity.getResources().getDrawable(R.drawable.ic_done_black_24dp)));
-                nomalbook.revertAnimation();
-                instantbook.revertAnimation();
+                if (isinstant.equals("")){
+                    nomalbook.revertAnimation();
+                    instantbook.setClickable(true);
+                }
+                else{
+                    instantbook.revertAnimation();
+                    nomalbook.setClickable(true);
+
+                }
+
 
             }
         }
 
 
-    Socket mSocket;
+
+
+//    Socket mSocket;
     Context context;
     String[] dictionary={"name"};
     JSONObject jsonObject;
+    String phonenumber=" ";
+//    Socket mSocket;
+    Socket socket;
+    boolean socket_connected;
+    private void socket_init(String token,String phonenumber,String branch_id,String service_name) {
 
-    private void socket_init(String token,String phonenumber,String branch_id,String service_name){
-        SocketInstance instance = (SocketInstance)getActivity().getApplication();
-        mSocket = instance.getSocketInstance();
-        mSocket.connect();
-        payment_status_listener(token,phonenumber,branch_id,service_name);
-//        attemptSend();
-
-        if (mSocket.connected()){
-//            Toast.makeText(activity, "Socket Connected!!",Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "onCreateView: ,Socket connected" );
-        }
-    }
-    private void payment_status_listener(String token,String phonenumber,String branch_id,String service_name){
-        mSocket.on("mpesa_verify_data", new Emitter.Listener() {
+        IO.Options options = new IO.Options();
+        socket = IO.socket(URI.create("http://159.65.144.235:5000"), options); // the main namespace
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                JSONObject data = null;
+                System.out.println(socket.connected()); // true
+                Log.e(TAG, "call: socket connected");
+                socket_connected = true;
+            }
+        });
+        socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println(socket.connected()); // false
+                Log.e(TAG, "call: socket disconnected");
+                socket_connected = false;
+            }
+        });
+        socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+//                    options.auth.put("authorization", "bearer 1234");
+                socket.connect();
+                Log.e(TAG, "call: socket error " + args[0]);
+            }
+        });
+        socket.on("mpesa_verify_data", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.e(TAG, "call: mpesa_verify_data listening" );
                 try {
-                    String mpesa_token;
+                    JSONObject data = null;
+
+                    String phone_number, verify_token;
                     data = new JSONObject((String) args[0]);
-                    mpesa_token = data.getString("mpesa_token");
-                    if(mpesa_token.equals(token)){
-                        mSocket.disconnect();
-                        mSocket.off("mpesa_verify_data");
+                    phone_number = data.getString("phone_number");
+
+                    if (phone_number.equals(phonenumber)) {
+
+                        verify_token = data.getString("token");
+                        SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
+                        editor.putString("token", verify_token);
+                        editor.commit();
                         activity.startService(new Intent(activity, PM_verify_service.class));
+                        socket.disconnect();
+                        socket.off("mpesa_verify_data");
                     }
-                    Log.d(TAG, "listener: "+data.toString());
+                    Log.e(TAG, "listener: " + data.toString());
                 } catch (JSONException e) {
-                    insert_in_db(txtcompanyname.getText().toString(),txtbranch.getText().toString(),token+"_"+phonenumber,branch_id,service_name,isinstant);
+                    socket.disconnect();
+                    socket.off("mpesa_verify_data");
+                    insert_in_db(txtcompanyname.getText().toString(), txtbranch.getText().toString(), token + "_" + phonenumber, branch_id, service_name, isinstant);
                     e.printStackTrace();
                 }
+            }
+        });
+//        if (socket_connected){
+//            payment_status_listener(token,phonenumber,branch_id,service_name);
+//
+//        }
+                socket.connect();
+//        SocketInstance instance = (SocketInstance)getActivity().getApplication();
+//        mSocket = instance.getSocketInstance();
+//        mSocket.connect();
+//        this.phonenumber = phonenumber;
+//        if (mSocket.connected()){
+//            Toast.makeText(activity, "Socket Connected!!",Toast.LENGTH_SHORT).show();
+//            Log.e(TAG, "onCreateView: ,Socket connected" );
+//        }
+//        payment_status_listener(token,phonenumber,branch_id,service_name);
+
+//
+    }
+    private void payment_status_listener(String token,String phonenumber,String branch_id,String service_name){
+//        Toast.makeText(activity, "listener started", Toast.LENGTH_SHORT).show();
+        Log.e(TAG, "payment_status_listener: "+token);
+        socket.on("mpesa_verify_data", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject data = null;
+
+                            String phone_number,verify_token;
+                            data = new JSONObject((String) args[0]);
+                            phone_number = data.getString("phone_number");
+
+                            if(phone_number.equals(phonenumber)){
+
+                                verify_token = data.getString("token");
+                                SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
+                                editor.putString("token", verify_token);
+                                editor.commit();
+                                activity.startService(new Intent(activity, PM_verify_service.class));
+                                socket.disconnect();
+                                socket.off("mpesa_verify_data");
+                            }
+                            Log.e(TAG, "listener: "+data.toString());
+                        } catch (JSONException e) {
+                            socket.disconnect();
+                            socket.off("mpesa_verify_data");
+                            insert_in_db(txtcompanyname.getText().toString(),txtbranch.getText().toString(),token+"_"+phonenumber,branch_id,service_name,isinstant);
+                            e.printStackTrace();
+                        }
+                    }
+                });
+//                Toast.makeText(activity, "listening", Toast.LENGTH_SHORT).show();
+
+//                Log.e(TAG, "calllistener: "+data );
             }
         });
     }
@@ -973,13 +1069,10 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
         new Dbhelper(activity).insert_booking(bookingDetails);
     }
     public void refreshnavview(){
-
         BottomNavigationView navView=activity.findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_queue);
 //        navView.getOrCreateBadge(R.id.navigation_order).setNumber(new Dbhelper(getContext()).getactivebookings());
-
     }
-
 
     private class get_services_offered extends AsyncTask<String, String, String>{
             View view;
@@ -1498,7 +1591,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
         private void clear_prefs(SharedPreferences prefs){
             SharedPreferences.Editor editor = prefs.edit();
             editor.clear();
-            editor.apply();
+            editor.commit();
         }
 
 

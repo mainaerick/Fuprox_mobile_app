@@ -73,7 +73,6 @@ public class notification {
                     .setVibrate(vib)
                     .setContentTitle(content)
                     .setContentText(people)
-                    .setSubText(people)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(people + "\n" + branchname + " for " + servicename + " service"))
                     .setAutoCancel(true)

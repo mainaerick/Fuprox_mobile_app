@@ -56,7 +56,29 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:orientation="vertical"
+        android:padding="13dp"
+        android:id="@+id/layout_pending"
+        android:layout_marginTop="10dp">
 
+        <TextView
+            android:id="@+id/tvtransaction_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/popupbtn"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentTop="true"
+            android:textSize="17dp"
+            app:drawableLeftCompat="@drawable/ic_baseline_error_outline_24"
+            android:text="Ongoing tansaction...\nTaking too long? Click here"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/lato_bold"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
 
 
     <LinearLayout

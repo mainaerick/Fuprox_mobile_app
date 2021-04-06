@@ -2,17 +2,18 @@ package com.fuprox.noqueue.model;
 
 
 import android.app.Application;
-
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
+import android.util.Log;
 
 
 import java.net.URISyntaxException;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
 public class SocketInstance extends Application {
-    private Socket iSocket;
     String[] dict= { };
-    private static final String URL = "http://159.65.144.235:5000" ;
+    Socket iSocket;
+    private static final String URL = "http://159.65.144.235:5000";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -20,7 +21,9 @@ public class SocketInstance extends Application {
             IO.Options opts = new IO.Options();
 //            opts.query = "auth_token=" + authToken;
             iSocket = IO.socket(URL);
+            Log.e("TAG", "onCreate: socket ok");
         } catch (URISyntaxException e) {
+            Log.e("TAG", "onCreate: socket_instance "+e.getMessage() );
             throw new RuntimeException(e);
         }
     }

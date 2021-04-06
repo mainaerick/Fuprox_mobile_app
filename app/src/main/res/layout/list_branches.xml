@@ -34,11 +34,11 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="23dp">
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     app:srcCompat="@mipmap/ic_business"
                     android:id="@+id/branch_icon"
-                    android:background="@drawable/background_circle"
+                    android:background="@drawable/border"
                     android:padding="3dp"
                     />
                 <TextView
