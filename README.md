@@ -3,7 +3,7 @@ android app for queue booking
 
 <div align="center">
   
-![fuprox bookings](https://user-images.githubusercontent.com/33715848/93322011-5f41eb00-f802-11ea-854e-4c51eab3e520.png)
+![fuprox bookings](https://user-images.githubusercontent.com/33715848/119270661-73967d00-bc06-11eb-8ad6-20eb4ebb1b8c.png)
 
 ![fuprox acount](https://user-images.githubusercontent.com/33715848/93322147-8698b800-f802-11ea-98fe-63e98412585e.png)
 
