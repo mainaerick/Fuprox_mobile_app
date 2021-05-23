@@ -2,7 +2,7 @@
 android app for queue booking
 
 <div align="center">
-  <img align="right"  width="460" height="300" src="https://user-images.githubusercontent.com/33715848/119270661-73967d00-bc06-11eb-8ad6-20eb4ebb1b8c.png">
+  <img align="right"  width="460" height="1210" src="https://user-images.githubusercontent.com/33715848/119270661-73967d00-bc06-11eb-8ad6-20eb4ebb1b8c.png">
   <img align="right" width="460" height="300" src="https://user-images.githubusercontent.com/33715848/119270709-ae001a00-bc06-11eb-8d2c-917e7a0537dc.png">
   <img align="right" width="460" height="300" src="https://user-images.githubusercontent.com/33715848/119270711-afc9dd80-bc06-11eb-870e-5d54caf3c9c3.png">
     
