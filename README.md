@@ -1,7 +1,7 @@
 # Fuprox_mobile_app
 android app for queue booking
 
-<div align="center">
+<div align="center" float= "left">
   
 ![fuprox bookings](https://user-images.githubusercontent.com/33715848/119270661-73967d00-bc06-11eb-8ad6-20eb4ebb1b8c.png)
 
