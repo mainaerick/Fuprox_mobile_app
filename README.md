@@ -6,6 +6,8 @@ android app for queue booking
   <img align="right" width="100" height="100" src="https://user-images.githubusercontent.com/33715848/119270709-ae001a00-bc06-11eb-8d2c-917e7a0537dc.png">
   <img align="right" width="100" height="100" src="https://user-images.githubusercontent.com/33715848/119270711-afc9dd80-bc06-11eb-870e-5d54caf3c9c3.png">
 
+  <br>
+    
   <img align="right" width="100" height="100" src="https://user-images.githubusercontent.com/33715848/119270712-b0627400-bc06-11eb-834b-8d5176aaae48.png">
 
   <img align="right" width="100" height="100" src="https://user-images.githubusercontent.com/33715848/119270714-b0fb0a80-bc06-11eb-987a-fea079588fc7.png">
