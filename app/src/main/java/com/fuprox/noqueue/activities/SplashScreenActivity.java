@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.fuprox.noqueue.MainActivity;
+import com.fuprox.noqueue.model.check_user_exist;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,11 +28,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
         get_ipaddress(this);
-
+        new check_user_exist(this,new Dbhelper(this).get_user_id()).execute();
         startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
         finish();
     }
-
     private void get_ipaddress(Activity activity) {
         // Read from the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -61,4 +61,5 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
 
     }
+
 }

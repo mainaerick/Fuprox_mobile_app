@@ -7,6 +7,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Display;
@@ -346,6 +347,14 @@ public class FloatingWidgetService extends Service {
                 if (infront==0){
 //                    stopSelf();
                     counterFab.setCount(0);
+                    Intent intent1 = new Intent(FloatingWidgetService.this, MainActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("book_id", booking_id);
+                    bundle.putString("verify","verify");
+                    intent1.putExtras(bundle);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent1);
                 }
                 else {
                     new Checkinfront(booking_id).execute();

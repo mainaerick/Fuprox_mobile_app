@@ -1,4 +1,4 @@
-package com.fuprox.noqueue.adapters;
+ package com.fuprox.noqueue.adapters;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.fuprox.noqueue.R;
 import com.fuprox.noqueue.Receiver.FloatingWidgetService;
 import com.fuprox.noqueue.Receiver.PM_verify_service;
+import com.fuprox.noqueue.activities.Receipt_Activity;
 import com.fuprox.noqueue.fragment.fragment_oder_more_details;
 import com.fuprox.noqueue.model.notification;
 import com.fuprox.noqueue.model.strings_;
@@ -245,9 +246,15 @@ public class orderadapter extends ArrayAdapter<booking_details> {
 //                                Toast.makeText(mActivity, ""+id, Toast.LENGTH_SHORT).show();
 
 //                                bottom_sheet_fragment bottomSheetFragment = new bottom_sheet_fragment(sname,saddress,sbranch);
-                                fragment_oder_more_details fragmentOderMoreDetails=new fragment_oder_more_details(id,new Dbhelper(mActivity).get_user_id());
-                                FragmentManager manager = ((AppCompatActivity)mActivity).getSupportFragmentManager();
-                                fragmentOderMoreDetails.show(manager,fragmentOderMoreDetails.getTag());
+//                                fragment_oder_more_details fragmentOderMoreDetails=new fragment_oder_more_details(id,new Dbhelper(mActivity).get_user_id());
+//                                FragmentManager manager = ((AppCompatActivity)mActivity).getSupportFragmentManager();
+//                                fragmentOderMoreDetails.show(manager,fragmentOderMoreDetails.getTag());
+                                Intent ticket_intent = new Intent(mActivity, Receipt_Activity.class);
+                                Bundle bundle1 = new Bundle();
+                                bundle1.putString("book_id", id);
+                                bundle1.putString("verify","verify");
+                                ticket_intent.putExtras(bundle1);
+                                mActivity.startActivity(ticket_intent);
 //                                bottomSheetFragment.show(getFragmentManager(), bottomSheetFragment.getTag());
                                 return true;
                             default:
@@ -573,7 +580,6 @@ public class orderadapter extends ArrayAdapter<booking_details> {
                                 String booking_id=obj.getString("id");
                                 this.booking_id=booking_id;
                                 new Dbhelper(activity).update_pending_order(token+"_"+phonenumber,booking_id);
-
                             }
                             else {
                                 msg="Payment Unsuccessful";

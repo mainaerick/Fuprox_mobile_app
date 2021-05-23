@@ -88,7 +88,6 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
             pDialog.setCancelable(true);
             pDialog.show();
         }
-
     }
 
     @Override
@@ -100,7 +99,6 @@ public class verifypayment_pending extends AsyncTask<String, String, String> {
         StringBuilder sb;
         InputStream is = null;
         String result = null;
-
         try {
 //                SharedPreferences.Editor editor = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE).edit();
 //                editor.putString("start", String.valueOf(booking_milis));

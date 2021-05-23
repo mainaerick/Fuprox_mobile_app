@@ -140,7 +140,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\erick\Desktop\Desktop\ricko\fuprox\app\src\main\ic_launcher-playstore.png" />
+                                                <entry key="imagePath" value="C:\Users\erick\Downloads\5f2da8912d5aaefb6efa5b0bf1ee010d.webp" />
+                                                <entry key="paddingPercent" value="-10" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -181,9 +182,9 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="08204a" />
-                                      <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="imageAsset" value="C:\Users\erick\Desktop\Desktop\ricko\fuprox\app\src\main\ic_launcher-playstore.png" />
-                                      <entry key="outputName" value="ic_appname" />
+                                      <entry key="cropped" value="true" />
+                                      <entry key="imageAsset" value="C:\Users\erick\Downloads\5f2da8912d5aaefb6efa5b0bf1ee010d.webp" />
+                                      <entry key="outputName" value="ic_institution" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -338,7 +339,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/error_outline/baseline_error_outline_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/map/baseline_map_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -348,8 +349,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff7c23" />
-                            <entry key="outputName" value="ic_baseline_error_outline_24" />
+                            <entry key="color" value="394c6e" />
+                            <entry key="outputName" value="ic_baseline_map_24" />
                             <entry key="sourceFile" value="C:\Users\erick\Desktop\Desktop\ricko\fuprox" />
                           </map>
                         </option>

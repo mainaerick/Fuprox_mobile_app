@@ -1,10 +1,132 @@
-<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fuprox.noqueue.activities.MapsActivityCurrentPlace" />
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fuprox.noqueue.activities.MapsActivityCurrentPlace">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <include layout="@layout/fullscreen_header"
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="12dp"
+        app:cardElevation="13dp"
+        android:visibility="gone"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_directions_walk_24"
+                android:padding="7dp"
+                android:id="@+id/img_walk"
+                android:layout_marginBottom="13dp"
+                android:layout_marginTop="13dp"
+                android:background="#fff"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_drive_eta_24"
+                android:padding="7dp"
+                android:id="@+id/img_drive"
+                android:layout_below="@+id/img_walk"
+                android:layout_marginBottom="13dp"
+                android:background="#fff"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_directions_bus_24"
+                android:padding="7dp"
+                android:id="@+id/img_bus"
+                android:layout_below="@+id/img_drive"
+                android:layout_marginBottom="13dp"
+                android:background="#fff"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="13dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:id="@+id/card_detail"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_mylocation"
+                android:text="Your Location"
+                android:fontFamily="@font/lato_bold"
+                android:drawableRight="@drawable/ic_baseline_my_location_24"
+                android:layout_alignParentTop="true"
+                app:drawableTint="@color/colorAccent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_distance"
+                android:layout_below="@+id/tv_mylocation"
+                android:layout_marginTop="13dp"
+                android:text="_____" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_mode"
+                android:layout_below="@+id/tv_branchname"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="13dp"
+                android:visibility="gone"
+                android:text="walking" />
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="_____"
+                android:layout_below="@+id/tv_branchname"
+                android:layout_marginTop="13dp"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/tv_branchname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_baseline_place_24"
+                android:fontFamily="@font/lato_bold"
+                android:text="_____"
+                android:layout_below="@+id/tv_distance"
+                android:layout_marginTop="13dp"
+                app:drawableTint="@color/red" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+    
+
+
 
 
 

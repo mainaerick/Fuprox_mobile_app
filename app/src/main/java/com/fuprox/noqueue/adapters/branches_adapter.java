@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.cardview.widget.CardView;
+
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -34,6 +37,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuprox.noqueue.R;
+import com.fuprox.noqueue.activities.MapActivity;
+import com.fuprox.noqueue.activities.activity_booking;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.fuprox.noqueue.utils.branches_details;
 import com.fuprox.noqueue.utils.fav_details;
@@ -56,7 +61,7 @@ import java.util.Objects;
 
 public class branches_adapter extends ArrayAdapter<branches_details> {
 
-    public  static String TAG="";
+    public static String TAG = "";
 
     ProgressDialog pDialog;
     private Activity mActivity;
@@ -64,7 +69,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
     private ArrayList<branches_details> orders_list;
     private ListView mListView;
     branches_details branches_details;
-    LatLng my_latlong,other_latlong;
+    LatLng my_latlong, other_latlong;
     View tolocation_view;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
@@ -80,27 +85,28 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
 
     private int lastPosition = -1;
 
-    double my_lattitude,my_longitude;
-    double d_long=0;
+    double my_lattitude, my_longitude;
+    double d_long = 0;
     double d_lat = 0;
 
     Drawable drawable;
+
     private static class ViewHolder {
-        TextView title,txtid,txtvdist,tvticket,tvdate;
-        ImageView icon_view;
-//        CheckBox likeButton;
+        TextView title, txtid, txtvdist, tvticket, tvdate;
+        ImageView icon_view, imgdirection;
+        //        CheckBox likeButton;
         CardView cardView;
         LikeButton likeButton;
 
     }
 
-    public branches_adapter(Activity activity, ListView listView, int resource, ArrayList<branches_details> objects,Drawable drawable) {
+    public branches_adapter(Activity activity, ListView listView, int resource, ArrayList<branches_details> objects, Drawable drawable) {
         super(activity, resource, objects);
         mActivity = activity;
         mListView = listView;
         mResource = resource;
         orders_list = objects;
-        this.drawable=drawable;
+        this.drawable = drawable;
     }
 
 
@@ -110,46 +116,45 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         final branches_adapter.ViewHolder holder;
         final String name = Objects.requireNonNull(getItem(position)).getTitle();
-        final String br_id=Objects.requireNonNull(getItem(position)).getId();
-        final String br_open=Objects.requireNonNull(getItem(position)).getOpen_time();
-        final String br_close=Objects.requireNonNull(getItem(position)).getClose_time();
-        final String br_lat=Objects.requireNonNull(getItem(position)).getLattitude();
-        final String br_long=Objects.requireNonNull(getItem(position)).getLongitude();
-        final String ismedical=Objects.requireNonNull(getItem(position)).getIsmedical();
-        final String icon_url=Objects.requireNonNull(getItem(position)).getIcon_url();
+        final String br_id = Objects.requireNonNull(getItem(position)).getId();
+        final String br_open = Objects.requireNonNull(getItem(position)).getOpen_time();
+        final String br_close = Objects.requireNonNull(getItem(position)).getClose_time();
+        final String br_lat = Objects.requireNonNull(getItem(position)).getLattitude();
+        final String br_long = Objects.requireNonNull(getItem(position)).getLongitude();
+        final String ismedical = Objects.requireNonNull(getItem(position)).getIsmedical();
+        final String icon_url = Objects.requireNonNull(getItem(position)).getIcon_url();
 
-        branches_details=new branches_details(br_id,name,br_open,br_close,br_lat,br_long,ismedical,icon_url);
+        branches_details = new branches_details(br_id, name, br_open, br_close, br_lat, br_long, ismedical, icon_url);
 
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new branches_adapter.ViewHolder();
             holder.title = convertView.findViewById(R.id.branch_title);
-            holder.txtid=convertView.findViewById(R.id.txtbranchid);
-            holder.txtvdist=convertView.findViewById(R.id.branch_dist);
-            holder.likeButton=convertView.findViewById(R.id.favourite_btn);
-            holder.icon_view=convertView.findViewById(R.id.branch_icon);
+            holder.txtid = convertView.findViewById(R.id.txtbranchid);
+            holder.txtvdist = convertView.findViewById(R.id.branch_dist);
+            holder.likeButton = convertView.findViewById(R.id.favourite_btn);
+            holder.icon_view = convertView.findViewById(R.id.branch_icon);
+            holder.imgdirection = convertView.findViewById(R.id.imgdirection);
+
 
             convertView.setTag(holder);
         } else {
             holder = (branches_adapter.ViewHolder) convertView.getTag();
         }
         String s_title = branches_details.getTitle();
-        String s_id=branches_details.getId();
-        String s_longitude=branches_details.getLongitude();
-        String s_lattitude=branches_details.getLattitude();
+        String s_id = branches_details.getId();
+        String s_longitude = branches_details.getLongitude();
+        String s_lattitude = branches_details.getLattitude();
 
-        try{
-            d_long= Double.parseDouble(s_longitude);
-            d_lat= Double.parseDouble(s_lattitude);
-        }
-        catch (Exception e){
+        try {
+            d_long = Double.parseDouble(s_longitude);
+            d_lat = Double.parseDouble(s_lattitude);
+        } catch (Exception e) {
             Log.d(TAG, "getView: " + e);
         }
 
-        final LatLng other_latlong=new LatLng(d_lat,d_long);
-
-
+        final LatLng other_latlong = new LatLng(d_lat, d_long);
         boolean mLocationPermissionGranted = true;
 
         LocationManager lm = (LocationManager) mActivity.getSystemService(Context.LOCATION_SERVICE);
@@ -166,10 +171,9 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
 
-        }
-        else{
+        } else {
 //            get my location
-            if(isLocationEnabled()){
+            if (isLocationEnabled()) {
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mActivity);
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(
                         new OnCompleteListener<Location>() {
@@ -181,18 +185,17 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
                                 } else {
 //                                latTextView.setText(location.getLatitude()+"");
 //                                lonTextView.setText(location.getLongitude()+"");
-                                    my_lattitude=location.getLatitude();
-                                    my_longitude=location.getLongitude();
-                                    my_latlong=new LatLng(my_lattitude,my_longitude);
-                                    if (d_long!=0){
-                                        holder.txtvdist.setText("("+getDistance(my_latlong,other_latlong) +" from your location)");
+                                    my_lattitude = location.getLatitude();
+                                    my_longitude = location.getLongitude();
+                                    my_latlong = new LatLng(my_lattitude, my_longitude);
+                                    if (d_long != 0) {
+                                        holder.txtvdist.setText("(" + getDistance(my_latlong, other_latlong) + " from your location)");
                                     }
                                 }
                             }
                         }
-                        );
-            }
-            else {
+                );
+            } else {
                 Toast.makeText(mActivity, "Turn on location", Toast.LENGTH_LONG).show();
 //                Intent intent = new Intent(Settings_activity.ACTION_LOCATION_SOURCE_SETTINGS);
 //                mActivity.startActivity(intent);
@@ -202,18 +205,29 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
 
         holder.title.setText(s_title);
         holder.txtid.setText(s_id);
+        holder.imgdirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(mActivity, MapActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("branch_name", s_title);
+                bundle.putString("longitude", s_longitude);
+                bundle.putString("latitude", s_lattitude);
 
-        if (new Dbhelper(mActivity).check_if_fav(s_id)){
+                intent1.putExtras(bundle);
+                mActivity.startActivity(intent1);
+            }
+        });
+        if (new Dbhelper(mActivity).check_if_fav(s_id)) {
 //            holder.likeButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
             holder.likeButton.setLiked(true);
 //            holder.title.setText(s_title+"fav");
-        }
-        else {
+        } else {
 //            holder.likeButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
             holder.likeButton.setLiked(false);
 //            holder.title.setText(s_title+"not fav");
         }
-        fav_details fav_details=new fav_details();
+        fav_details fav_details = new fav_details();
         fav_details.setBranchid(br_id);
         fav_details.setBranchname(name);
         fav_details.setLongitude(br_long);
@@ -322,6 +336,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
             bmImage.setImageBitmap(result);
         }
     }
+
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
@@ -348,7 +363,8 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
 //            holder.popup.setVisibility(View.VISIBLE);
 //        }
     }
-    private void requestNewLocationData(){
+
+    private void requestNewLocationData() {
 
         @SuppressLint("RestrictedApi") LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -357,6 +373,17 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
         mLocationRequest.setNumUpdates(1);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mActivity);
+        if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mFusedLocationClient.requestLocationUpdates(
                 mLocationRequest, mLocationCallback,
                 Looper.myLooper()
@@ -394,7 +421,6 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
 
         float distance=l1.distanceTo(l2);
         String dist=distance+" M";
-
         if(distance>1000.0f)
         {
             distance=distance/1000.0f;

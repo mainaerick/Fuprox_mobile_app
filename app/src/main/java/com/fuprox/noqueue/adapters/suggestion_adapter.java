@@ -30,6 +30,8 @@ public class suggestion_adapter extends SuggestionsAdapter<suggestion_details, s
             holder.tvlongitude.setText(suggestion.getCompany_id());//company id
             holder.tvlattitude.setText(suggestion.getId());
             holder.tvmedical.setText(suggestion.getIsmedical());
+            holder.tvtruelatitude.setText(suggestion.getLatitude());
+            holder.tvtruelongitude.setText(suggestion.getLongitude());
         }catch (Exception e){
             Log.d("TAG", "onBindSuggestionHolder: "+e.getLocalizedMessage());
         }
@@ -112,7 +114,7 @@ public class suggestion_adapter extends SuggestionsAdapter<suggestion_details, s
 
     static class SuggestionHolder extends RecyclerView.ViewHolder{
         protected TextView title;
-        protected TextView tvlongitude,tvlattitude,tvmedical;
+        protected TextView tvlongitude,tvlattitude,tvmedical, tvtruelatitude,tvtruelongitude;
         protected ImageView image;
 
         public SuggestionHolder(View itemView) {
@@ -122,6 +124,10 @@ public class suggestion_adapter extends SuggestionsAdapter<suggestion_details, s
                 title = (TextView) itemView.findViewById(R.id.suggestion_title);
                 tvlongitude = (TextView) itemView.findViewById(R.id.suggestion_long);
                 tvlattitude = (TextView) itemView.findViewById(R.id.suggestion_lat);
+                tvtruelatitude = (TextView) itemView.findViewById(R.id.latitude);
+                tvtruelongitude = (TextView) itemView.findViewById(R.id.longitude);
+
+
             }catch (Exception e){
 
             }

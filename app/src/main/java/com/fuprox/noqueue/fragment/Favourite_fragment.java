@@ -3,6 +3,7 @@ package com.fuprox.noqueue.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.fuprox.noqueue.MainActivity;
 import com.fuprox.noqueue.R;
+import com.fuprox.noqueue.activities.activity_booking;
 import com.fuprox.noqueue.adapters.favourite_adapter;
 import com.fuprox.noqueue.model.strings_;
 import com.fuprox.noqueue.utils.Dbhelper;
@@ -113,7 +116,7 @@ public class Favourite_fragment extends Fragment {
         company_id,
         branch_name,
         branch_close,
-        branch_open,ismedical;
+        branch_open,ismedical,latitude,longitude;;
 
         public branch_get(String branch_id){
             this.branch_id=branch_id;
@@ -176,7 +179,11 @@ public class Favourite_fragment extends Fragment {
                             branch_close=obj.getString("closes");
                             branch_open=obj.getString("opens");
                             boolean isMedical=obj.getBoolean("is_medical");
+                            String longi=obj.getString("longitude");
+                            String latti=obj.getString("latitude");
 
+                            this.latitude = latti;
+                            this.longitude = longi;
 
                             if (isMedical){
                                 ismedical="1";
@@ -216,7 +223,7 @@ public class Favourite_fragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             pDialog.dismiss();
-            new getcompany_name(company_id,branch_id,branch_name,branch_close,branch_open,"book",ismedical).execute();
+            new getcompany_name(company_id,branch_id,branch_name,branch_close,branch_open,"book",ismedical,latitude,longitude).execute();
         }
     }
     private class getcompany_name extends AsyncTask<String, String, String>{
@@ -229,7 +236,10 @@ public class Favourite_fragment extends Fragment {
         String action;
         String gcnamerroe=" ";
         String ismedical;
-        public getcompany_name(String company_id,String branch_id,String branch_name,String branch_close,String branch_open,String action,String ismedical){
+        String longitude;
+        String latitude;
+
+        public getcompany_name(String company_id,String branch_id,String branch_name,String branch_close,String branch_open,String action,String ismedical,String lat,String longitude){
             this.ismedical=ismedical;
             this.company_id=company_id;
             this.branch_id=branch_id;
@@ -237,6 +247,8 @@ public class Favourite_fragment extends Fragment {
             this.branch_close=branch_close;
             this.branch_open=branch_open;
             this.action=action;
+            this.latitude = lat;
+            this.longitude = longitude;
         }
         @Override
         protected void onPreExecute() {
@@ -330,14 +342,28 @@ public class Favourite_fragment extends Fragment {
             pDialog.dismiss();
             if (gcnamerroe.equals(" ")) {
                 if (action.equals("book")) {
-                    bottom_sheet_fragment bottomSheetFragment = new bottom_sheet_fragment(activity, branch_id,
-                            company_name,
-                            "",
-                            branch_name,
-                            branch_close,
-                            branch_open, ismedical
-                    );
-                    bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+//                    bottom_sheet_fragment bottomSheetFragment = new bottom_sheet_fragment(activity, branch_id,
+//                            company_name,
+//                            "",
+//                            branch_name,
+//                            branch_close,
+//                            branch_open, ismedical
+//                    );
+//                    bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                    Intent intent1 = new Intent(activity, activity_booking.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("branch_id", branch_id);
+                    bundle.putString("opens", branch_open);
+                    bundle.putString("closes", branch_close);
+                    bundle.putString("branch_name", branch_name);
+                    bundle.putString("company", company_name);
+                    bundle.putString("ismedical", ismedical);
+                    bundle.putString("longitude", longitude);
+                    bundle.putString("latitude", latitude);
+
+                    intent1.putExtras(bundle);
+                    startActivity(intent1);
                 }
             }
 //            pDialog.dismiss();

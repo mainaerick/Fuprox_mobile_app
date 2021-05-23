@@ -2,9 +2,8 @@ package com.fuprox.noqueue.utils;
 
 public class service_details  {
 
-    static String title;
-
-    static String id;
+     String title;
+     String id;
     public service_details() {}
 
     public service_details(String id,String title) {
@@ -17,7 +16,7 @@ public class service_details  {
         this.title = title;
     }
 
-    public static String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -25,7 +24,7 @@ public class service_details  {
         this.id = id;
     }
 
-    public static String getId() {
+    public String getId() {
         return id;
     }
 }

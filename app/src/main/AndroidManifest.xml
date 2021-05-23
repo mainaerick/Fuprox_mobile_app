@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="TASKS" />
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW " />
-
     <application
         android:name=".model.SocketInstance"
         android:allowBackup="true"
@@ -23,14 +22,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
         tools:replace="android:icon"
         tools:targetApi="m">
+        <activity android:name=".activities.MapActivity"></activity>
+        <activity android:name=".activities.Receipt_Activity" />
+        <activity android:name=".new_app.BranchesActivity" />
         <activity android:name=".new_app.HomeActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <uses-library
@@ -48,7 +53,17 @@
         </activity>
         <activity android:name=".HelpActivity" />
         <activity android:name=".activities.Settings_activity" />
-        <activity android:name=".activities.Direction_activity" />
+        <activity
+            android:name=".activities.Direction_activity"
+            tools:ignore="Instantiatable">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity">
 
@@ -77,7 +92,7 @@
             android:value="@integer/google_play_services_version" /> <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA96mDSM5oaN7AgIl53MN1OfY-wAjZi9C4" />
+            android:value="@string/api_key" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

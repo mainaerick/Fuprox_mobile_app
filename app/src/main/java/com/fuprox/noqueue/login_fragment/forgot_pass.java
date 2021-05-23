@@ -74,7 +74,7 @@ public class forgot_pass extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
     private void forgotpass(View view){
         TextView request_code=view.findViewById(R.id.requestcode);
@@ -197,15 +197,14 @@ public class forgot_pass extends Fragment {
                                 message="Email does not exist!";
                             }
                         } catch (Throwable t) {
-                            message ="Couldn't communicate with the server";
-                            Log.e("My App", "Could not parse malformed JSON: \"" + json + "\""+t.getMessage());
+                            message ="Email not valid";
+                            Log.e("My App", "Could not parse malformed JSON: \"" + "\""+t.getMessage());
 
                         }
 
                         Log.d(TAG, "run: string "+result);
 
                     } catch (Exception e) {
-                        pDialog.dismiss();
 //                            Toast.makeText(activity, "No users created yet", Toast.LENGTH_SHORT).show();
                         message ="Couldn't communicate with the server";
                         Log.e("log_tag", "Error converting result login" + e.toString());
@@ -221,11 +220,7 @@ public class forgot_pass extends Fragment {
                 Log.e("log_tag", "Error converting result login" + e.toString());
 
             }
-
-
             return null;
-
-
         }
 
         @Override

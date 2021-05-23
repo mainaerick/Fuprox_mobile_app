@@ -58,6 +58,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    private void check_user(){
+
+    }
     public void get_booking_notify(Context context){
         Dbhelper dbHelper=new Dbhelper(context);
         Cursor cursor=dbHelper.getWritableDatabase().rawQuery("select * from booking;",null);
@@ -374,4 +377,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void update_db_ahead(Context context,String booking_id,int count){
         new Dbhelper(context).updat_q_no(booking_id,count);
     }
+
+
+
 }

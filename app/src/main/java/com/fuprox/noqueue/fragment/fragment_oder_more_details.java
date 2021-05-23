@@ -54,7 +54,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
     public  static String TAG="";
 
     String sname,saddress,user_id,stime,sid;
-    TextView ticket_number,ticket_status,ticket_service, ticket_verification,txtqueuesize,txttellers,tvqueuesizeerror,tvtellerslabel;
+    TextView ticket_number,ticket_status,ticket_service, ticket_verification,txtqueuesize,txttellers,tvqueuesizeerror,tvtellerslabel,tvticketdate;
     ProgressDialog pDialog;
     TextView confirm;
     ProgressBar progressBar;
@@ -107,6 +107,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
         txttellers = contentView.findViewById(R.id.tvtellers);
         tvqueuesizeerror = contentView.findViewById(R.id.queuesize_error);
         tvtellerslabel = contentView.findViewById(R.id.tellerslabel);
+        tvticketdate = contentView.findViewById(R.id.tvticket_date);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +128,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
     private class ticket_get extends AsyncTask<String, String, String>{
         View contentView;
         String tickt_error=" ";
-        String t_number,t_s_name,t_verify,t_branchid;
+        String t_number,t_s_name,t_verify,t_branchid,t_date;
         Boolean t_status;
         TextView imageView;
 
@@ -196,13 +197,14 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
                                 String service_name=jsonobject.getString("service_name");
                                 String verification_number = jsonobject.getString("unique");
                                 String branch_id = jsonobject.getString("branch_id");
+                                String tt_date = jsonobject.getString("today");
 
                                 t_status=ticket_status_bol;
                                 t_number=ticket_numvber;
                                 t_s_name=service_name;
                                 t_verify = verification_number;
                                 t_branchid = branch_id;
-
+                                t_date = tt_date;
                                 Log.d(TAG, "booking more details: object "+ jsonobject);
 
 
@@ -240,7 +242,7 @@ public class fragment_oder_more_details extends BottomSheetDialogFragment {
                 ticket_number.setText(t_number);
                 ticket_service.setText(t_s_name);
                 tvtellerslabel.setText("Teller name/number offering "+ t_s_name +" service");
-
+                tvticketdate.setText(t_date);
                 ticket_verification.setText(t_verify);
                 confirm.setVisibility(View.VISIBLE);
                 if (t_status){

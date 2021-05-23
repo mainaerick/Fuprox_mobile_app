@@ -2,7 +2,9 @@ package com.fuprox.noqueue.utils;
 
 public class institution_details {
 
-    String title,id,icon_url;
+     String title;
+     String id;
+     String icon_url;
 
 
     public institution_details() {}
@@ -29,10 +31,7 @@ public class institution_details {
         this.id = id;
     }
 
-    public String getIcon_url() {
-        return icon_url;
-    }
-
+    public String getIcon_url() { return icon_url; }
     public void setIcon_url(String icon_url) {
         this.icon_url = icon_url;
     }

@@ -72,7 +72,7 @@ public class confirm_r_code extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     private void confirmrcode(View view,String email){

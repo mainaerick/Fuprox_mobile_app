@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:opacity="opaque">
     <item>
         <shape>
@@ -14,6 +15,6 @@
         <bitmap
             android:gravity="center"
             android:src="@mipmap/ic_splash"
-            />
+            tools:ignore="VectorDrawableCompat" />
 
 </item></layer-list>

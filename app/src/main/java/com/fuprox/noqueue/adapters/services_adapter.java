@@ -43,9 +43,6 @@ public class services_adapter extends ArrayAdapter<service_details> implements F
         CardView cardView;
     }
 
-
-
-
     public services_adapter(Activity activity, ListView listView, int resource, ArrayList<service_details> objects) {
         super(activity, resource, objects);
         mActivity = activity;

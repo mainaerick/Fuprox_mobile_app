@@ -2,143 +2,673 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.activity_booking"
     android:orientation="vertical"
-    >
+    android:background="@color/colorPrimaryDark"
+    app:behavior_hideable="false"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/heading"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_black_24"
+            android:elevation="19dp"
+            android:layout_margin="12dp"
+            />
+        <ImageView
+            android:id="@+id/imgfullscreen"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/ic_baseline_fullscreen_24"
+            android:elevation="9sp"
+            android:layout_margin="12dp"
+            android:layout_alignParentEnd="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_weight="0.8"
+            android:background="@color/white"
+            android:id="@+id/maplayout"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            >
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_home"
+                />
 
-<!--    <android.support.v7.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="96dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        app:cardElevation="0dp"-->
-<!--        app:cardCornerRadius="13dp"-->
-<!--        >-->
+        </RelativeLayout>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layout_above="@+id/laybookbtn"
+            android:paddingBottom="9dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="313dp"
+                android:elevation="19dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:background="@drawable/border_top"
+                android:paddingTop="37dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_dark"
+                            android:elevation="3dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <TextView
+                                android:id="@+id/bs_coname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bold"
+                                android:text="Equity Kenya"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="32sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/bs_branch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Kenyatta University Branch"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="23sp" />
+
+                                <TextView
+                                    android:id="@+id/bs_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="P.O Box 43844, Nairobi-0202744788"
+                                    android:visibility="invisible" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_marginBottom="12dp"
+                                    android:background="#5d5d5d"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Working Hours"
+                                    android:textColor="@color/colorAccent" />
+
+                                <TextView
+                                    android:id="@+id/open_close_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato"
+                                    android:text="05:00-18:00"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="23sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/select_service"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="23dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Services"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorAccent" />
+
+                            <ProgressBar
+                                android:id="@+id/queuesizeprogress"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="end"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_dark"
+                            android:elevation="3dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <Spinner
+                                    android:id="@+id/spinner_serv_offered"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:spinnerMode="dropdown"
+                                    tools:listitem="@layout/spinner_services_items"
+                                    android:backgroundTint="@color/colorPrimary"
+                                    />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_baseline_arrow_drop_down_circle_24"
+                                    android:layout_gravity="center"
+                                    android:visibility="gone"
+                                    />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="13dp"
+                                android:background="@color/colorAccent" />
+
+                            <TextView
+                                android:id="@+id/queuesize_error"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_baseline_error_outline_24"
+                                android:text="An Error Occured while getting queue details"
+                                android:textColor="@color/design_default_color_error"
+                                android:visibility="gone" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Busy: Average Service Time-3 Minutes"
+                                android:textColor="#ffa500"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/service_selected_textview"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="Loan Services"-->
-<!--            android:padding="13dp"-->
-<!--            android:background="#f0f0f0"-->
-<!--            />-->
-<!--    </android.support.v7.widget.CardView>-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
-<!--    <android.support.v7.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        app:cardElevation="0dp"-->
-<!--        app:cardCornerRadius="13dp"-->
-<!--        >-->
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
 
-<!--        <TextView-->
-<!--            android:id="@+id/booking_date_activity"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Date"-->
-<!--            android:selectAllOnFocus="true"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            android:padding="13dp"-->
-<!--            android:elevation="0dp"-->
-<!--            android:background="#f0f0f0"-->
-<!--            />-->
-<!--    </android.support.v7.widget.CardView>-->
+                                    <TextView
+                                        android:id="@+id/tvnumberofpeople"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/lablequeuesize"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="13dp"
+                                        android:elevation="3dp"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:padding="3dp"
+                                        android:text="______"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="19sp" />
 
-<!--    <android.support.v7.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        app:cardElevation="0dp"-->
-<!--        app:cardCornerRadius="13dp"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:id="@+id/booking_time_activity"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
+                                    <TextView
+                                        android:id="@+id/lablequeuesize"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:text="Ahead of you\n"
+                                        android:textColor="@color/colorAccent" />
+                                </RelativeLayout>
 
-<!--            android:hint="Time"-->
-<!--            android:padding="13dp"-->
-<!--            android:background="#f0f0f0"-->
-<!--            android:selectAllOnFocus="true"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            />-->
-<!--    </android.support.v7.widget.CardView>-->
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
 
+                                    <TextView
+                                        android:id="@+id/tvtellernumbers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/availabletellers"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="13dp"
+                                        android:elevation="3dp"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:padding="3dp"
+                                        android:text="______"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="19sp" />
 
+                                    <TextView
+                                        android:id="@+id/availabletellers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:text="Teller number/name"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/colorAccent" />
+                                </RelativeLayout>
 
-
-
-
-
-<!--    &lt;!&ndash;        &ndash;&gt;-->
-<!--    &lt;!&ndash;    <EditText&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:id="@+id/booking_date"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_width="0dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginStart="24dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginTop="96dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginEnd="24dp"&ndash;&gt;-->
-
-<!--    &lt;!&ndash;        android:hint="@string/prompt_email"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:inputType="textEmailAddress"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:selectAllOnFocus="true"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
-
-<!--    &lt;!&ndash;    <EditText&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:id="@+id/password"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_width="0dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginStart="24dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginTop="8dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_marginEnd="24dp"&ndash;&gt;-->
-
-<!--    &lt;!&ndash;        android:hint="@string/prompt_password"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:imeActionLabel="@string/action_sign_in_short"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:imeOptions="actionDone"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:inputType="textPassword"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:selectAllOnFocus="true"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/booking_date" />&ndash;&gt;-->
-<!--    <android.support.v7.widget.CardView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:cardElevation="0dp"-->
-<!--        app:cardCornerRadius="13dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginStart="48dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginEnd="48dp"-->
-<!--        android:layout_marginBottom="64dp"-->
-<!--        >-->
-<!--        <Button-->
-
-<!--            android:elevation="0dp"-->
-<!--            android:id="@+id/booking_confirm_activity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="#000"-->
-<!--            android:text="Confirm booking"-->
-<!--            app:layout_constraintVertical_bias="0.2"-->
-<!--            android:background="#ffff"-->
-<!--            />-->
-<!--    </android.support.v7.widget.CardView>-->
+                            </LinearLayout>
+                        </LinearLayout>
 
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="23sp"
+                            android:text="payment method"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent"
 
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_dark"
+                            android:elevation="3dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tvaddnumber"
+                                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="13dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="@string/add_no"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:visibility="gone"
+
+                                    />
+
+                                <TextView
+                                    android:id="@+id/shownumber"
+                                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="13dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/countrycode"
+                                    style="@style/TextAppearance.AppCompat.Title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:gravity="bottom"
+                                    android:paddingBottom="11dp"
+                                    android:text="254"
+                                    android:textColor="@color/colorPrimary" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/edittextnumber"
+                                        style="@style/TextAppearance.AppCompat.Title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:backgroundTint="@color/colorPrimary"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:hint="Enter phone number"
+                                        android:inputType="phone"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textColorHint="@color/colorAccent"
+                                        tools:targetApi="lollipop" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/bookwarning"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="23dp"
+                                android:fontFamily="@font/lato_bold"
+                                android:text="@string/booking_info"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:id="@+id/laybookbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:elevation="19dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginBottom="13dp"
+            >
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/book_click"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/button_book"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/lato_bold"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="@color/colorAccent"
+                app:spinning_bar_padding="6dp"
+                android:layout_weight="0.25"/>
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/instantbook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Instant booking"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/button_book"
+                android:fontFamily="@font/lato_bold"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="@color/colorAccent"
+                app:spinning_bar_padding="6dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/error_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textColor="@color/red_btn_bg_color"
+            android:visibility="visible"
+            android:textStyle="bold"
+            />
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
+
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardElevation="0dp"
+                android:id="@+id/cardview_bcal"
+                app:cardCornerRadius="3dp"
+                android:layout_toRightOf="@+id/cardview_btime"
+                android:layout_marginLeft="30dp"
+
+                >
+
+                <TextView
+                    android:id="@+id/booking_date_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:hint="Date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="7dp"
+                    android:elevation="0dp"
+
+                    tools:targetApi="lollipop" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="3dp"
+                android:id="@+id/cardview_btime"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+
+
+                >
+                <TextView
+                    android:id="@+id/booking_time_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:hint="Time"
+                    android:padding="7dp"
+                    android:visibility="gone"
+                    android:textAlignment="center"
+                    android:selectAllOnFocus="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/colorPrimary"
+
+                    />
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#c2c5cc"
+            android:elevation="0dp"
+            android:visibility="gone"
+            tools:targetApi="lollipop">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffff"
+                android:elevation="0dp"
+
+                tools:targetApi="lollipop">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M-Pesa"
+                    android:layout_margin="9dp"
+                    android:textStyle="bold"
+                    android:elevation="0dp"
+
+
+                    tools:targetApi="lollipop" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Paypal"
+                    android:layout_margin="9dp"
+                    android:textStyle="bold"
+                    android:elevation="0dp"
+
+                    tools:targetApi="lollipop" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/booking_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Confirm"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="13dp"
+                android:textAlignment="center"
+                android:background="@color/colorPrimary"
+
+                />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 </LinearLayout>
+
+    <!--<Button-->
+    <!--android:id="@+id/book_click"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:text="Normal"-->
+    <!--android:textAllCaps="true"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textColor="@color/colorPrimaryDark"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--android:fontFamily="@font/lato_bold"-->
+    <!--    />-->
+
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:padding="7dp"-->
+    <!--    >-->
+    <!--<android.support.v7.widget.CardView-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    app:cardBackgroundColor="@color/colorPrimary"-->
+    <!--    android:layout_marginTop="12dp"-->
+    <!--    android:id="@+id/cardinstant"-->
+    <!--    android:layout_alignParentEnd="true"-->
+    <!--    app:cardCornerRadius="7dp"-->
+    <!--    android:layout_alignParentRight="true">-->
+
+    <!--    <CheckBox-->
+    <!--        android:layout_marginRight="70dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        android:id="@+id/chkinstantservices"-->
+    <!--        android:text="Instant service"-->
+    <!--        android:textColor="@color/colorPrimaryDark"-->
+    <!--        style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"-->
+    <!--        />-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--<android.support.v7.widget.CardView-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    app:cardBackgroundColor="@color/colorPrimary"-->
+    <!--    android:layout_marginTop="12dp"-->
+    <!--    android:layout_toLeftOf="@+id/cardinstant"-->
+    <!--    android:layout_alignParentStart="true"-->
+    <!--    android:layout_marginRight="7dp"-->
+    <!--    app:cardCornerRadius="7dp"-->
+    <!--    android:layout_alignParentLeft="true">-->
+
+    <!--    <CheckBox-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        android:id="@+id/chknormalservices"-->
+    <!--        android:text="Normal"-->
+    <!--        android:textColor="@color/colorPrimaryDark"-->
+    <!--        style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"-->
+    <!--        />-->
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--</RelativeLayout>-->

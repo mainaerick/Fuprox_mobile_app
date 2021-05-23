@@ -85,6 +85,7 @@ public class favourite_adapter  extends ArrayAdapter<fav_details> {
     }
 
 
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
@@ -308,6 +309,7 @@ public class favourite_adapter  extends ArrayAdapter<fav_details> {
     }
 
 
+    @SuppressLint("MissingPermission")
     private void requestNewLocationData(){
 
         @SuppressLint("RestrictedApi") LocationRequest mLocationRequest = new LocationRequest();

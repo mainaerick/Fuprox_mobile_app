@@ -128,7 +128,7 @@ public class login extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
     public void sign_in(final View view) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();

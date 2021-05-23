@@ -3,9 +3,11 @@ package com.fuprox.noqueue.new_app.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,16 +46,55 @@ public class category_adapter extends RecyclerView.Adapter<category_adapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.list_services, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.list_home_category, parent, false);
         return new ViewHolder(view);
     }
 
+    int row_index = RecyclerView.NO_POSITION;
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final service_details order = orderList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                row_index=position;
+                notifyDataSetChanged();
+            }
+        });
+        CardView cardView = holder.itemView.findViewById(R.id.orders_cardview);
+        TextView tvtit=holder.itemView.findViewById(R.id.service_title);
+        ImageView img_background = holder.itemView.findViewById(R.id.background_image);
+        if(row_index==position){
+//            holder.itemView.setBackgroundColor(Color.parseColor("#567845"));
+//            cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorAccent));
 
-        String s_title = service_details.getTitle();
-        String s_id=service_details.getId();
+//
+//            float ThirteenDp = TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 13,
+//                    context.getResources().getDisplayMetrics() );
+////            cardView.setCardElevation(ThirteenDp);
+//            cardView.setRadius(ThirteenDp);
+
+            img_background.setImageDrawable(context.getResources().getDrawable(R.drawable.bottom_selected));
+            tvtit.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        }
+        else if (row_index == RecyclerView.NO_POSITION && position==0){
+//            cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+//            float ThirteenDp = TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 13,
+//                    context.getResources().getDisplayMetrics() );
+//            cardView.setRadius(ThirteenDp);
+            img_background.setImageDrawable(context.getResources().getDrawable(R.drawable.bottom_selected));
+            tvtit.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        }
+        else {
+//            cardView.setCardBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+//            float ThirteenDp = TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 0,
+//                    context.getResources().getDisplayMetrics() );
+//            cardView.setRadius(ThirteenDp);
+            img_background.setImageDrawable(context.getResources().getDrawable(R.drawable.bottom_unselected));
+            tvtit.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        }
+        String s_title = order.getTitle();
+        String s_id=order.getId();
 
         holder.title.setText(s_title);
         holder.txtid.setText(s_id);

@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,23 +34,32 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fuprox.noqueue.activities.Receipt_Activity;
+import com.fuprox.noqueue.activities.activity_booking;
 import com.fuprox.noqueue.adapters.suggestion_adapter;
 import com.fuprox.noqueue.fragment.Favourite_fragment;
+import com.fuprox.noqueue.fragment.Home_Fragment;
 import com.fuprox.noqueue.fragment.Services_fragment;
 import com.fuprox.noqueue.fragment.account_fragment;
 import com.fuprox.noqueue.fragment.bottom_sheet_fragment;
 import com.fuprox.noqueue.fragment.ordersfragment;
+import com.fuprox.noqueue.fragment.queue;
 import com.fuprox.noqueue.model.RecyclerTouch;
 import com.fuprox.noqueue.model.SimpleAlarmManager;
 import com.fuprox.noqueue.model.notification;
 import com.fuprox.noqueue.model.strings_;
+import com.fuprox.noqueue.new_app.HomeActivity;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.fuprox.noqueue.utils.booking_details;
+import com.fuprox.noqueue.utils.institution_details;
+import com.fuprox.noqueue.utils.service_details;
 import com.fuprox.noqueue.utils.suggestion_details;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -102,6 +113,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE=500;
     int OVERLAY_ASK_PERMISSION_CODE=501;
 
+    ArrayList<service_details> servicelist;
+
+    SpinKitView loadingDots;
+    LinearLayout layout_loading;
+    TextView txterror_title,error_desc;
+    Button error_retry;
+    LinearLayout error_linearlayout;
+    public static String error = " ";
+    boolean list_status_nolist;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -124,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return true;
                 case R.id.navigation_queue:
                     onbackpress="exit";
-                    new Services_fragment(MainActivity.this).hideactivityitems(MainActivity.this);
+//                    new Services_fragment(MainActivity.this).hideactivityitems(MainActivity.this);
                     verify_permissions();
                     return true;
                 case R.id.navigation_account:
@@ -147,8 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
         }
     }
-
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -170,7 +190,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void errorToast() {
         Toast.makeText(this, "Draw over other app permission not available. Can't start the application without the permission.", Toast.LENGTH_LONG).show();
     }
-
+    private void loadhome(){
+        new Home_Fragment(MainActivity.this,servicelist).hideactivityitems(MainActivity.this);
+        loadFragment(new Home_Fragment(MainActivity.this,servicelist));
+//        new Services_fragment(MainActivity.this).hideactivityitems(MainActivity.this);
+//        loadFragment(new Services_fragment(MainActivity.this));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -178,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Catcho.Builder(this)
                 .recipients("niteric@gmail.com")
                 .build();
-
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class));
 //        startService(new Intent(MainActivity.this, FloatingWidgetService.class).putExtra("activity_background", true));
 //        finish();
@@ -213,10 +237,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setalarm(this);
         navView= findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        error_linearlayout= findViewById(R.id.layout_error_disp);
+
+        layout_loading = findViewById(R.id.layout_loading);
+        error_retry = findViewById(R.id.retry_btn);
+
+        txterror_title = findViewById(R.id.error_title);
+        error_desc = findViewById(R.id.error_description);
+        servicelist = new ArrayList<>();
         if (getIntent().getExtras()!=null){
             if (getIntent().getExtras().getString("verify").equals("verify")){
                 booking_id=getIntent().getExtras().getString("book_id");
+//                finish();
+                Intent intent1 = new Intent(this, Receipt_Activity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("book_id", booking_id);
+                bundle.putString("verify","verify");
+                intent1.putExtras(bundle);
                 navView.setSelectedItemId(R.id.navigation_order);
+                startActivity(intent1);
 //                loadFragment(new ordersfragment(booking_id));
             }
             else {
@@ -244,7 +283,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        searchBar.inflateMenu(R.menu.main_menu);
         searchBar.setOnSearchActionListener(this);
         Log.d("LOG_TAG", getClass().getSimpleName() + ": text " + searchBar.getText());
-        searchBar.setCardViewElevation(10);
 //        sendJson_getbranch_details(" ");
         searchBar.addTextChangeListener(new TextWatcher() {
             @Override
@@ -297,10 +335,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         TextView searchcompany_id = view.findViewById(R.id.suggestion_long);
                         TextView searchbranch_id = view.findViewById(R.id.suggestion_lat);
                         TextView searchbranch_ismedical=view.findViewById(R.id.tvsuggestion_bmedical);
+                        TextView lat = view.findViewById(R.id.latitude);
+                        TextView longi = view.findViewById(R.id.longitude);
 
                         searchBar.setText("");
                         searchBar.disableSearch();
-
+//                        searchBar.hideSuggestionsList();
+//                        searchBar.clearSuggestions();
 //                        Toast.makeText(MainActivity.this, "position" + position, Toast.LENGTH_SHORT).show();
 
 //                        searchBar.setText(textView.getText().toString());
@@ -310,10 +351,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 branch_close=post_params.get(position).getCloses(),
                                 branch_open=post_params.get(position).getOpens(),
                                 branchismedical=searchbranch_ismedical.getText().toString();
-
-                        new getcompany_name(company_id,branch_id,branch_name,branch_close,branch_open,"book",branchismedical).execute();
+//                        post_params.clear();
+                        new getcompany_name(company_id,branch_id,branch_name,branch_close,branch_open,"book",branchismedical,lat.getText().toString(),longi.getText().toString()).execute();
                     }
-
                     @Override
                     public void onLongItemClick(View view, int position) {
                         // do whatever
@@ -437,7 +477,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public class branches_search extends AsyncTask<String, String, String> {
         String searchtext;
         String found="0";
-        String company,b_id,branch_name,closes,opens;
+        String company,b_id,branch_name,closes,opens,latitude,longitude;
 
         public branches_search(String search_term){
             searchtext=search_term;
@@ -520,6 +560,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 this.branch_name=branch_name;
                                 this.closes=closes;
                                 this.opens=opens;
+                                this.latitude = latti;
+                                this.longitude = longi;
 ////                                    post_params.add(company+ " " +branch_name);
                                 suggestion_details suggestion_details=new suggestion_details();
                                 suggestion_details.setCompany_id(obj.getString("company"));
@@ -527,6 +569,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 suggestion_details.setOpens(opens);
                                 suggestion_details.setCloses(closes);
                                 suggestion_details.setId(obj.getString("id"));
+                                suggestion_details.setLatitude(latti);
+                                suggestion_details.setLongitude(longi);
                                 boolean ismedical=obj.getBoolean("is_medical");
                                 if (ismedical){
                                     suggestion_details.setIsmedical("1");
@@ -576,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            loadFragment(new Services_fragment(MainActivity.this));
 //            navView.setSelectedItemId(R.id.navigation_queue);
             for (int i=0;i< clonepost_params.size();i++){
-                new getcompany_name(clonepost_params.get(i).getCompany_id(),clonepost_params.get(i).getId(),clonepost_params.get(i).getTitle(),clonepost_params.get(i).getCloses(),clonepost_params.get(i).getOpens()," ",clonepost_params.get(i).getIsmedical()).execute();
+                new getcompany_name(clonepost_params.get(i).getCompany_id(),clonepost_params.get(i).getId(),clonepost_params.get(i).getTitle(),clonepost_params.get(i).getCloses(),clonepost_params.get(i).getOpens()," ",clonepost_params.get(i).getIsmedical(),clonepost_params.get(i).getLatitude(),clonepost_params.get(i).getLongitude()).execute();
                 Log.d(TAG, "onPostExecute company id= : "+clonepost_params.get(i).getCompany_id());
             }
 
@@ -594,8 +638,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String action;
         String gcnamerroe=" ";
         String ismedical;
-
-        public getcompany_name(String company_id,String branch_id,String branch_name,String branch_close,String branch_open,String action,String ismedical){
+        String longitude;
+        String latitude;
+        public getcompany_name(String company_id,String branch_id,String branch_name,String branch_close,String branch_open,String action,String ismedical,String lat,String longitude){
             this.ismedical=ismedical;
             this.company_id=company_id;
             this.branch_id=branch_id;
@@ -603,6 +648,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.branch_close=branch_close;
             this.branch_open=branch_open;
             this.action=action;
+            this.latitude = lat;
+            this.longitude = longitude;
         }
         @Override
         protected void onPreExecute() {
@@ -660,6 +707,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         booking_details bookingDetails=new booking_details();
                         try {
                             obj= new JSONObject(result);
+                            Log.d(TAG, "onPostExecute company id= : "+company_id);
+
+                            Log.e(TAG, "doInBackground: company search "+obj );
                             if (obj.length()==0){
                                 gcnamerroe="empty company";
                             }
@@ -670,9 +720,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             suggestion_details.setCompany(company_name);
                             suggestion_details.setCompany_id(company_id);
                             suggestion_details.setTitle(branch_name);
-//                            suggestion_details.setLatitude();
-//                            suggestion_details.setLongitude();
-
+                            suggestion_details.setLatitude(latitude);
+                            suggestion_details.setLongitude(longitude);
                             suggestion_details.setOpens(branch_open);
                             suggestion_details.setCloses(branch_close);
                             suggestion_details.setId(branch_id);
@@ -712,14 +761,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            pDialog.dismiss();
             if (gcnamerroe.equals(" ")){
                 if (action.equals("book")){
-                    bottom_sheet_fragment bottomSheetFragment = new bottom_sheet_fragment(MainActivity.this,branch_id,
-                            company_name,
-                            "",
-                            branch_name,
-                            branch_close,
-                            branch_open,ismedical
-                    );
-                    bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+//                    bottom_sheet_fragment bottomSheetFragment = new bottom_sheet_fragment(MainActivity.this,branch_id,
+//                            company_name,
+//                            "",
+//                            branch_name,
+//                            branch_close,
+//                            branch_open,ismedical
+//                    );
+//                    bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                    Intent intent1 = new Intent(MainActivity.this, activity_booking.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("branch_id", branch_id);
+                    bundle.putString("opens", branch_open);
+                    bundle.putString("closes", branch_close);
+                    bundle.putString("branch_name", branch_name);
+                    bundle.putString("company", company_name);
+                    bundle.putString("ismedical", ismedical);
+                    bundle.putString("longitude", longitude);
+                    bundle.putString("latitude", latitude);
+
+                    intent1.putExtras(bundle);
+                    startActivity(intent1);
                 }
                 else {
                     searchBar.setCustomSuggestionAdapter(suggestion_adapter);
@@ -728,6 +791,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else {
                 if (!action.equals("booking")){
+                    post_params.clear();
                     new branches_search(" ").execute();
 
                 }
@@ -798,8 +862,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else {
                 if (permision_granted) {
                     if (isLocationEnabled()) {
-                        new Services_fragment(MainActivity.this).hideactivityitems(MainActivity.this);
-                        loadFragment(new Services_fragment(MainActivity.this));
+//                        new Home_Fragment(MainActivity.this,servicelist).hideactivityitems(MainActivity.this);
+//                        loadFragment(new Home_Fragment(MainActivity.this,servicelist));
+
+//                        new Services_fragment(MainActivity.this).hideactivityitems(MainActivity.this);
+//                        loadFragment(new Services_fragment(MainActivity.this));
+                        loadhome();
                     } else {
                         Toast.makeText(MainActivity.this, "Turn on location", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -836,7 +904,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else {
             if (isLocationEnabled()){
-                loadFragment(new Services_fragment(MainActivity.this));
+//                loadFragment(new Home_Fragment(MainActivity.this,servicelist));
+//                loadFragment(new Services_fragment(MainActivity.this));
+
+                loadhome();
                 permision_granted = true;
 
 //                            loadFragment(new Services_fragment());
@@ -928,6 +999,191 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
+    }
+
+    public class services_get extends AsyncTask<String, String, String> {
+        String error_title="";
+        public services_get() {
+        }
+        @Override
+        protected void onPreExecute() {
+//            pDialog = new ProgressDialog(getActivity());
+//            pDialog.setMessage("Services loading. Please wait...");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+            layout_loading.setVisibility(View.VISIBLE);
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpClient client = new DefaultHttpClient();
+            HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
+            HttpResponse response;
+            JSONObject json = new JSONObject();
+            StringBuilder sb;
+            InputStream is = null;
+            String result = null;
+
+            try {
+                HttpPost post = new HttpPost(new strings_().get_ipaddress(MainActivity.this) + "/service/get");
+//                json.put("branch", "");
+
+                StringEntity se = new StringEntity(json.toString());
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                post.setEntity(se);
+                response = client.execute(post);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+
+                /*Checking response */
+                if (response != null) {
+
+                    try {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                                is, "iso-8859-1"), 8);
+                        sb = new StringBuilder();
+                        sb.append(reader.readLine()).append("\n");
+                        String line = "0";
+
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line).append("\n");
+                        }
+
+                        is.close();
+                        result = sb.toString();
+
+
+//                            CONVERT THE RESPONSE RESOULT TO JSON FROM STRRING
+
+                        JSONObject obj = null;
+                        JSONArray jsonarray;
+                        try {
+//                            obj= new JSONObject(result);
+
+                            jsonarray = new JSONArray(result);
+
+
+                            String name = null;
+                            int i = 0;
+                            while (i < jsonarray.length()) {
+
+
+                                service_details service_details = new service_details();
+                                obj = new JSONObject(jsonarray.getString(i));
+
+                                service_details.setTitle(obj.getString("name"));
+                                service_details.setId(obj.getString("id"));
+                                Log.d(TAG, "get all services " + obj.getString("name"));
+
+                                servicelist.add(service_details);
+
+                                i++;
+                            }
+                            if (servicelist.size()==0) {
+                                error="No Services added yet!";
+                                error_title="No services!";
+//                                network_error(view, error_title,"Try again later and find services provided!");
+                            }
+                            else {
+
+                            }
+                            Log.d(TAG, "get all services " + jsonarray);
+
+
+                        } catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: services\"" + obj + "\"" + t.getMessage());
+                            error = "Oops.. \n There was a problem communicating with the servers.";
+                            error_title="Server error";
+//                            network_error(view,"Server error",error);
+                        }
+//                            Log.d(TAG, "run: string" + result+new Dbhelper(activity).get_user_id());
+                    } catch (Exception e) {
+                        Log.e("log_tag", "Error converting result " + e.toString());
+                        error = "Oops.. \n There was a problem communicating with the servers.";
+                        error_title="Server error";
+//                        network_error(view,error_title,error);
+//                            pDialog.dismiss();
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+//                    Toast.makeText(getActivity(), "Problem Establishing Connection", Toast.LENGTH_SHORT).show();
+//                    new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE)
+//                            .setTitleText("There was a problem communicating with the servers.")
+//                            .setContentText("Try again later.")
+//                            .show();
+                Log.d(TAG, "run: services get");
+                error = "Oops.. \nThere was a problem establishing internet connection.";
+                error_title="Internet connection error!";
+
+//                network_error(view,error_title,error);
+//                    pDialog.cancel();
+//                    createDialog("Error", "Cannot Estabilish Connection");
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            layout_loading.setVisibility(View.GONE);
+//            pDialog.dismiss();
+
+            if (error_title.isEmpty()){
+                verify_permissions();
+                service_details service_details = new service_details();
+
+//                for (int i=0; i<2;i++){
+//                    service_details.setTitle("Hospital");
+//                    service_details.setId("Garage");
+//
+//                    servicelist.add(service_details);
+//                }
+                error_linearlayout.setVisibility(View.GONE);
+            }
+            else {
+                network_error(error_title,error);
+            }
+
+            Log.d(TAG, "onPostExecute: services  ");
+        }
+    }
+
+
+    public void network_error(String error,String error_description){
+        ArrayList<String> listNamesOfFiles = new ArrayList<>();
+        String[] strings = {error};
+//        List<String> list = Arrays.asList(strings_);
+//        ArrayList<branches_details> servicelist = new ArrayList<>();
+        error_linearlayout.setVisibility(View.VISIBLE);
+        TextView error_title=findViewById(R.id.error_title);
+        TextView error_desc=findViewById(R.id.error_description);
+        error_title.setText(error);
+        error_desc.setText(error_description);
+
+        Button error_retry=findViewById(R.id.retry_btn);
+
+        error_retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                error_linearlayout.setVisibility(View.INVISIBLE);
+                new services_get().execute();
+            }
+        });
+
+//        String name = null;
+//        servicelist = new ArrayList<>();
+//
+//        for (int i = 0; i < strings_.length; i++) {
+//            service_details service_details = new service_details();
+//            service_details.setTitle(strings_[i]);
+//            servicelist.add(service_details);
+//        }
+        list_status_nolist=true;
+
     }
 
 

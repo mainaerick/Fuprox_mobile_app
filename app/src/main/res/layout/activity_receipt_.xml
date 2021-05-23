@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.activity_order_details"
+    android:background="@color/colorPrimaryDark"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+                android:padding="13dp"
+                android:id="@+id/backbtn"
+                android:contentDescription="TODO" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket Details"
+                style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                android:padding="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lato_bold"
+                />
+            <ProgressBar
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/progress_circular"
+                android:layout_gravity="center|end"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="7.5dp"
+                />
+            <ImageView
+                android:id="@+id/refresh_bookings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0"
+                android:padding="13dp"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_refresh_black_24dp"
+                android:layout_marginEnd="13dp"
+
+                android:contentDescription="TODO" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="end">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booked on "
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="13dp"
+            android:textSize="19sp"
+            android:layout_gravity="end"
+            android:textAllCaps="true"
+            android:visibility="gone"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading_ordermorededatils"
+        android:layout_gravity="end"
+        android:textColor="@color/red_btn_bg_color"
+        android:text="Loading...."
+        android:padding="30dp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi,\nThank you for waiting"
+        android:textAlignment="center"
+        android:fontFamily="@font/lato"
+        android:textSize="23dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="23dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom"
+        android:padding="12dp"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket"
+                android:fontFamily="@font/lato"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"
+                android:layout_marginBottom="13dp"
+                android:textSize="17dp"
+                android:id="@+id/ticket_numberlabl" />
+            <TextView
+                android:id="@+id/ticket_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="27sp"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="19dp"
+                android:layout_below="@+id/ticket_numberlabl"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date:"
+                android:textColor="@color/colorAccent"
+                android:fontFamily="@font/lato"
+                android:textSize="17dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="13dp"
+                android:id="@+id/labelvnumber"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvticket_date"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="27sp"
+                android:layout_marginBottom="13dp"
+                android:layout_below="@+id/labelvnumber"
+
+                />
+            <TextView
+                android:id="@+id/ticket_verification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:textSize="27sp"
+                android:visibility="gone"
+                android:layout_below="@+id/labelvnumber"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="347dp"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="19dp"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_bottom"
+                    android:layout_marginBottom="27dp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/branchname"
+                        android:visibility="gone"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="23dp"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/layout_served"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/queuedone"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23sp"
+                        android:text="tICKET SERVED"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="23dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:background="@drawable/border_primary"
+                        android:layout_marginBottom="19dp"
+
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/queuesize_error"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="An Error Occured while getting queue details"
+                    android:textColor="@color/design_default_color_error"
+                    android:drawableTop="@drawable/ic_baseline_error_outline_24"
+                    android:textSize="23sp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/ticket_active"
+                    android:visibility="gone"
+                    >
+
+
+
+                    <TextView
+                        android:layout_marginTop="23dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Here is your position in the queue"
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/queuesize"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="38sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="23dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:background="@drawable/border_primary"
+                        android:layout_marginBottom="19dp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tellerslabel"
+                        android:layout_marginTop="23dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teller number/name offering ____ service"
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textColor="@color/colorAccent"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="13dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvtellers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="23dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="19dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We'll notify you when your\nticket is almost ready."
+                        android:fontFamily="@font/lato"
+                        android:textSize="17dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="19dp"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ticket status:"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_marginRight="9dp"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/ligt_grey"
+                    android:id="@+id/ticket_status"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="19dp"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Service:"
+                    android:layout_marginRight="9dp"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ligt_grey"
+                    android:id="@+id/ticket_service_name"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:visibility="gone"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="19dp"
+
+                >
+
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="23dp"
+                android:elevation="0dp"
+                android:visibility="gone"
+                app:cardCornerRadius="7dp"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:paddingLeft="13dp"
+                    android:paddingTop="7dp"
+                    android:paddingRight="13dp"
+                    android:paddingBottom="7dp"
+                    android:id="@+id/confirmticket"
+                    android:text="Confirm" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/label_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time Booked" />
+
+                <TextView
+                    android:id="@+id/time_order_click"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingRight="23sp"
+                    android:text="12:00 am" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17sp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Place : " />
+
+                <TextView
+                    android:id="@+id/loaction_order_clicke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingRight="23sp"
+                    android:text="Githurai" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/qrcode_order"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:visibility="gone"
+
+                android:contentDescription="TODO" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

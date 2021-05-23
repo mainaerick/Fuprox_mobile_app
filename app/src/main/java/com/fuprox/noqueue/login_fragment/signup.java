@@ -75,7 +75,7 @@ public class signup extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     public void sign_up(final View view ) {
@@ -203,6 +203,7 @@ public class signup extends Fragment {
 //                                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 //                                pDialog.dismiss();
                                 Log.d(TAG, "run: " + obj);
+                                message= " ";
                             }
                             else {
                                 message ="Email already exists";
@@ -231,7 +232,7 @@ public class signup extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             pDialog.dismiss();
-            if(!message.isEmpty()){
+            if(!message.equals(" ")){
                 SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.WARNING_TYPE);
                 sweetAlertDialog
                         .setTitleText(message)

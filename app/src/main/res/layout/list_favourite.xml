@@ -7,27 +7,12 @@
     android:descendantFocusability="blocksDescendants"
     tools:ignore="HardcodedText,RtlHardcoded,ContentDescription"
     >
-
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/orders_cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="10dp"
-        android:elevation="0dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="0dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:descendantFocusability="afterDescendants"
-            android:orientation="vertical"
-            android:padding="13dp"
-            android:background="@color/colorPrimary">
+            android:layout_marginBottom="26dp"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,24 +37,22 @@
                     android:layout_marginStart="1.5dp"
                     android:layout_marginEnd="1.5dp"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:maxLines="2"
                     android:fontFamily="@font/lato_bold"
-                    android:textAlignment="center"
                     />
-
                 <com.like.LikeButton
-                app:icon_type="heart"
-                app:icon_size="17dp"
-                android:id="@+id/favourite_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:like_drawable="@drawable/ic_favorite_black_24dp"
-                app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"
-                app:dots_primary_color="@color/colorPrimaryDark"
-                app:dots_secondary_color="@color/colorPrimary"
-                app:circle_end_color="@color/colorAccent" />
+                    app:icon_type="heart"
+                    app:icon_size="17dp"
+                    android:id="@+id/favourite_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:like_drawable="@drawable/ic_baseline_favorite_24"
+                    app:unlike_drawable="@drawable/ic_favorite_border_black_24dp"
+                    app:dots_primary_color="@color/colorPrimary"
+                    app:dots_secondary_color="@color/colorPrimaryDark"
+                    app:circle_end_color="@color/colorAccent" />
             </LinearLayout>
 
 
@@ -77,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="13dp"
+                android:background="@color/colorAccent"
+                android:padding="7dp"
                 >
                 <TextView
                     android:layout_width="0dp"
@@ -87,6 +71,7 @@
                     android:layout_gravity="center"
                     android:textAlignment="center"
                     android:text="(12232km from your location)"
+                    android:textColor="@color/material_deep_teal_50"
                     android:fontFamily="@font/lato_bold"/>
             </LinearLayout>
 
@@ -99,7 +84,6 @@
 
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </FrameLayout>
 
 

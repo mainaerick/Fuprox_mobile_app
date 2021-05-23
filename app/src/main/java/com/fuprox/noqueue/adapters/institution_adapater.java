@@ -89,6 +89,7 @@ public class institution_adapater extends ArrayAdapter<institution_details> {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new institution_adapater.ViewHolder();
+
             holder.title = convertView.findViewById(R.id.institution_title);
             holder.txtid=convertView.findViewById(R.id.txtinstitution_id);
             holder.txt_serviceimage=convertView.findViewById(R.id.service_image);

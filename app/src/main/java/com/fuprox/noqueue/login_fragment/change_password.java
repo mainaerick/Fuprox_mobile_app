@@ -79,7 +79,7 @@ public class change_password extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
     private void change_password(View view){
         TextView confirm = view.findViewById(R.id.confirm_password_change);

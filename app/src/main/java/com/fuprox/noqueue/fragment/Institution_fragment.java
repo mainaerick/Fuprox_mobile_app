@@ -595,7 +595,7 @@ public class Institution_fragment extends Fragment implements MaterialSearchBar.
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
-                    .commit();
+                    .commitAllowingStateLoss();
             return true;
         }
         return false;

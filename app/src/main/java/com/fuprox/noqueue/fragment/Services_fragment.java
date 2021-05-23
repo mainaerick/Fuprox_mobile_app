@@ -139,6 +139,7 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
                     TextView textView = view.findViewById(R.id.service_title);
                     TextView textViewid = view.findViewById(R.id.serviceid);
                     loadFragment(new Services_fragment(activity));
+                    list_status_nolist = false;
                 }
             });
         }
@@ -214,23 +215,18 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
 //                            obj= new JSONObject(result);
 
                             jsonarray = new JSONArray(result);
-
-
-                            String name = null;
                             int i = 0;
                             while (i < jsonarray.length()) {
-
-
                                 service_details service_details = new service_details();
                                 obj = new JSONObject(jsonarray.getString(i));
 
                                 service_details.setTitle(obj.getString("name"));
                                 service_details.setId(obj.getString("id"));
-                                Log.d(TAG, "get all services " + obj.getString("name"));
-
+//                                Log.d(TAG, "get all services " + obj.getString("name"));
 
                                 servicelist.add(service_details);
 
+//                                Log.e(TAG, "doInBackground: services obj "+i+": "+servicelist.get(i).getTitle());
                                 i++;
                             }
                             if (servicelist.size()==0) {
@@ -238,10 +234,7 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
                                 error_title="No services!";
 //                                network_error(view, error_title,"Try again later and find services provided!");
                             }
-                            else {
-
-                            }
-                            Log.d(TAG, "get all services " + jsonarray);
+//                            Log.d(TAG, "get all services " + jsonarray);
 
 
                         } catch (Throwable t) {
@@ -291,12 +284,9 @@ public class Services_fragment extends Fragment implements MaterialSearchBar.OnS
                 error_linearlayout.setVisibility(View.GONE);
             }
             else {
-
-
                 network_error(view,error_title,error);
             }
 
-            Log.d(TAG, "onPostExecute: services  ");
         }
     }
 

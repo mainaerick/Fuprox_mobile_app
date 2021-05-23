@@ -529,7 +529,7 @@ private static final int DB_VERSION = 1;
     }
 
     public String getuser_no(){
-        String number = null;
+        String number = "0";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+user_table + ";",null);
         if (cursor.moveToFirst()){

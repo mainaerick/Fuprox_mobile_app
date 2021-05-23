@@ -11,8 +11,8 @@
 
 <!--    searchbar-->
 
-    <color name="searchBarIconColor">#67B1CC</color>
-    <color name="searchBarPrimaryColor">#08204A</color>
+    <color name="searchBarIconColor">@color/colorAccent</color>
+    <color name="searchBarPrimaryColor">@color/colorPrimaryDark</color>
     <color name="searchBarCursorColor">#67B1CC</color>
     <color name="searchBarDividerColor">#67B1CC</color>
 
@@ -20,8 +20,8 @@
 <!--    searchbar text-->
     <color name="searchBarTextColor">@color/colorPrimary</color>
     <color name="searchBarHintColor">@color/colorPrimary</color>
-    <color name="searchBarPlaceholderColor">@color/colorPrimary</color>
-    <color name="searchBarTextHighlightColor">@color/colorPrimaryDark</color>
+    <color name="searchBarPlaceholderColor">@color/colorAccent</color>
+    <color name="searchBarTextHighlightColor">@color/colorAccent</color>
 
 
 <!--    catcho error report -->
@@ -54,6 +54,10 @@
     <color name="warning_stroke_color">@color/colorPrimaryDark</color>
     <color name="confirm_button_color">@color/colorPrimary</color>
 
-
+    <!--    Switch colors-->
+    <color name="blue">@color/colorPrimary</color>
+    <color name="lightBlue">#ff6691c4</color>
+    <color name="lighterBlue">@color/colorAccent</color>
+    <color name="controlBackground">@color/colorPrimaryDark</color>
     <attr name="sb_checked_color" format="reference|color"/>
 </resources>

@@ -133,10 +133,7 @@ public class queue extends Fragment implements OnMapReadyCallback {
             this.qlat=mDefaultLocation.latitude;
             this.qlong=mDefaultLocation.longitude;
         }
-
     }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -227,21 +224,21 @@ public class queue extends Fragment implements OnMapReadyCallback {
 
 
 
-        new LoadAllProducts().execute();
+//        new LoadAllProducts().execute();
 //        LoadAllProducts_booking.Status.values();
         // Prompt the user for permission.
-//        getLocationPermission();
-//
-//        // Turn on the My Location layer and the related control on the map.
-//        updateLocationUI();
-//
-//        // Get the current location of the device and set the position of the map.
-//        getDeviceLocation();
-//        MarkerOptions marker = new MarkerOptions().position(
-//                new LatLng(-1.176433, 36.929415))
-//                .title("").snippet("");
-//        Marker marker1=mMap.addMarker(marker);
-//        marker1.showInfoWindow();
+        getLocationPermission();
+
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
+
+        // Get the current location of the device and set the position of the map.
+        getDeviceLocation();
+        MarkerOptions marker = new MarkerOptions().position(
+                new LatLng(qlat, qlong))
+                .title("").snippet("");
+        Marker marker1=mMap.addMarker(marker);
+        marker1.showInfoWindow();
 
 
 
@@ -405,11 +402,11 @@ public class queue extends Fragment implements OnMapReadyCallback {
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
 //                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-//                                    new LatLng(qlat,qlong), DEFAULT_ZOOM));
+//                                    new LatLng(mLastKnownLocation.getLatitude(),
+//                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(qlat,qlong), DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
@@ -658,6 +655,15 @@ public class queue extends Fragment implements OnMapReadyCallback {
 
             // Get the current location of the device and set the position of the map.
             getDeviceLocation();
+
+            MarkerOptions marker = new MarkerOptions().position(
+                    new LatLng(lat, longi))
+                    .title(strcompany_name).snippet(strbranch_name);
+//
+//
+            Marker marker1=mMap.addMarker(marker);
+            marker1.showInfoWindow();
+            marker1.setTag(productsList.get(i));
         }
 
         /**

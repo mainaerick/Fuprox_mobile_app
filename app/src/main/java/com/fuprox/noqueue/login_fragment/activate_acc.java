@@ -83,7 +83,7 @@ public class activate_acc extends Fragment {
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
     private void activate_account(View view){
         EditText email=view.findViewById(R.id.tvactivationemail);
@@ -527,7 +527,7 @@ public class activate_acc extends Fragment {
                         try {
                             obj = new JSONObject(result);
 
-                            if (obj.length() > 2) {
+                            if (obj.length() >= 2) {
                                 status = "true";
                                 message = "Code reset Successful. Check email.";
                             }
@@ -538,7 +538,6 @@ public class activate_acc extends Fragment {
 
                         }
                         Log.e(TAG, "run: string " + result);
-
                     } catch (Exception e) {
 //                            Toast.makeText(activity, "No users created yet", Toast.LENGTH_SHORT).show();
                         message = "Couldn't communicate with the server";
@@ -553,7 +552,6 @@ public class activate_acc extends Fragment {
             }
             return null;
         }
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

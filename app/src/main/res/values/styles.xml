@@ -17,7 +17,14 @@
         <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>
         <item name="android:textColorPrimary">#000000</item>
     </style>
-
+    <style name="SpinnerTheme" parent="android:Widget.Spinner.DropDown">
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">@color/ligt_grey</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 
     <style name="CustomAlertDialogStyle">
         <item name="android:bottomBright">@color/colorPrimaryDark</item>

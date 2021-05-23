@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuprox.noqueue.R;
+import com.fuprox.noqueue.activities.Receipt_Activity;
 import com.fuprox.noqueue.adapters.orderadapter;
 import com.fuprox.noqueue.model.JSONParser;
 import com.fuprox.noqueue.model.strings_;
@@ -68,12 +71,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
-
 @SuppressLint("ValidFragment")
 public class ordersfragment extends Fragment implements androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener, MaterialSearchBar.OnSearchActionListener {
     //recyclerview objects
     public  static String TAG="";
-
     public static final String KEY_FRIDAY_FRAGMENT = "Friday";
     private ListView listView;
     private orderadapter adapter;
@@ -148,13 +149,18 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
                     }
                 }
             });
-
         }
         else{
             if (booking_id.length()>=1){
-                fragment_oder_more_details fragmentOderMoreDetails=new fragment_oder_more_details(booking_id,new Dbhelper(getActivity()).get_user_id());
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                fragmentOderMoreDetails.show(manager,fragmentOderMoreDetails.getTag());
+//                fragment_oder_more_details fragmentOderMoreDetails=new fragment_oder_more_details(booking_id,new Dbhelper(getActivity()).get_user_id());
+//                FragmentManager manager = getActivity().getSupportFragmentManager();
+//                fragmentOderMoreDetails.show(manager,fragmentOderMoreDetails.getTag());
+//                Intent intent1 = new Intent(activity, Receipt_Activity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("book_id", booking_id);
+//                bundle.putString("verify","verify");
+//                intent1.putExtras(bundle);
+//                startActivity(intent1);
             }
             view = inflater.inflate(R.layout.orders, container, false);
             setupAdapter(view);
@@ -192,12 +198,21 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         }
 
 
+
         listView = view.findViewById(R.id.homeworklist);
         adapter = new orderadapter(getActivity(), listView, R.layout.listorders, new Dbhelper(getContext()).get_booking());
 
         listView.setAdapter(adapter);
 
-
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.pulltorefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter = new orderadapter(getActivity(), listView, R.layout.listorders, new Dbhelper(getContext()).get_booking());
+                listView.setAdapter(adapter);
+                pullToRefresh.setRefreshing(false);
+            }
+        });
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -876,18 +891,27 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
 //                                prefs = activity.getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
-                                    String phonenumber = prefs.getString("phonenumber", "No token defined");
-                                    String branch_id = prefs.getString("branch_id", "branch_id undefined");
-                                    String start = prefs.getString("start", "start undefined");
-                                    String service_name = prefs.getString("service_name", "sername undefined");
-                                    String user_id = prefs.getString("user_id", "user_id undefined");
-                                    String isinstant = prefs.getString("is_instant", "is_instant undefined");
-                                    String company_name = prefs.getString("company_name", "company undefined");
-                                    String branch_name = prefs.getString("branch_name", "branch undefined");
-                                    String token = prefs.getString("token", "token undefined");
-                                    new verifypayment_pending(getContext(),phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
-                                    pending_transaction(view);
-
+                                    if (prefs.getAll().size()==0){
+//                                        Snackbar.make(getView(),"Sorry no transaction is available!",Snackbar.LENGTH_SHORT).show();
+                                        new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE)
+                                                .setTitleText("Sorry no transaction available!")
+                                                .setContentText("click to exit")
+                                                .show();
+                                        pending_transaction(view);
+                                    }
+                                    else {
+                                        String phonenumber = prefs.getString("phonenumber", "No token defined");
+                                        String branch_id = prefs.getString("branch_id", "branch_id undefined");
+                                        String start = prefs.getString("start", "start undefined");
+                                        String service_name = prefs.getString("service_name", "sername undefined");
+                                        String user_id = prefs.getString("user_id", "user_id undefined");
+                                        String isinstant = prefs.getString("is_instant", "is_instant undefined");
+                                        String company_name = prefs.getString("company_name", "company undefined");
+                                        String branch_name = prefs.getString("branch_name", "branch undefined");
+                                        String token = prefs.getString("token", "token undefined");
+                                        new verifypayment_pending(getContext(),phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
+                                        pending_transaction(view);
+                                    }
                                     sweetAlertDialog.dismiss();
 
                                 }

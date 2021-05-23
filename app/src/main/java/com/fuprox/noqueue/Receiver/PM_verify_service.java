@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.fuprox.noqueue.model.notification;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.fuprox.noqueue.utils.booking_details;
 import com.fuprox.noqueue.utils.verifypayment_pending;
@@ -25,15 +26,16 @@ public class PM_verify_service extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         prefs = getSharedPreferences("PAYMENT_VERIFICATION", MODE_PRIVATE);
-        phonenumber = prefs.getString("phonenumber", "No token defined");
-        branch_id = prefs.getString("branch_id", "branch_id undefined");
-        start = prefs.getString("start", "start undefined");
-        service_name = prefs.getString("service_name", "sername undefined");
-        user_id = prefs.getString("user_id", "user_id undefined");
-        isinstant = prefs.getString("is_instant", "is_instant undefined");
-        company_name = prefs.getString("company_name", "company undefined");
-        branch_name = prefs.getString("branch_name", "branch undefined");
-        token = prefs.getString("token", "token undefined");
+        if(prefs.getAll().size()!=0){
+            phonenumber = prefs.getString("phonenumber", "No token defined");
+            branch_id = prefs.getString("branch_id", "branch_id undefined");
+            start = prefs.getString("start", "start undefined");
+            service_name = prefs.getString("service_name", "sername undefined");
+            user_id = prefs.getString("user_id", "user_id undefined");
+            isinstant = prefs.getString("is_instant", "is_instant undefined");
+            company_name = prefs.getString("company_name", "company undefined");
+            branch_name = prefs.getString("branch_name", "branch undefined");
+            token = prefs.getString("token", "token undefined");
 //        token = "11068980e1f1e544cfef";
 
 //        final Handler handler = new Handler();
@@ -41,12 +43,20 @@ public class PM_verify_service extends Service {
 //            @Override
 //            public void run() {
 //                Toast.makeText(PM_verify_service.this, ""+isinstant, Toast.LENGTH_SHORT).show();
-                new verifypayment_pending(PM_verify_service.this,phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
+            new verifypayment_pending(PM_verify_service.this,phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
 //                new verifypayment_pending().execute();
-                Log.e(TAG, "run: paymeent verification process started "+token);
+            Log.e(TAG, "run: paymeent verification process started "+token);
 //                Toast.makeText(PM_verify_service.this, "Service started by user."+service_name, Toast.LENGTH_LONG).show();
 //            }
 //        }, 30000);
+        }
+        else {
+
+            notification.createNotificationChannel(this);
+            notification.notify_payment_status(this,1221,"Transaction completed ","Open the app to verify.","");
+            stopSelf();
+        }
+
         return START_STICKY;
     }
     @Override

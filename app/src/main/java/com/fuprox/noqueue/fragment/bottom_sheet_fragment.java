@@ -135,7 +135,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
 
 
     // Creating JSON Parser object
-
     public bottom_sheet_fragment(Activity activity,String branch_id,String name,String address, String branch,String scloset,String sopent,String ismedical) {
         this.ismedical=ismedical;
         sname=name;
@@ -146,13 +145,11 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
         this.scloset=scloset;
         this.activity=activity;
     }
-
     String invisi="invisible";
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
         }
-
         private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
             @Override
@@ -164,9 +161,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 if (slideOffset>0.5){
-
                 }
-
             }
         };
 
@@ -182,7 +177,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
 //            IO.Options options = IO.Options.builder()
 //                    .setForceNew(true)
 //                    .build();
-
 
             nomalbook=contentView.findViewById(R.id.book_click);
             instantbook=contentView.findViewById(R.id.instantbook);
@@ -250,8 +244,8 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
             if (ismedical.equals("1")){
                 instantbook.setVisibility(View.GONE);
                 nomalbook.setText("Book");
-                nomalbook.getLayoutParams().width= LinearLayout.LayoutParams.MATCH_PARENT;
-                nomalbook.requestLayout();
+//                nomalbook.getLayoutParams().width= LinearLayout.LayoutParams.MATCH_PARENT;
+//                nomalbook.requestLayout();
                 warntv.setText("Charges ksh 10");
             }
             nomalbook.setOnClickListener(new View.OnClickListener() {
@@ -504,7 +498,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-        private void bookclicked(View contentView,TextView textViewedit,String booktype){
+    private void bookclicked(View contentView,TextView textViewedit,String booktype){
             SimpleDateFormat format;
 
             hideKeyboardFrom(getContext(),contentView);
@@ -599,7 +593,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     else {
                         spinner_text=spinner.getSelectedItem().toString();
                     }
-
                     SimpleDateFormat booking_time_format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     booking_time_format.setTimeZone(TimeZone.getDefault());
                     booking_milis=book_milis.getTimeInMillis();
@@ -685,6 +678,10 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     instantbook.setClickable(false);
 
                 }
+                else if (ismedical.equals("1")){
+                    nomalbook.startAnimation();
+
+                }
                 else{
                     instantbook.startAnimation();
                     nomalbook.setClickable(false);
@@ -707,7 +704,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     json.put("start", start);
                     json.put("service_name",service_name);
                     json.put("user_id",user_id);
-                    json.put("is_instant","");
+                    json.put("is_instant",isinstant);
                     json.put("phonenumber",phonenumber);
                     StringEntity se = new StringEntity( json.toString());
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -815,7 +812,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                                         editor.commit();
                                         sweetAlertDialog.dismiss();
                                         Toast.makeText(getContext(), "Transaction Cancelled", Toast.LENGTH_SHORT).show();
-
                                     }
                                 }})
                                 .setConfirmButton("Verify Transaction", new SweetAlertDialog.OnSweetClickListener() {
@@ -833,7 +829,6 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                                         String token = prefs.getString("token", "token undefined");
                                         new verifypayment_pending(getContext(),phonenumber,branch_id,start,service_name,user_id,isinstant,company_name,branch_name,token,"new").execute();
                                         sweetAlertDialog.dismiss();
-
                                     }
                                 })
                                 .show();
@@ -843,7 +838,7 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     else{
                         Toast.makeText(activity, "Proceeding to Payment...", Toast.LENGTH_SHORT).show();
                         socket_init(token,phonenumber,branch_id,service_name);
-                        dismiss();
+                        dismissAllowingStateLoss();
 //                        SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.SUCCESS_TYPE);
 //                        sweetAlertDialog
 //                                .setTitleText("Verification Successful")
@@ -917,13 +912,14 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                     nomalbook.revertAnimation();
                     instantbook.setClickable(true);
                 }
+                else if (ismedical.equals("1")){
+                    nomalbook.revertAnimation();
+                    nomalbook.setClickable(true);
+                }
                 else{
                     instantbook.revertAnimation();
                     nomalbook.setClickable(true);
-
                 }
-
-
             }
         }
 
@@ -1093,8 +1089,8 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
 //            pDialog.setCancelable(false);
 //            pDialog.show();
 
-            nomalbook.setVisibility(View.INVISIBLE);
-            instantbook.setVisibility(View.INVISIBLE);
+            nomalbook.setVisibility(View.GONE);
+            instantbook.setVisibility(View.GONE);
         }
 
         @Override
@@ -1239,30 +1235,33 @@ public class bottom_sheet_fragment extends BottomSheetDialogFragment {
                 }
                 show_loading.setVisibility(View.GONE);
                 nomalbook.setVisibility(View.VISIBLE);
-                instantbook.setVisibility(View.VISIBLE);
+                if (!ismedical.equals("1")){
+                    instantbook.setVisibility(View.VISIBLE);
+
+                }
 
             }
             else {
-                show_loading.setText("Click to refresh");
+                show_loading.setText("Sorry, services could not be loade. Click to refresh.");
                 show_loading.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         new get_services_offered(view).execute();
                     }
                 });
-                SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE);
-                sweetAlertDialog
-                        .setTitleText("Sorry, services could not be loaded")
-                        .setContentText("click ok to exit")
-                        .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-//                                dismiss();
-                                sweetAlertDialog.dismiss();
-                            }
-                        })
-                        .show();
-                sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
+//                SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE);
+//                sweetAlertDialog
+//                        .setTitleText("Sorry, services could not be loaded")
+//                        .setContentText("click ok to exit")
+//                        .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+//                            @Override
+//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+////                                dismiss();
+//                                sweetAlertDialog.dismiss();
+//                            }
+//                        })
+//                        .show();
+//                sweetAlertDialog.findViewById(R.id.confirm_button).setBackgroundColor(activity.getResources().getColor(R.color.confirm_button_color));
 //                dismiss();
             }
 
