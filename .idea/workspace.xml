@@ -25,157 +25,12 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52ef9fb7-e889-4bb4-8fda-3930aaa4655b" name="Default Changelist" comment="payment fixed">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_sharish_ShimmerRecyclerView_v1_3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/release/app-release.apk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/release/output.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/MapActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/Receipt_Activity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Home_Fragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/model/RecyclerTouchListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/model/check_user_exist.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/BranchesActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/adapter/InstitutionAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_spinner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_accent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_dark.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_top.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_topaccent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bottom_selected.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bottom_unselected.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/control_switch_background_border.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/control_switch_background_selector.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/control_switch_background_selector_middle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/control_switch_color_selector.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gradient_background_upward.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_back_ios_black_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_drop_down_circle_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_directions_bus_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_directions_walk_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_drive_eta_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_favorite_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_fullscreen_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_map_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_my_location_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_place_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_search_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_branches.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_receipt_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fullscreen_header.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_home_category.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_home_institutions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_new_branches.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/load_institution.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_institution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_institution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_institution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_institution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_institution.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_baoyz_pullrefreshlayout_library_1_2_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_baoyz_pullrefreshlayout_library_1_2_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_andremion_counterfab_1_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_andremion_counterfab_1_0_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_jd_alexander_LikeButton_0_2_3_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_jd_alexander_LikeButton_0_2_3_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_mancj_MaterialSearchBar_0_8_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_mancj_MaterialSearchBar_0_8_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_components_16_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_maps_android_android_maps_utils_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_maps_android_android_maps_utils_0_5_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_alhazmy13_catcho_library_1_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_alhazmy13_catcho_library_1_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/fuprox.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/fuprox.app.iml" afterDir="false" />
+    <list default="true" id="52ef9fb7-e889-4bb4-8fda-3930aaa4655b" name="Default Changelist" comment="new ui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/debug/app-debug.apk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/debug/output.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/AlarmReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/AlarmReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/FloatingWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/FloatingWidgetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/PM_verify_service.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/Receiver/PM_verify_service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/Direction_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/Direction_activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/SplashScreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/SplashScreenActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/activity_booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/activities/activity_booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/branches_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/branches_adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/favourite_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/favourite_adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/institution_adapater.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/institution_adapater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/orderadapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/orderadapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/services_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/services_adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/suggestion_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/adapters/suggestion_adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Branches_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Branches_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Favourite_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Favourite_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Institution_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Institution_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Services_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/Services_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/bottom_sheet_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/bottom_sheet_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/fragment_oder_more_details.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/fragment_oder_more_details.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/ordersfragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/ordersfragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/fragment/queue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/activate_acc.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/activate_acc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/change_password.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/change_password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/confirm_r_code.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/confirm_r_code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/forgot_pass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/forgot_pass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/login_fragment/signup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/adapter/category_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/new_app/adapter/category_adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/Dbhelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/Dbhelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/institution_details.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/institution_details.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/service_details.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/service_details.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/verifypayment_pending.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fuprox/noqueue/utils/verifypayment_pending.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_favorite_border_black_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_favorite_border_black_24dp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_more_vert_black_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_more_vert_black_24dp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/splash_screen_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash_screen_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/account.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/favourite_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/favourite_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_bottom_sheet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_bottom_sheet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_suggestion.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_suggestion.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_branches.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_branches.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_favourite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_favourite.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/listorders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/listorders.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/orders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/orders.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/annotation/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/annotation/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/appcompat/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/appcompat/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/lifecycle/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/lifecycle/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/gms/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/gms/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/material/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/material/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/firebase/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/firebase/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -460,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617731119609</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="new ui">
+      <created>1621793018818</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621793018818</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +344,8 @@
     <MESSAGE value="Return home after payment" />
     <MESSAGE value="bugs fixing" />
     <MESSAGE value="payment fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="payment fixed" />
+    <MESSAGE value="new ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="new ui" />
   </component>
   <component name="WindowStateProjectService">
     <state x="685" y="296" key="#Notifications" timestamp="1617491112597">
@@ -595,11 +458,13 @@
     <state x="250" y="57" key="SettingsEditor/-147.-1080.1920.1050/0.0.1600.870@-147.-1080.1920.1050" timestamp="1619183532331" />
     <state x="300" y="69" key="SettingsEditor/0.0.1920.1050/181.1080.1600.870@0.0.1920.1050" timestamp="1619383584993" />
     <state x="431" y="1137" key="SettingsEditor/0.0.1920.1050/181.1080.1600.870@181.1080.1600.870" timestamp="1620225259032" />
-    <state x="474" y="209" width="810" height="531" key="Vcs.Push.Dialog.v2" timestamp="1617892270448">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="576" y="1253" width="810" height="531" key="Vcs.Push.Dialog.v2" timestamp="1621804815946">
+      <screen x="181" y="1080" width="1600" height="870" />
     </state>
     <state x="395" y="173" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1617731421875" />
     <state x="474" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1600.0.1600.870@0.0.1920.1050" timestamp="1617892270448" />
+    <state x="474" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1050/181.1080.1600.870@0.0.1920.1050" timestamp="1621801243132" />
+    <state x="576" y="1253" key="Vcs.Push.Dialog.v2/0.0.1920.1050/181.1080.1600.870@181.1080.1600.870" timestamp="1621804815946" />
     <state x="113" y="0" width="1187" height="972" maximized="true" key="dock-window-1" timestamp="1619192923490">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -615,10 +480,11 @@
     <state x="507" y="140" width="585" height="592" key="find.popup/0.0.1600.870@0.0.1600.870" timestamp="1617364405826" />
     <state x="608" y="169" width="702" height="715" key="find.popup/0.0.1920.1050/-1600.0.1600.870@0.0.1920.1050" timestamp="1617893624290" />
     <state x="608" y="174" width="702" height="736" key="find.popup/0.0.1920.1080/-1600.0.1600.900@0.0.1920.1080" timestamp="1618153494855" />
-    <state x="735" y="426" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1617892254178">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="794" y="1433" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1621804596207">
+      <screen x="181" y="1080" width="1600" height="870" />
     </state>
     <state x="735" y="426" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1050/-1600.0.1600.870@0.0.1920.1050" timestamp="1617892254178" />
+    <state x="794" y="1433" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1050/181.1080.1600.870@181.1080.1600.870" timestamp="1621804596207" />
     <state x="547" y="239" key="run.anything.popup" timestamp="1619372647176">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
