@@ -196,11 +196,12 @@
                                     android:backgroundTint="@color/colorPrimary"
                                     />
                                 <ImageView
+                                    android:id="@+id/refreshdetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:srcCompat="@drawable/ic_baseline_arrow_drop_down_circle_24"
+                                    app:srcCompat="@drawable/ic_refresh_white_24dp"
                                     android:layout_gravity="center"
-                                    android:visibility="gone"
+                                    android:visibility="visible"
                                     />
                             </LinearLayout>
 

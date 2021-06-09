@@ -284,7 +284,7 @@
                         android:layout_marginTop="23dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Here is your position in the queue"
+                        android:text="Ahead of you"
                         android:fontFamily="@font/lato"
                         android:textSize="17dp"
                         android:textColor="@color/colorAccent"
@@ -304,10 +304,7 @@
                         android:layout_gravity="center"
                         android:textAlignment="center"
                         android:background="@drawable/border_primary"
-                        android:layout_marginBottom="19dp"
-
-                        />
-
+                        android:layout_marginBottom="19dp" />
                     <TextView
                         android:id="@+id/tellerslabel"
                         android:layout_marginTop="23dp"

@@ -55,7 +55,6 @@ private static final int DB_VERSION = 1;
 
 
 //    BOOKING DETAILS
-
     public String
             booking_id="_id",
             company_name="company_name",
@@ -67,7 +66,6 @@ private static final int DB_VERSION = 1;
             db_service_name="service_name",
             booking_active="booking_status",
             booking_q_no = "booking_q_no";
-
 //    favourites details
     public String fav_id="_id",
     fav_branchname="branch_name",
@@ -76,14 +74,9 @@ private static final int DB_VERSION = 1;
     fav_branchlatitude="branch_lat",
     fav_table="favourite_table";
 
-
-
-
-
     public Dbhelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -387,7 +380,19 @@ private static final int DB_VERSION = 1;
 
         db.close();
     }
+    public void delete_all_fav(){
+        SQLiteDatabase db = this.getWritableDatabase();
+//        db.delete(booking_table, null,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+fav_table+ ";",null);
 
+        if (cursor.moveToFirst()){
+            do{
+                db.delete(fav_table, fav_id + "=" + cursor.getInt(cursor.getColumnIndex(fav_id)),null);
+            }while (cursor.moveToNext());
+        }
+
+        db.close();
+    }
     public ArrayList<booking_details> get_booking(){
 
         SQLiteDatabase db = this.getWritableDatabase();

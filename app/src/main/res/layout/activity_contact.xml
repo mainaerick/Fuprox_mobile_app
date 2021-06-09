@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ContactActivity"
+    android:background="@color/colorPrimaryDark"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+                android:padding="13dp"
+                android:id="@+id/backbtn"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact"
+                android:visibility="visible"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:padding="13dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lato_bold"
+                />
+
+            <ImageView
+                android:id="@+id/refresh_bookings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0"
+                android:padding="13dp"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_refresh_black_24dp"
+                android:layout_marginEnd="13dp"
+                android:contentDescription="TODO" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="23dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subject"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="17dp"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <EditText
+            android:id="@+id/ed_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="13dp"
+            android:textColor="@color/colorPrimary"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="17dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="23dp"
+            />
+
+        <EditText
+            android:id="@+id/ed_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="13dp"
+            android:textColor="@color/colorPrimary"
+            android:inputType="textEmailAddress"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="23dp"
+
+            />
+
+        <EditText
+            android:id="@+id/ed_message"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:hint="Message"
+            android:padding="9dp"
+            android:textColorHint="@color/colorAccent"
+            android:background="@drawable/border"
+            android:textColor="@color/colorPrimary"
+            />
+<!--        <TextView-->
+<!--            android:id="@+id/send_message"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/button_book"-->
+<!--            android:text="Send Message"-->
+<!--            android:textSize="17dp"-->
+<!--            android:padding="13dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textColor="@color/colorPrimaryDark"-->
+<!--            android:fontFamily="@font/lato_bold"-->
+<!--            android:layout_marginTop="23dp"-->
+<!--            />-->
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/send_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Message"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_book"
+            android:fontFamily="@font/lato_bold"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="@color/colorAccent"
+            app:spinning_bar_padding="6dp"
+            android:layout_marginTop="23dp"
+            android:padding="13dp"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>

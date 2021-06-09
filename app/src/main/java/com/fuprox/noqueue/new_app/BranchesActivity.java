@@ -157,12 +157,9 @@ public class BranchesActivity extends AppCompatActivity {
                             return o1.getTitle().compareTo(o2.getTitle());
                         }
                     });
-
                     branches_adapter adapter = new branches_adapter(BranchesActivity.this, listView, R.layout.list_new_branches, branches_list,drawable);
-
                     listView.setAdapter(adapter);
                 }
-
             }
         });
     }
@@ -170,8 +167,9 @@ public class BranchesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        startActivity(new Intent(this,MainActivity.class));
     }
+
 
     private void setup_image(){
         imgcompany = findViewById(R.id.imgcompany);
@@ -184,7 +182,6 @@ public class BranchesActivity extends AppCompatActivity {
                     pDialog.dismiss();
                     drawable = imgcompany.getDrawable();
                     new branch_get().execute();
-
                 }
                 @Override
                 public void onBitmapFailed(Exception e, Drawable errorDrawable) {
@@ -194,7 +191,6 @@ public class BranchesActivity extends AppCompatActivity {
 
                     //                    holder.pDialog.setVisibility(View.GONE);
                 }
-
                 @Override
                 public void onPrepareLoad(Drawable placeHolderDrawable) {
                     Log.i(TAG, "Getting ready to get the image");
@@ -216,7 +212,6 @@ public class BranchesActivity extends AppCompatActivity {
     }
     private void setupAdapter(){
         txttitle = findViewById(R.id.company_name);
-
 
         listView = findViewById(R.id.branches_listview);
         error_linearlayout=findViewById(R.id.layout_error_disp);

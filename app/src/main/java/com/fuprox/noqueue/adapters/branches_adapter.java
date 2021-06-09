@@ -92,7 +92,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
     Drawable drawable;
 
     private static class ViewHolder {
-        TextView title, txtid, txtvdist, tvticket, tvdate;
+        TextView title, txtid, txtvdist,txtworkingtime, tvticket, tvdate;
         ImageView icon_view, imgdirection;
         //        CheckBox likeButton;
         CardView cardView;
@@ -136,8 +136,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
             holder.likeButton = convertView.findViewById(R.id.favourite_btn);
             holder.icon_view = convertView.findViewById(R.id.branch_icon);
             holder.imgdirection = convertView.findViewById(R.id.imgdirection);
-
-
+            holder.txtworkingtime = convertView.findViewById(R.id.branch_workingtime);
             convertView.setTag(holder);
         } else {
             holder = (branches_adapter.ViewHolder) convertView.getTag();
@@ -146,6 +145,14 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
         String s_id = branches_details.getId();
         String s_longitude = branches_details.getLongitude();
         String s_lattitude = branches_details.getLattitude();
+        String sworkingtime = " ";
+        if (branches_details.getClose_time().length()==0){
+            sworkingtime = "Open " + branches_details.getOpen_time();
+
+        }
+        else {
+            sworkingtime = "Open " + branches_details.getOpen_time() + " - " + branches_details.getClose_time();
+        }
 
         try {
             d_long = Double.parseDouble(s_longitude);
@@ -205,6 +212,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
 
         holder.title.setText(s_title);
         holder.txtid.setText(s_id);
+        holder.txtworkingtime.setText(sworkingtime);
         holder.imgdirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,6 +240,7 @@ public class branches_adapter extends ArrayAdapter<branches_details> {
         fav_details.setBranchname(name);
         fav_details.setLongitude(br_long);
         fav_details.setLatitude(br_lat);
+
 
 //        holder.likeButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override

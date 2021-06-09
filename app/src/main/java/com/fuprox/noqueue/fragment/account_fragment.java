@@ -22,6 +22,8 @@ import com.fuprox.noqueue.BuildConfig;
 import com.fuprox.noqueue.HelpActivity;
 import com.fuprox.noqueue.LoginActivity;
 import com.fuprox.noqueue.R;
+import com.fuprox.noqueue.Receiver.FloatingWidgetService;
+import com.fuprox.noqueue.activities.ContactActivity;
 import com.fuprox.noqueue.activities.Settings_activity;
 import com.fuprox.noqueue.model.alertdialoghelper;
 import com.fuprox.noqueue.utils.Dbhelper;
@@ -34,7 +36,7 @@ import com.suke.widget.SwitchButton;
 public class account_fragment extends Fragment {
     static ProgressDialog pDialog;
     Activity activity;
-    TextView txtaddnumber,acc_phone,textViewsettings,textViewshare,textViewrate;
+    TextView txtaddnumber,acc_phone,textViewsettings,textViewshare,textViewrate,textContact;
     ImageView notification_button;
     public BottomNavigationView navView;
 
@@ -42,14 +44,10 @@ public class account_fragment extends Fragment {
         activity=_activity;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view;
-
-
-
         if (new Dbhelper(getContext()).check_user()==1){
             view=inflater.inflate(R.layout.account, container, false);
             final TextView txtname=view.findViewById(R.id.acc_name),txtemail=view.findViewById(R.id.acc_email),
@@ -59,6 +57,8 @@ public class account_fragment extends Fragment {
             notification_button=view.findViewById(R.id.notificationbutton);
             textViewrate = view.findViewById(R.id.rate);
             textViewshare = view.findViewById(R.id.share);
+            textContact = view.findViewById(R.id.contact);
+
             ImageView backbtn = view.findViewById(R.id.backbtn);
             
             backbtn.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +66,12 @@ public class account_fragment extends Fragment {
                 public void onClick(View view) {
                     navView= activity.findViewById(R.id.nav_view);
                     navView.setSelectedItemId(R.id.navigation_queue);
+                }
+            });
+            textContact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getActivity(), ContactActivity.class));
                 }
             });
             textViewshare.setOnClickListener(new View.OnClickListener() {
@@ -331,6 +337,8 @@ public class account_fragment extends Fragment {
 
             new Dbhelper(getContext()).delete_user();
             new Dbhelper(getContext()).delete_all_booking();
+            new Dbhelper(getContext()).delete_all_fav();
+            activity.stopService(new Intent(getContext(),FloatingWidgetService.class));
 
 
             return null;

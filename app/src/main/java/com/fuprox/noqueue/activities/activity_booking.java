@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.util.Log;
@@ -46,6 +47,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.fuprox.noqueue.MainActivity;
 import com.fuprox.noqueue.R;
 import com.fuprox.noqueue.Receiver.FloatingWidgetService;
 import com.fuprox.noqueue.Receiver.PM_verify_service;
@@ -56,6 +58,7 @@ import com.fuprox.noqueue.model.strings_;
 import com.fuprox.noqueue.new_app.BranchesActivity;
 import com.fuprox.noqueue.utils.Dbhelper;
 import com.fuprox.noqueue.utils.booking_details;
+import com.fuprox.noqueue.utils.branches_details;
 import com.fuprox.noqueue.utils.services_offered_details;
 import com.fuprox.noqueue.utils.verifypayment_pending;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -128,7 +131,7 @@ public class activity_booking extends AppCompatActivity {
     Spinner spinner;
     String spinner_text;
     TextView warntv;
-    ImageView btn_fullscrn;
+    ImageView btn_fullscrn,refreshdetails;
     /* view binding */
     NestedScrollView scrollView;
     boolean skipdate_check = false;
@@ -199,6 +202,8 @@ public class activity_booking extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView);
         parallaxLayout = findViewById(R.id.fragment_container);
         heading = findViewById(R.id.heading);
+        refreshdetails = findViewById(R.id.refreshdetails);
+
 
 //
 //        Window window = getWindow();
@@ -265,7 +270,13 @@ public class activity_booking extends AppCompatActivity {
             String n=new Dbhelper(this).getuser_no().substring(codesize);
             editnumber.setText(n);
         }
-        branch_time_status.setText("Open "+sopent+" - "+scloset);
+        if (scloset.length()==0){
+            branch_time_status.setText("Open "+sopent);
+        }
+        else {
+            branch_time_status.setText("Open "+sopent+" - "+scloset);
+        }
+//        branch_time_status.setText("Open "+sopent+" - "+scloset);
         final String add_no=getResources().getString(R.string.add_no);
         String myno=getResources().getString(R.string.my_no);
 
@@ -885,7 +896,30 @@ public class activity_booking extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(activity, "Proceeding to Payment...", Toast.LENGTH_SHORT).show();
+//                    notification.createNotificationChannel(activity);
+//                    notification.notify_payment_status(activity,1221,"Transaction status.","Transaction processing...","");
+
                     socket_init(token,phonenumber,branch_id,service_name);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(socket.hasListeners("mpesa_verify_data")){
+                                Intent intent1 = new Intent(context, MainActivity.class);
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("book_id", "null");
+                                bundle.putString("verify","verify");
+                                intent1.putExtras(bundle);
+                                startActivity(intent1);
+
+                            }
+                            notification.createNotificationChannel(activity);
+                            notification.notify_payment_status(activity,1221,"Transaction status","Transaction taking too long open app to verify","");
+
+
+                        }
+                    }, 30000);
                     finish();
 //                        SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(activity,SweetAlertDialog.SUCCESS_TYPE);
 //                        sweetAlertDialog
@@ -1419,6 +1453,12 @@ public class activity_booking extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressBar.setVisibility(View.GONE);
+            refreshdetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new Checkinfront(id,spinner.getSelectedItem().toString()).execute();
+                }
+            });
             if (error_serv.equals(" ")){
                 StringBuilder strlellerlist = new StringBuilder();
 
@@ -1430,7 +1470,6 @@ public class activity_booking extends AppCompatActivity {
                         strlellerlist.append(tellers.get(i)+",");
                     }
                 }
-
                 Log.d(TAG, "onPostExecute: check infront"+infront);
                 if (infront==0){
                     tvnumberpeople.setText("First to be served");

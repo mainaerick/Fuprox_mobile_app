@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         error_desc = findViewById(R.id.error_description);
         servicelist = new ArrayList<>();
         if (getIntent().getExtras()!=null){
-            if (getIntent().getExtras().getString("verify").equals("verify")){
+            if (getIntent().getExtras().getString("verify").equals("verify")&& !getIntent().getExtras().getString("book_id").equals("null")){
                 booking_id=getIntent().getExtras().getString("book_id");
 //                finish();
                 Intent intent1 = new Intent(this, Receipt_Activity.class);
@@ -258,8 +258,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
 //                loadFragment(new ordersfragment(booking_id));
             }
-            else {
+            else if (getIntent().getExtras().getString("verify").equals("verify") && getIntent().getExtras().getString("book_id").equals("null")){
 
+                navView.setSelectedItemId(R.id.navigation_queue);
+//                loadFragment(new ordersfragment(booking_id));
             }
         }
         else {

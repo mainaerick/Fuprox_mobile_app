@@ -87,7 +87,6 @@ public class notification {
             notificationManagerCompat.notify(Integer.parseInt(booking_id), builder.build());
         }
     }
-
     public static void notify_payment_status(Context context, int id,String title, String content,String booking_id){
         if (new Dbhelper(context).getnotistate().equals("1")) {
             String show_fromtime = null, show_totime = null;
@@ -113,6 +112,30 @@ public class notification {
                         .setAutoCancel(true)
                         .setContentIntent(pendingIntent)
                         .addAction(R.drawable.icon_notification_click, "Ticket Status",
+                                pendingIntent)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//        branchname+" for "+servicename+" \n\n"+people
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+                notificationManagerCompat.notify(id, builder.build());
+            }
+            else if (content.equals("Transaction taking too long open app to verify")){
+                Intent intent1 = new Intent(context, MainActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("book_id", "null");
+                bundle.putString("verify","verify");
+                intent1.putExtras(bundle);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, new Random().nextInt(), intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.icon_title)
+                        .setVibrate(vib)
+                        .setContentTitle(title)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(content))
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent)
+                        .addAction(R.drawable.icon_notification_click, "View",
                                 pendingIntent)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 //        branchname+" for "+servicename+" \n\n"+people
