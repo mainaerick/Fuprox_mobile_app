@@ -125,14 +125,13 @@ public class HomeActivity extends AppCompatActivity {
                 bundle.putString("imgurl",institution_list.get(position).getIcon_url());
 
                 intent1.putExtras(bundle);
-//                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent1);            }
             @Override
             public void onLongClick(View view, int position) {
-
             }
         }));
-
     }
     public class services_get extends AsyncTask<String, String, String> {
         String error_title="";
@@ -157,7 +156,6 @@ public class HomeActivity extends AppCompatActivity {
             StringBuilder sb;
             InputStream is = null;
             String result = null;
-
             try {
                 HttpPost post = new HttpPost(new strings_().get_ipaddress(HomeActivity.this) + "/service/get");
 //                json.put("branch", "");

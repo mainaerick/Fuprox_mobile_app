@@ -259,8 +259,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                loadFragment(new ordersfragment(booking_id));
             }
             else if (getIntent().getExtras().getString("verify").equals("verify") && getIntent().getExtras().getString("book_id").equals("null")){
+                booking_id=getIntent().getExtras().getString("book_id");
 
-                navView.setSelectedItemId(R.id.navigation_queue);
+                navView.setSelectedItemId(R.id.navigation_order);
 //                loadFragment(new ordersfragment(booking_id));
             }
         }

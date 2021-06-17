@@ -904,8 +904,8 @@ public class activity_booking extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if(socket.hasListeners("mpesa_verify_data")){
-                                Intent intent1 = new Intent(context, MainActivity.class);
+                            if(prefs.getAll().size()!=0){
+                                Intent intent1 = new Intent(activity_booking.this, MainActivity.class);
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString("book_id", "null");
@@ -914,8 +914,8 @@ public class activity_booking extends AppCompatActivity {
                                 startActivity(intent1);
 
                             }
-                            notification.createNotificationChannel(activity);
-                            notification.notify_payment_status(activity,1221,"Transaction status","Transaction taking too long open app to verify","");
+//                            notification.createNotificationChannel(activity);
+//                            notification.notify_payment_status(activity,1221,"Transaction status","Transaction taking too long open app to verify","");
 
 
                         }
@@ -1062,7 +1062,7 @@ public class activity_booking extends AppCompatActivity {
                         editor.putString("token", verify_token);
                         editor.commit();
                         startService(new Intent(activity_booking.this, PM_verify_service.class));
-                        socket.disconnect();
+//                        socket.disconnect();
                         socket.off("mpesa_verify_data");
                     }
                     Log.e(TAG, "listener: " + data.toString());

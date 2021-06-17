@@ -21,6 +21,7 @@ import com.fuprox.noqueue.MainActivity;
 import com.fuprox.noqueue.R;
 import com.fuprox.noqueue.login_fragment.activate_acc;
 import com.fuprox.noqueue.model.strings_;
+import com.fuprox.noqueue.utils.Dbhelper;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -54,6 +55,7 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
         ed_name = findViewById(R.id.ed_name);
         ed_email = findViewById(R.id.ed_email);
+        ed_email.setText(new Dbhelper(this).get_user_email());
         ed_massage = findViewById(R.id.ed_message);
         btn_sendmessage = findViewById(R.id.send_message);
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();

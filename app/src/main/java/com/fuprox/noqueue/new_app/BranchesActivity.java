@@ -164,12 +164,6 @@ public class BranchesActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this,MainActivity.class));
-    }
-
 
     private void setup_image(){
         imgcompany = findViewById(R.id.imgcompany);
@@ -277,12 +271,20 @@ public class BranchesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-//                loadFragment(new Institution_fragment(service_id));
+                //                loadFragment(new Institution_fragment(service_id));
             }
         });
     }
 
-private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+        startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
         SweetAlertDialog pDialog = new SweetAlertDialog(BranchesActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         public DownloadImageTask(ImageView bmImage) {

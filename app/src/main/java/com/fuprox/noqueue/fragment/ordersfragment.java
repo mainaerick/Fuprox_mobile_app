@@ -109,7 +109,6 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
         context=getActivity();
         IO.Options options = new IO.Options();
         socket = IO.socket(URI.create("http://159.65.144.235:5000"), options); // the main namespace
-        pending_layout = view.findViewById(R.id.layout_pending);
         if (new Dbhelper(getContext()).get_booking().isEmpty()){ // no available bookings and user exist
 
             if (new Dbhelper(getContext()).get_user_id()!=null && new Dbhelper(getContext()).get_booking().isEmpty()){
@@ -118,6 +117,7 @@ public class ordersfragment extends Fragment implements androidx.appcompat.widge
                 Log.d(TAG, "setupAdapter: orderfragment check iuser and adapter is ");
             }
             view = inflater.inflate(R.layout.orders_empty,container,false);
+            pending_layout = view.findViewById(R.id.layout_pending);
 
             ImageView refreshimg=view.findViewById(R.id.refresh_bookings);
             ImageView imageView=view.findViewById(R.id.noorders);
